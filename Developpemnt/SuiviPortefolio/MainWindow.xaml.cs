@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SuiviPortefolio
+namespace SuiviPortefolio.Portefeuille.PortefeuilleView
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -19,6 +19,10 @@ namespace SuiviPortefolio
         public MainWindow()
         {
             InitializeComponent();
+            var dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SuiviPortefeuille.sqlite");
+            //var etfService = new EtfService(dbPath);
+            //_viewModel = new MainViewModel(etfService);
+            this.DataContext = new MainViewModel(); // ViewModel associé
         }
     }
 }
