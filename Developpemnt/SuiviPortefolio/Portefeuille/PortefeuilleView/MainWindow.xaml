@@ -7,6 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock Text="Bonjour depuis le sous-répertoire Portefeuille/PortefeuilleView/ !" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0" >
+            <TextBlock Text="Bonjour depuis le sous-répertoire Portefeuille/PortefeuilleView/ !" />
+            <TextBlock Text="PORTEFEUILLE" />
+            <TextBlock VerticalAlignment="Top" Text="Montant:" />
+            <TextBlock Background="LightYellow" VerticalAlignment="Center" Text="{Binding NomPortefeuille}" />
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" >
+
+            <TextBlock Text="AUTRE" />
+            <TextBlock VerticalAlignment="Top" Text="Montant:" />
+            <TextBlock VerticalAlignment="Top" Text="Rien" />
+
+        </StackPanel>
     </Grid>
 </Window>
