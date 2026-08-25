@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "UjFsagXgjdk=",
+  "dgSpecHash": "oNaJVGN1p0U=",
   "success": true,
-  "projectFilePath": "C:\\Users\\yves_\\MesDocuments\\VStudio\\SuiviPortefolio\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\yves_\\.nuget\\packages\\microsoft.data.sqlite\\10.0.11\\microsoft.data.sqlite.10.0.11.nupkg.sha512",
+    "C:\\Users\\yves_\\.nuget\\packages\\microsoft.data.sqlite.core\\10.0.11\\microsoft.data.sqlite.core.10.0.11.nupkg.sha512",
+    "C:\\Users\\yves_\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.12\\sqlitepclraw.bundle_e_sqlite3.2.1.12.nupkg.sha512",
+    "C:\\Users\\yves_\\.nuget\\packages\\sqlitepclraw.core\\2.1.12\\sqlitepclraw.core.2.1.12.nupkg.sha512",
+    "C:\\Users\\yves_\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.12\\sqlitepclraw.lib.e_sqlite3.2.1.12.nupkg.sha512",
+    "C:\\Users\\yves_\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.12\\sqlitepclraw.provider.e_sqlite3.2.1.12.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "SuiviPortefolio": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio"
+    },
+    "Profil 1": {
+      "commandName": "Executable"
+    }
+  }
+}
