@@ -21,12 +21,30 @@
         <StackPanel Grid.Row="0" Grid.Column="0" >
             <TextBlock Text="Bonjour depuis le sous-répertoire Portefeuille/PortefeuilleView/ !" />
             <TextBlock Text="PORTEFEUILLE" />
-            <TextBlock VerticalAlignment="Top" Text="Montant:" />
-            <TextBlock Background="LightYellow" VerticalAlignment="Center" Text="{Binding NomPortefeuille}" />
+            <TextBlock Background="LightYellow" Text="{Binding NomPortefeuille}" />
+                <!-- Les deux derniers TextBox sur la même ligne -->
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center">
 
+                    <TextBlock Text="Montant:"
+                            Margin="0,5,10,0"
+                            Width="80" />
+
+                    <TextBlock Text="{Binding Portefeuille.Solde, Mode=TwoWay,
+                        UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0,5,0,0"
+                            Width="100" />
+                 </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" >
+
+
+        <StackPanel Grid.Row="1" Grid.Column="0" > 
+
+                 <!-- Ligne de séparation -->
+                <Separator Margin="0,10,0,10"
+                    Background="Red"
+                    Height="1" />
 
             <TextBlock Text="AUTRE" />
             <TextBlock VerticalAlignment="Top" Text="Montant:" />

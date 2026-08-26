@@ -13,22 +13,52 @@ public class MainViewModel : INotifyPropertyChanged
     //public string NomPortefeuille { get; set; } = "Mon Portefeuille";
 
     
-    private string _nomPortefeuille;
+    private monPortefeuille _portefeuille;
 
-    public string NomPortefeuille
+    public monPortefeuille Portefeuille
     {
         get
         {
-            return _nomPortefeuille;
+            return _portefeuille;
         }
         set
         {
-            if (_nomPortefeuille != value)
+            if (_portefeuille != value)
             {
-                _nomPortefeuille = value;
+                _portefeuille = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(NomPortefeuille));
+            }
+        }
+    }
+     public string NomPortefeuille
+    {
+        get => Portefeuille.NomPortefeuille;
+        set
+        {
+            if (Portefeuille.NomPortefeuille != value)
+            {
+                Portefeuille.NomPortefeuille = value;
                 OnPropertyChanged();
             }
         }
+    }
+
+    public decimal Solde
+    {
+                get => Portefeuille.Solde;
+        set
+        {
+            if (Portefeuille.Solde != value)
+            {
+                Portefeuille.Solde = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+        public MainViewModel()
+    {
+        Portefeuille = new monPortefeuille();
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -41,54 +71,4 @@ public class MainViewModel : INotifyPropertyChanged
             new PropertyChangedEventArgs(propertyName));
     }
 }
-
-/*
-public class MainViewModel()
-{
-    public class MonPortefeuille
-    { 
-        MonPortefeuille portefeuille = new MonPortefeuille();
-
-
-    };
-
-}
-    
-    
-public class PortefeuilleViewModel
-    {
-        
-        public class MonPortefeuille
-        {
-          
-            MonPortefeuille portefeuille = new MonPortefeuille();
-                
-
-        };
-        /*
-         
-        public PortefeuilleModel.Portefeuille { get; set; }
-
-        public decimal ValeurTotale
-        {
-            get
-            {
-                decimal total = Portefeuille.Liquidites;
-
-                foreach (var actif in Portefeuille.Actifs)
-                {
-                    total += actif.Prix * actif.Quantite;
-                }
-
-                return total;
-            }
-        }
-      
-    }
-    
-}
-*/
-
-
-
 
