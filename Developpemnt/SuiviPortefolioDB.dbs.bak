@@ -39,6 +39,9 @@
 			<index name="pk_Dividende" unique="PRIMARY_KEY" >
 				<column name="Id" />
 			</index>
+			<fk name="fk_Dividende" to_schema="Default" to_table="Actif" >
+				<fk_column name="ActifId" pk="Id" />
+			</fk>
 		</table>
 		<table name="ETF" spec="" >
 			<column name="Id" type="INTEGER" mandatory="y" >
@@ -51,6 +54,9 @@
 			<index name="pk_ETF" unique="PRIMARY_KEY" >
 				<column name="Id" />
 			</index>
+			<fk name="fk_ETF" to_schema="Default" to_table="Actif" >
+				<fk_column name="Id" pk="Id" />
+			</fk>
 		</table>
 		<table name="Liquidite" spec="" >
 			<column name="Id" type="INTEGER" mandatory="y" >
@@ -63,6 +69,9 @@
 			<index name="pk_Liquidite" unique="PRIMARY_KEY" >
 				<column name="Id" />
 			</index>
+			<fk name="fk_Liquidite" to_schema="Default" to_table="Compte" >
+				<fk_column name="TypeLiquidite" pk="Id" />
+			</fk>
 		</table>
 		<table name="MouvementTresorerie" spec="" >
 			<column name="Id" type="INTEGER" mandatory="y" >
@@ -71,15 +80,22 @@
 			<column name="TypeMouvement" type="TEXT" mandatory="y" />
 			<column name="MontantMouvement" type="DECIMAL" length="18" decimal="2" mandatory="y" />
 			<column name="DateMouvement" type="DATETIME" mandatory="y" />
+			<column name="CompteId" type="INT" mandatory="y" />
 			<index name="pk_MouvementTresorerie" unique="PRIMARY_KEY" >
 				<column name="Id" />
 			</index>
+			<fk name="fk_MouvementTresorerie" to_schema="Default" to_table="Compte" >
+				<fk_column name="CompteId" pk="Id" />
+			</fk>
 		</table>
 		<table name="Portefeuille" spec="" >
 			<column name="Id" type="INTEGER" mandatory="y" >
 				<identity><![CDATA[AUTOINCREMENT]]></identity>
 			</column>
 			<column name="NomPortefeuille" type="TEXT" mandatory="y" />
+			<column name="Solde" type="DECIMAL" >
+				<defo><![CDATA[0]]></defo>
+			</column>
 			<index name="pk_Portefeuille" unique="PRIMARY_KEY" >
 				<column name="Id" />
 			</index>
@@ -130,6 +146,11 @@
 	<diagram_group name="Default" id="4be51f9c-c29e-40b7-a6ed-0557e8ec79c7" >
 		<diagram name="Diagram" id="6502e77c-0452-4f0c-904b-a8c2e42c2d4e" joined_routing="y" show_column_type="y" show_schema_name="y" show_relation="columns" >
 			<entity schema="Default" name="Actif" color="3986C1" x="874" y="133" />
+			<entity schema="Default" name="Compte" color="3986C1" x="589" y="551" />
+			<entity schema="Default" name="Dividende" color="3986C1" x="1159" y="399" />
+			<entity schema="Default" name="ETF" color="3986C1" x="1292" y="133" />
+			<entity schema="Default" name="Liquidite" color="3986C1" x="152" y="589" />
+			<entity schema="Default" name="MouvementTresorerie" color="3986C1" x="950" y="627" />
 			<entity schema="Default" name="Portefeuille" color="3986C1" x="57" y="57" />
 			<entity schema="Default" name="Position" color="3986C1" x="494" y="57" />
 			<entity schema="Default" name="TransacFin" color="3986C1" x="437" y="323" />

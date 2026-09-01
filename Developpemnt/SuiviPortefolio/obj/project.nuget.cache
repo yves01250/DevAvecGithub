@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oNaJVGN1p0U=",
+  "dgSpecHash": "0EVwGnne/u4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio.csproj",
+  "projectFilePath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio_zscv51jo_wpftmp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yves_\\.nuget\\packages\\microsoft.data.sqlite\\10.0.11\\microsoft.data.sqlite.10.0.11.nupkg.sha512",
     "C:\\Users\\yves_\\.nuget\\packages\\microsoft.data.sqlite.core\\10.0.11\\microsoft.data.sqlite.core.10.0.11.nupkg.sha512",

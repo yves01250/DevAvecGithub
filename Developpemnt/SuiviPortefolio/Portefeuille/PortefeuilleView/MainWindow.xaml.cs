@@ -25,16 +25,18 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
         public MainWindow()
         {
             InitializeComponent();
-            var dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SuiviPortefeuille.sqlite");
-            _database = new SqliteRepository(dbPath);
 
-            //var etfService = new EtfService(dbPath);
-
-            //_viewModel = new MonPf(Portefeuille.cs);
-            //_repository = new PortefeuilleBase(SqliteRepository); // Initialise la base et la table ici
-            //InitializeDatabase();
             DataContext = new MainViewModel(); // ViewModel associé
             
         }
+        private void Enregistrer_Click(
+        object sender,
+        RoutedEventArgs e)
+    {
+        if (DataContext is MainViewModel viewModel)
+        {
+            viewModel.EnregistrerPortefeuille();
+        }
+    }
     }
 }

@@ -1,0 +1,83 @@
+CREATE TABLE Actif ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	NomActif             TEXT NOT NULL    ,
+	Ticker               TEXT NOT NULL    ,
+	Isin                 TEXT NOT NULL    ,
+	Marche               TEXT NOT NULL    ,
+	Devise               TEXT NOT NULL    ,
+	TypeActif            TEXT NOT NULL    ,
+	CoursActuel          DECIMAL(18) NOT NULL    ,
+	DateDernierCours     TEXT NOT NULL    
+ );
+
+CREATE TABLE Compte ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	NomCompte            TEXT NOT NULL    ,
+	Devise               TEXT NOT NULL    ,
+	SoldeEspeces         DECIMAL(18) NOT NULL    
+ );
+
+CREATE TABLE Dividende ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	MontantDividende     DECIMAL(18) NOT NULL    ,
+	DateDividende        DATETIME NOT NULL    ,
+	ActifId              INTEGER NOT NULL    ,
+	SoldeDividende       DECIMAL(18) NOT NULL    ,
+	FOREIGN KEY ( ActifId ) REFERENCES Actif( Id )  
+ );
+
+CREATE TABLE ETF ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	NomETF               TEXT NOT NULL    ,
+	IndiceSuivi          TEXT NOT NULL    ,
+	Capitalisant         NUMERIC NOT NULL    ,
+	FraisGestion         DECIMAL(5) NOT NULL    ,
+	FOREIGN KEY ( Id ) REFERENCES Actif( Id )  
+ );
+
+CREATE TABLE Liquidite ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	TypeLiquidite        TEXT NOT NULL    ,
+	Devise               TEXT NOT NULL    ,
+	SoldeLiquidite       DECIMAL(18) NOT NULL    ,
+	DateMouvementLiquidite DATETIME NOT NULL    ,
+	FOREIGN KEY ( TypeLiquidite ) REFERENCES Compte( Id )  
+ );
+
+CREATE TABLE MouvementTresorerie ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	TypeMouvement        TEXT NOT NULL    ,
+	MontantMouvement     DECIMAL(18) NOT NULL    ,
+	DateMouvement        DATETIME NOT NULL    ,
+	CompteId             INT NOT NULL    ,
+	FOREIGN KEY ( CompteId ) REFERENCES Compte( Id )  
+ );
+
+CREATE TABLE Portefeuille ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	NomPortefeuille      TEXT NOT NULL    ,
+	Solde                DECIMAL  DEFAULT 0   
+ );
+
+CREATE TABLE Position ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	ActifId              INTEGER NOT NULL    ,
+	Quantité             DECIMAL NOT NULL    ,
+	PrixMoyen            DECIMAL NOT NULL    ,
+	PortefeuilleId       INT NOT NULL    ,
+	FOREIGN KEY ( Id ) REFERENCES Portefeuille( Id )  ,
+	FOREIGN KEY ( PortefeuilleId ) REFERENCES Portefeuille( Id )  ,
+	FOREIGN KEY ( ActifId ) REFERENCES Actif( Id )  
+ );
+
+CREATE TABLE TransacFin ( 
+	Id                   INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	TypeTransacFin       TEXT NOT NULL    ,
+	Quantite             DECIMAL(18) NOT NULL    ,
+	DateTransacFin       DATETIME NOT NULL    ,
+	PortefeuilleId       INT NOT NULL    ,
+	ActifId              INT NOT NULL    ,
+	FOREIGN KEY ( PortefeuilleId ) REFERENCES Portefeuille( Id )  ,
+	FOREIGN KEY ( ActifId ) REFERENCES Actif( Id )  
+ );
+
