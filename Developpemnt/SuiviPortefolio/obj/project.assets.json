@@ -302,9 +302,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio_zscv51jo_wpftmp.csproj",
+      "projectUniqueName": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio.csproj",
       "projectName": "SuiviPortefolio",
-      "projectPath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio_zscv51jo_wpftmp.csproj",
+      "projectPath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio.csproj",
       "packagesPath": "C:\\Users\\yves_\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\obj\\",
       "projectStyle": "PackageReference",

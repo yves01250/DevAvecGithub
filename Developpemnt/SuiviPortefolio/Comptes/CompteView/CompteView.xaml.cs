@@ -1,4 +1,7 @@
 using System.Windows.Controls;
+using SuiviPortefolio.Comptes.CpteViewModel;
+
+
 
 namespace SuiviPortefolio.Comptes.CompteView
 {
@@ -7,6 +10,8 @@ namespace SuiviPortefolio.Comptes.CompteView
         public CompteView()
         {
             InitializeComponent();
+            DataContext = new CompteViewModel();
+
         }
     }
 }

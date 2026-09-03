@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SuiviPortefolio"
+        xmlns:compte="clr-namespace:SuiviPortefolio.Comptes.CompteView"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,7 +20,24 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0">
+        <!-- Onglets sur toute la largeur -->
+        <TabControl Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
+
+            <TabItem Header="Portefeuille">
+                <!--<TextBlock Text="Contenu de l'onglet 1"/> -->
+            </TabItem>
+
+            <TabItem Header="Comptes">
+                <!--<local:CompteView />-->
+                <compte:CompteView />
+
+            </TabItem>
+
+        </TabControl>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
             <TextBlock Text="Bonjour depuis le sous-répertoire Portefeuille/PortefeuilleView/ !" />
             <TextBlock Text="PORTEFEUILLE" />
 
@@ -46,7 +65,7 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Row="1" Grid.Column="0" > 
+        <StackPanel Grid.Row="2" Grid.Column="0" > 
 
                  <!-- Ligne de séparation -->
                 <Separator Margin="0,10,0,10"

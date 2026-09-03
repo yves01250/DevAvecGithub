@@ -5,7 +5,8 @@ using System.Windows.Input;
 using SuiviPortefolio.Comptes.CompteModel;
 using SuiviPortefolio.Comptes.CompteRepository;
 
-namespace SuiviPortefolio.Comptes.CompteViewModel;
+namespace SuiviPortefolio.Comptes.CpteViewModel;
+
 
 public class CompteViewModel : INotifyPropertyChanged
 {

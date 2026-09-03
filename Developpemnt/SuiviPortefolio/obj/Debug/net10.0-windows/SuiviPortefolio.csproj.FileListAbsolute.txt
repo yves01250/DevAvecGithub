@@ -49,3 +49,4 @@ C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\ob
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\ref\SuiviPortefolio.dll
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Comptes\CompteView\CompteView.baml
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Comptes\CompteView\CompteView.g.cs
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\GeneratedInternalTypeHelper.g.cs

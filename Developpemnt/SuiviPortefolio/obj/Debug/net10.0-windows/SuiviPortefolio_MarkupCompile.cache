@@ -1,5 +1,5 @@
 ﻿SuiviPortefolio
-1.0.0.0
+
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_O
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\App.xaml
 2-997451259
 
-161754673684
-4201997084628
+121688420351
+210998542314
 Comptes\CompteView\CompteView.xaml;Portefeuille\PortefeuilleView\MainWindow.xaml;
 
-True
+False
 
