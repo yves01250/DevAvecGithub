@@ -66,7 +66,7 @@ public class CompteRepository : ICompteRepository
         return result;
     }
 
-    public void Add(Compte compte)
+    public int Add(Compte compte)
     {
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
@@ -75,6 +75,7 @@ public class CompteRepository : ICompteRepository
         command.CommandText = @"
             INSERT INTO Compte (CpteNom, CpteType, CpteDevise, CpteSolde, CpteEstDefaut, CptePtfId)
             VALUES ($nom, $type, $devise, $solde, $estDefaut, $ptfId);
+            SELECT last_insert_rowid();
         ";
 
         command.Parameters.AddWithValue("$nom", compte.CpteNom);
@@ -84,7 +85,7 @@ public class CompteRepository : ICompteRepository
         command.Parameters.AddWithValue("$estDefaut", compte.CpteEstDefaut ? 1 : 0);
         command.Parameters.AddWithValue("$ptfId", compte.CptePtfId);
 
-        command.ExecuteNonQuery();
+        return Convert.ToInt32(command.ExecuteScalar());
     }
 
     public void Update(Compte compte)

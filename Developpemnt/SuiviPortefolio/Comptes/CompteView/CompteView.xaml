@@ -20,6 +20,12 @@
                     HorizontalAlignment="Left"
                     Margin="0,0,0,10"/>
 
+            <Button Content="Modifier le compte sélectionné"
+                    Command="{Binding ModifierCompteCommand}"
+                    Width="220"
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,10"/>
+
             <Button Content="Définir comme compte par défaut"
                     Command="{Binding SetCompteDefautCommand}"
                     Width="220"

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using SuiviPortefolio.Comptes.CompteModel;
 using SuiviPortefolio.Comptes.CompteRepository;
+using SuiviPortefolio.Comptes.CompteView;
 
 namespace SuiviPortefolio.Comptes.CpteViewModel;
 
@@ -19,6 +20,8 @@ public class CompteViewModel : INotifyPropertyChanged
             System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SuiviPortefeuille.sqlite"));
 
         AjouterCompteCommand = new RelayCommand(_ => AjouterCompte());
+        ModifierCompteCommand = new RelayCommand(_ => ModifierCompte(),
+            _ => CompteSelectionne != null);
         SetCompteDefautCommand = new RelayCommand(_ => DefinirCompteDefaut(), _ => CompteSelectionne != null);
 
         ChargerComptes();
@@ -35,12 +38,14 @@ public class CompteViewModel : INotifyPropertyChanged
             {
                 _compteSelectionne = value;
                 OnPropertyChanged();
+                ((RelayCommand)ModifierCompteCommand).RaiseCanExecuteChanged();
                 ((RelayCommand)SetCompteDefautCommand).RaiseCanExecuteChanged();
             }
         }
     }
 
     public ICommand AjouterCompteCommand { get; }
+    public ICommand ModifierCompteCommand { get; }
     public ICommand SetCompteDefautCommand { get; }
 
     public void ChargerComptes()
@@ -51,7 +56,8 @@ public class CompteViewModel : INotifyPropertyChanged
             Comptes.Add(compte);
         }
 
-        CompteSelectionne = Comptes.FirstOrDefault();
+        CompteSelectionne = Comptes.FirstOrDefault(compte => compte.CpteEstDefaut)
+            ?? Comptes.FirstOrDefault();
     }
 
     private void AjouterCompte()
@@ -66,8 +72,44 @@ public class CompteViewModel : INotifyPropertyChanged
             CptePtfId = 1
         };
 
-        _repository.Add(nouveauCompte);
+        var dialog = new CompteEditWindow(nouveauCompte, nouveau: true);
+        if (dialog.ShowDialog() != true)
+            return;
+
+        var nouveauCompteId = _repository.Add(nouveauCompte);
+        if (nouveauCompte.CpteEstDefaut)
+            _repository.SetDefault(nouveauCompteId);
+
         ChargerComptes();
+        CompteSelectionne = Comptes.FirstOrDefault(compte => compte.CpteId == nouveauCompteId);
+    }
+
+    private void ModifierCompte()
+    {
+        if (CompteSelectionne == null)
+            return;
+
+        var compteModifie = new Compte
+        {
+            CpteId = CompteSelectionne.CpteId,
+            CpteNom = CompteSelectionne.CpteNom,
+            CpteType = CompteSelectionne.CpteType,
+            CpteDevise = CompteSelectionne.CpteDevise,
+            CpteSolde = CompteSelectionne.CpteSolde,
+            CpteEstDefaut = CompteSelectionne.CpteEstDefaut,
+            CptePtfId = CompteSelectionne.CptePtfId
+        };
+
+        var dialog = new CompteEditWindow(compteModifie, nouveau: false);
+        if (dialog.ShowDialog() != true)
+            return;
+
+        _repository.Update(compteModifie);
+        if (compteModifie.CpteEstDefaut)
+            _repository.SetDefault(compteModifie.CpteId);
+
+        ChargerComptes();
+        CompteSelectionne = Comptes.FirstOrDefault(compte => compte.CpteId == compteModifie.CpteId);
     }
 
     private void DefinirCompteDefaut()

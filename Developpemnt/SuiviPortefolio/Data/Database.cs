@@ -50,14 +50,7 @@ public class SqliteRepository
                 ActifTransID INTEGER NOT NULL,
                 FOREIGN KEY ( ActifTransID ) REFERENCES TransacFin( TransId )
             );
-            CREATE TABLE IF NOT EXISTS Compte (
-                CpteId INTEGER PRIMARY KEY AUTOINCREMENT,
-                CpteNom TEXT NOT NULL,
-                CpteDevise TEXT NOT NULL,
-                CpteSoldeEsp decimal(18, 2) NOT NULL,
-                CptePtfId INTEGER NOT NULL,
-                FOREIGN KEY ( CptePtfId ) REFERENCES Portefeuille( PtfId )
-            );
+
             CREATE TABLE IF NOT EXISTS ETF (
                 ActifEtfId INTEGER PRIMARY KEY AUTOINCREMENT,
                 ActifEtfNom TEXT NOT NULL,
@@ -71,7 +64,9 @@ public class SqliteRepository
                 PosActifId INTEGER NOT NULL,
                 PosQte decimal(18, 2) NOT NULL,
                 PosPrixMoyen decimal(18, 2) NOT NULL,
-                FOREIGN KEY ( PosActifId ) REFERENCES Actif( ActifId )
+                PosCpteId INTEGER NOT NULL,
+                FOREIGN KEY ( PosActifId ) REFERENCES Actif( ActifId ),
+                FOREIGN KEY ( PosCpteId ) REFERENCES Compte( CpteId )
             );
             CREATE TABLE IF NOT EXISTS TransacFin (
                 TransId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -79,7 +74,9 @@ public class SqliteRepository
                 TransQte decimal(18, 2) NOT NULL,
                 TransDateTransac DATETIME NOT NULL,
                 TransCpteId INTEGER NOT NULL,
-                FOREIGN KEY ( TransCpteId ) REFERENCES Compte( CpteId )
+                TransActifId INTEGER NOT NULL,
+                FOREIGN KEY ( TransCpteId ) REFERENCES Compte( CpteId ),
+                FOREIGN KEY ( TransActifId ) REFERENCES Actif( ActifId )
             );
             CREATE TABLE IF NOT EXISTS Liquidite (
                 LiqId INTEGER PRIMARY KEY AUTOINCREMENT,
