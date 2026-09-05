@@ -15,9 +15,9 @@ public class CompteRepository : ICompteRepository
             Mode = SqliteOpenMode.ReadWriteCreate
         }.ToString();
 
-        InitializeDatabase();
+        //InitializeDatabase();
     }
-
+    /*
     private void InitializeDatabase()
     {
         using var connection = new SqliteConnection(_connectionString);
@@ -32,11 +32,13 @@ public class CompteRepository : ICompteRepository
                 CpteDevise TEXT NOT NULL,
                 CpteSolde DECIMAL(18, 2) NOT NULL DEFAULT 0,
                 CpteEstDefaut INTEGER NOT NULL DEFAULT 0,
-                CptePtfId INTEGER NOT NULL DEFAULT 1
+                CptePtfId INTEGER NOT NULL DEFAULT 1,
+                FOREIGN KEY (CptePtfId) REFERENCES Portefeuille(PtfId)
             );
         ";
         command.ExecuteNonQuery();
     }
+    */
 
     public List<Compte> GetAll()
     {

@@ -47,12 +47,21 @@ public class SqliteRepository
                 ActifDevise TEXT NOT NULL,
                 ActifCoursActuel decimal(18, 2) NOT NULL,
                 ActifDateDernierCours TEXT NOT NULL,
-                ActifTransID INTEGER NOT NULL,
-                FOREIGN KEY ( ActifTransID ) REFERENCES TransacFin( TransId )
+                ActifTransID INTEGER NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS Compte (
+                CpteId INTEGER PRIMARY KEY AUTOINCREMENT,
+                CpteNom TEXT NOT NULL,
+                CpteType TEXT NOT NULL,
+                CpteDevise TEXT NOT NULL,
+                CpteSolde DECIMAL(18, 2) NOT NULL DEFAULT 0,
+                CpteEstDefaut INTEGER NOT NULL DEFAULT 0,
+                CptePtfId INTEGER NOT NULL DEFAULT 1,
+                FOREIGN KEY (CptePtfId) REFERENCES Portefeuille(PtfId)
             );
 
             CREATE TABLE IF NOT EXISTS ETF (
-                ActifEtfId INTEGER PRIMARY KEY AUTOINCREMENT,
+                ActifEtfId INTEGER PRIMARY KEY,
                 ActifEtfNom TEXT NOT NULL,
                 ActifEtfIndiceSuivi TEXT NOT NULL,
                 ActifEtfCapit boolean NOT NULL,
@@ -65,6 +74,7 @@ public class SqliteRepository
                 PosQte decimal(18, 2) NOT NULL,
                 PosPrixMoyen decimal(18, 2) NOT NULL,
                 PosCpteId INTEGER NOT NULL,
+                UNIQUE (PosCpteId, PosActifId),
                 FOREIGN KEY ( PosActifId ) REFERENCES Actif( ActifId ),
                 FOREIGN KEY ( PosCpteId ) REFERENCES Compte( CpteId )
             );
