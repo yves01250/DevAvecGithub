@@ -1,0 +1,1 @@
+namespace SuiviPortefolio.Transactions.TransRepository;

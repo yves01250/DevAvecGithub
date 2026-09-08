@@ -52,3 +52,12 @@ C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\ob
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Comptes\CompteView\CompteEditWindow.baml
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Comptes\CompteView\CompteEditWindow.g.cs
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Transactions\TransView\TransView.baml
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Transactions\TransView\TransView.g.cs
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Transactions\TransView\TransEditWindow.baml
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Transactions\TransView\TransEditWindow.g.cs
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.exe
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.deps.json
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.runtimeconfig.json
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.dll
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.pdb

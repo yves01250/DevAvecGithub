@@ -1,0 +1,56 @@
+<UserControl x:Class="SuiviPortefolio.Transactions.TransView.TransView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBlock Text="TRANSACTIONS" FontWeight="Bold" FontSize="20" Margin="0,0,0,10"/>
+
+            <ComboBox ItemsSource="{Binding Cotations}"
+                      SelectedItem="{Binding CotationSelectionnee, Mode=TwoWay}"
+                      DisplayMemberPath="Name"
+                      Margin="0,0,0,10"/>
+
+            <Button Content="Rechercher une cotation"
+                    Click="RechercherCotation_Click"
+                    Width="160"
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,10"/>
+
+            <Button Content="Modifier la transaction sélectionnée"
+                    Command="{Binding ModifierTransactionCommand}"
+                    Width="220"
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,10"/>
+
+            <Button Content="Définir comme transaction par défaut"
+                    Command="{Binding SetTransactionDefautCommand}"
+                    Width="220"
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,10"/>
+
+            <GroupBox Header="Transaction sélectionnée" Margin="0,10,0,0">
+                <StackPanel Margin="10">
+
+                    <TextBlock Text="Ticker :" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TransactionSelectionnee.ActifTicker}" Margin="0,0,0,5"/>
+
+                    <TextBlock Text="Type :" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TransactionSelectionnee.TransType}" Margin="0,0,0,5"/>
+
+                    <TextBlock Text="Cours actuel :" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TransactionSelectionnee.TransCours}" Margin="0,0,0,5"/>
+
+                    <TextBlock Text="Quantité :" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TransactionSelectionnee.TransQuantite}" Margin="0,0,0,5"/>
+
+                    <TextBlock Text="Solde :" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TransactionSelectionnee.TransSolde}" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

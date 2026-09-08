@@ -20,9 +20,6 @@ public class MainViewModel : INotifyPropertyChanged
     private readonly SqliteRepository _database;
     private monPortefeuille _portefeuille;
 
-    //private monPortefeuille _portefeuille;
-
-    //private monPortefeuille Portefeuille { get; set; }
 
     public MainViewModel()
     {
