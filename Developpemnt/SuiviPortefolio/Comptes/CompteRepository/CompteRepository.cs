@@ -15,9 +15,9 @@ public class CompteRepository : ICompteRepository
             Mode = SqliteOpenMode.ReadWriteCreate
         }.ToString();
 
-        //InitializeDatabase();
+        InitializeDatabase();
     }
-    /*
+
     private void InitializeDatabase()
     {
         using var connection = new SqliteConnection(_connectionString);
@@ -38,7 +38,6 @@ public class CompteRepository : ICompteRepository
         ";
         command.ExecuteNonQuery();
     }
-    */
 
     public List<Compte> GetAll()
     {

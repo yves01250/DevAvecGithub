@@ -1,1 +1,4 @@
-{}
+{"color-highlight.includes": [
+    "**/*.xaml"
+]
+}

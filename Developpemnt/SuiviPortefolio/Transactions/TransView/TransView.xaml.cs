@@ -1,6 +1,5 @@
 using System.Windows.Controls;
 using System.Windows;
-using SuiviPortefolio.Transactions.TransModel;
 using SuiviPortefolio.Transactions.TransViewModel;
 
 
@@ -15,19 +14,26 @@ namespace SuiviPortefolio.Transactions.TransView
             DataContext = new TransactionViewModel();
         }
 
-        private void AjouterCotation_Click(object sender, RoutedEventArgs e)
+        private void RechercherCotation_Click(object sender, RoutedEventArgs e)
         {
-            var nouvelleCotation = new Cotation
+            if (DataContext is TransactionViewModel viewModel)
             {
-                Name = "Nouvelle Cotation"
-            };
+                var owner = Window.GetWindow(this);
+                if (owner != null)
+                    viewModel.RechercherCotation(owner);
+            }
+        }
 
-            var dialog = new TransEditWindow(nouvelleCotation, nouveau: true)
-            {
-                Owner = Window.GetWindow(this)
-            };
+        private void Enregistrer_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is TransactionViewModel viewModel)
+                viewModel.Enregistrer();
+        }
 
-            dialog.ShowDialog();
+        private void Annuler_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is TransactionViewModel viewModel)
+                viewModel.Annuler();
         }
     }
 }

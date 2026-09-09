@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Mode Sombre -->
+    <Color x:Key="PrimaryColor">#FF2D2D30</Color>
+    <Color x:Key="SecondaryColor">#FF0078D7</Color>
+    <Color x:Key="BackgroundColor">#FF1E1E1E</Color>
+    <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
+
+    <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource SecondaryColor}" />
+    <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource ForegroundColor}" />
+    <SolidColorBrush x:Key="ButtonBorder" Color="{StaticResource SecondaryColor}" />
+
+    <SolidColorBrush x:Key="TextForeground" Color="{StaticResource ForegroundColor}" />
+
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="ComboBoxForeground" Color="{StaticResource ForegroundColor}" />
+    <SolidColorBrush x:Key="ComboBoxBorder" Color="{StaticResource SecondaryColor}" />
+
+    <SolidColorBrush x:Key="ListBoxBackground" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="ListBoxForeground" Color="{StaticResource ForegroundColor}" />
+    <SolidColorBrush x:Key="ListBoxBorder" Color="{StaticResource SecondaryColor}" />
+
+    <SolidColorBrush x:Key="TabControlBackground" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="TabControlForeground" Color="{StaticResource ForegroundColor}" />
+
+    <SolidColorBrush x:Key="TabItemBackground" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="TabItemForeground" Color="{StaticResource ForegroundColor}" />
+    <SolidColorBrush x:Key="TabItemBorder" Color="{StaticResource SecondaryColor}" />
+
+    <SolidColorBrush x:Key="GroupBoxBackground" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="GroupBoxForeground" Color="{StaticResource ForegroundColor}" />
+    <SolidColorBrush x:Key="GroupBoxBorder" Color="{StaticResource SecondaryColor}" />
+</ResourceDictionary>

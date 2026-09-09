@@ -18,7 +18,7 @@ public partial class CompteEditWindow : Window
         NomTextBox.Text = compte.CpteNom;
         TypeComboBox.SelectedItem = compte.CpteType;
         DeviseTextBox.Text = compte.CpteDevise;
-        SoldeTextBox.Text = compte.CpteSolde.ToString(CultureInfo.CurrentCulture);
+        SoldeTextBox.Text = compte.CpteSolde.ToString("0.00",CultureInfo.CurrentCulture);
         DefautCheckBox.IsChecked = compte.CpteEstDefaut;
     }
 

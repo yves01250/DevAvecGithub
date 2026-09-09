@@ -7,108 +7,79 @@
         xmlns:compte="clr-namespace:SuiviPortefolio.Comptes.CompteView"
         xmlns:transaction="clr-namespace:SuiviPortefolio.Transactions.TransView"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1000">
+        <!-- A remplacer pour fenêtre s'adaptant à l'ecran-->
+        <!-- Title="MainWindow" WindowState="Maximized"> -->
 
     <Grid>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <!-- Ligne pour le bouton -->
+            <RowDefinition Height="Auto" />
+            <!-- Ligne pour le TabControl -->
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        
+                <!-- Bouton pour basculer entre les thèmes -->
+        <Button Grid.Row="0"                
+                Content="🌓 Basculer en mode sombre"
+                Click="ToggleTheme_Click"
+                HorizontalAlignment="Right"
+                Margin="10" />
+       
 
         <!-- Onglets sur toute la largeur -->
-        <TabControl Grid.Row="0"
+        <TabControl Margin="0" Padding="0"
+                SelectionChanged="TabControl_SelectionChanged"
+                Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2">
 
             <TabItem Header="Portefeuille">
-                <!--<TextBlock Text="Contenu de l'onglet 1"/> -->
+                <!--<"Contenu de l'onglet 1"/> -->
+                <Grid Margin="10">
+                    <StackPanel>
+                        <TextBlock Text="PORTEFEUILLES" FontWeight="Bold" FontSize="20" Margin="0,0,0,10"/>
+
+                        <ComboBox ItemsSource="{Binding ListePortefeuilles}"
+                                SelectedItem="{Binding PortefeuilleSelectionne, Mode=TwoWay}"
+                                DisplayMemberPath="PtfNom"
+                                Margin="0,5,0,10" />
+
+                        <Button Content="Ajouter un portefeuille"
+                                Command="{Binding }"
+                                Width="220"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,10"/>
+
+                        <Button Content="Définir comme portefeuille par défaut"
+                                Command="{Binding }"
+                                Width="220"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,10"/>
+
+                        <GroupBox Header="Portefeuille sélectionné" Margin="0,10,0,0">
+                            <StackPanel Margin="10">
+                                <TextBlock 
+                                    Text="{Binding Portefeuille.PtfNom, Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Text="Solde :" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Portefeuille.PtfSolde, StringFormat='{}{0:F2}'}" />
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>    
             </TabItem>
 
-            <TabItem Header="Comptes">
+            <TabItem x:Name="ComptesTab" Header="Comptes">
                 <!--<local:CompteView />-->
-                <compte:CompteView />
+                <compte:CompteView x:Name="ComptesView" />
             </TabItem>
 
             <TabItem Header="Transactions">
                 <transaction:TransView/>
             </TabItem>
 
-        </TabControl>
-
-        <StackPanel Grid.Row="1" Grid.Column="0">
-            <TextBlock Text="Bonjour depuis le sous-répertoire Portefeuille/PortefeuilleView/ !" />
-            <TextBlock Text="PORTEFEUILLE" />
-
-            <!-- Choix du portefeuille par défaut -->
-            <TextBlock Text="Portefeuille par défaut :" Margin="0,10,0,0"/>
-            <ComboBox ItemsSource="{Binding ListePortefeuilles}"
-              SelectedItem="{Binding PortefeuilleSelectionne, Mode=TwoWay}"
-              DisplayMemberPath="PtfNom"
-              Margin="0,5,0,10" />
-
-            <TextBlock Background="LightYellow"
-             Text="{Binding Portefeuille.PtfNom, Mode=TwoWay,
-                            UpdateSourceTrigger=PropertyChanged}" />
-
-            <StackPanel Orientation="Horizontal"
-                VerticalAlignment="Center">
-                <TextBlock Text="Solde:"
-                   Margin="0,5,10,0"
-                   Width="80" />
-                <TextBlock Text="{Binding Portefeuille.PtfSolde, Mode=TwoWay,
-                                  UpdateSourceTrigger=PropertyChanged}"
-                   Margin="0,5,0,0"
-                   Width="100" />
-            </StackPanel>
-        </StackPanel>
-
-
-        <StackPanel Grid.Row="2" Grid.Column="0" > 
-
-                 <!-- Ligne de séparation -->
-                <Separator Margin="0,10,0,10"
-                    Background="Red"
-                    Height="1" />
-
-            <TextBlock Text="AJOUTER" />
-
-            <!-- Les derniers TextBox sur la même ligne -->
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <Button Content="Enregistrer"
-                            Click="Enregistrer_Click"
-                            Width="120"
-                            Margin="5" />
-
-                    <TextBlock Text="Nom:"
-                            Margin="0,5,10,0"
-                            Width="80" />
-                   <TextBox Text="{Binding Portefeuille.PtfNom, Mode=TwoWay,
-                        UpdateSourceTrigger=PropertyChanged}"
-                            Margin="0,5,0,0"
-                            Width="200" />
-                </StackPanel>
-
-                <!-- Les derniers TextBox sur la même ligne -->
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-
-                    <TextBlock Text="Montant:"
-                            Margin="0,5,10,0"
-                            Width="80" />
-                   <TextBox Text="{Binding Portefeuille.PtfSolde, Mode=TwoWay,
-                        UpdateSourceTrigger=PropertyChanged}"
-                            Margin="0,5,0,0"
-                            Width="100" />
-                </StackPanel>
-
-        </StackPanel>
-        
+        </TabControl>        
     </Grid>
 </Window>

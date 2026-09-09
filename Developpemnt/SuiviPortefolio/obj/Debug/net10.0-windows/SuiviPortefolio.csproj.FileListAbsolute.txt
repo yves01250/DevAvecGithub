@@ -61,3 +61,15 @@ C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.deps.jso
 C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.runtimeconfig.json
 C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.dll
 C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-build\SuiviPortefolio.pdb
+C:\Users\yves_\AppData\Local\Temp\SuiviBuild\Debug\net10.0-windows\SuiviPortefolio.deps.json
+C:\Users\yves_\AppData\Local\Temp\SuiviBuild\Debug\net10.0-windows\SuiviPortefolio.runtimeconfig.json
+C:\Users\yves_\AppData\Local\Temp\SuiviBuild\Debug\net10.0-windows\SuiviPortefolio.dll
+C:\Users\yves_\AppData\Local\Temp\SuiviBuild\Debug\net10.0-windows\SuiviPortefolio.pdb
+C:\Users\yves_\AppData\Local\Temp\SuiviBuild2\Debug\net10.0-windows\SuiviPortefolio.deps.json
+C:\Users\yves_\AppData\Local\Temp\SuiviBuild2\Debug\net10.0-windows\SuiviPortefolio.runtimeconfig.json
+C:\Users\yves_\AppData\Local\Temp\SuiviBuild2\Debug\net10.0-windows\SuiviPortefolio.dll
+C:\Users\yves_\AppData\Local\Temp\SuiviBuild2\Debug\net10.0-windows\SuiviPortefolio.pdb
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Ressources\DarkTheme.baml
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Ressources\Styles.baml
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Ressources\Theme.baml
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\App.baml

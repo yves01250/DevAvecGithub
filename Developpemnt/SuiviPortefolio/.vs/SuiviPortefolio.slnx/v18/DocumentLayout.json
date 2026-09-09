@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\transactions\\transview\\transeditwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:transactions\\transview\\transeditwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -31,18 +26,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TransEditWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Transactions\\TransView\\TransEditWindow.xaml",
-              "RelativeDocumentMoniker": "Transactions\\TransView\\TransEditWindow.xaml",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Transactions\\TransView\\TransEditWindow.xaml",
-              "RelativeToolTip": "Transactions\\TransView\\TransEditWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-09-07T15:24:34.352Z",
-              "EditorCaption": ""
             }
           ]
         }

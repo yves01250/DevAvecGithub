@@ -1,9 +1,19 @@
-﻿<Application x:Class="SuiviPortefolio.App"
+﻿
+<Application x:Class="SuiviPortefolio.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SuiviPortefolio"
              StartupUri="Portefeuille/PortefeuilleView/MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Fusionner les dictionnaires de ressources -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Thème par défaut (clair) -->
+                <ResourceDictionary Source="Ressources/Theme.xaml" />
+                <!-- Styles globaux -->
+                <ResourceDictionary Source="Ressources/Styles.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
