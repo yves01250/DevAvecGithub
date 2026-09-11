@@ -11,7 +11,17 @@
         <!-- A remplacer pour fenêtre s'adaptant à l'ecran-->
         <!-- Title="MainWindow" WindowState="Maximized"> -->
 
-    <Grid>
+        <!-- Définition du WindowChrome pour personnaliser la barre de titre -->
+    <!-- <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="30"
+            ResizeBorderThickness="5"
+            GlassFrameThickness="0"
+            UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome> -->
+
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
+        
         
         <Grid.RowDefinitions>
             <!-- Ligne pour le bouton -->
@@ -39,12 +49,17 @@
                 <!--<"Contenu de l'onglet 1"/> -->
                 <Grid Margin="10">
                     <StackPanel>
-                        <TextBlock Text="PORTEFEUILLES" FontWeight="Bold" FontSize="20" Margin="0,0,0,10"/>
+                        <TextBlock Text="PORTEFEUILLES" Style="{StaticResource TitleH1Style}" Margin="0,0,0,10"/>
 
                         <ComboBox ItemsSource="{Binding ListePortefeuilles}"
                                 SelectedItem="{Binding PortefeuilleSelectionne, Mode=TwoWay}"
-                                DisplayMemberPath="PtfNom"
-                                Margin="0,5,0,10" />
+                                Margin="0,5,0,10">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PtfNom}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
                         <Button Content="Ajouter un portefeuille"
                                 Command="{Binding }"

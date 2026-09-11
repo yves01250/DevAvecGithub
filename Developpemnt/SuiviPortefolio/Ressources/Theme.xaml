@@ -7,15 +7,23 @@
     <Color x:Key="BackgroundColor">#FFFFFFFF</Color>
     <Color x:Key="ForegroundColor">#FF000000</Color>
 
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource BackgroundColor}" />   
+
     <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource SecondaryColor}" />
     <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush x:Key="ButtonBorder" Color="{StaticResource SecondaryColor}" />
 
     <SolidColorBrush x:Key="TextForeground" Color="{StaticResource ForegroundColor}" />
+    
+    <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource BackgroundColor}" />
+    <SolidColorBrush x:Key="TextBoxForeground" Color="{StaticResource ForegroundColor}" />
+    <SolidColorBrush x:Key="TextBoxBorder" Color="{StaticResource SecondaryColor}" />
 
     <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource BackgroundColor}" />
     <SolidColorBrush x:Key="ComboBoxForeground" Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush x:Key="ComboBoxBorder" Color="{StaticResource SecondaryColor}" />
+    <SolidColorBrush x:Key="ComboBoxItemSelectedBackground" Color="{StaticResource SecondaryColor}" />
+    <SolidColorBrush x:Key="ComboBoxItemHoverBackground" Color="#FFE5E5E5" />
 
     <SolidColorBrush x:Key="ListBoxBackground" Color="{StaticResource BackgroundColor}" />
     <SolidColorBrush x:Key="ListBoxForeground" Color="{StaticResource ForegroundColor}" />

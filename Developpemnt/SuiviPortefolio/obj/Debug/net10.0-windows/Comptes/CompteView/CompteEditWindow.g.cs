@@ -91,7 +91,7 @@ namespace SuiviPortefolio.Comptes.CompteView {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SuiviPortefolio;V1.0.0.0;component/comptes/compteview/compteeditwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SuiviPortefolio;component/comptes/compteview/compteeditwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Comptes\CompteView\CompteEditWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

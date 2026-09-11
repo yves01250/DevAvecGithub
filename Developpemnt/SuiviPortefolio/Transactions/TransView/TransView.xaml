@@ -29,7 +29,13 @@
             <Grid Margin="10">
                 <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="220"/></Grid.ColumnDefinitions>
                 <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                <TextBlock Text="Compte :" Margin="0,0,8,8"/><ComboBox Grid.Column="1" ItemsSource="{Binding Comptes}" SelectedItem="{Binding CompteSelectionne}" DisplayMemberPath="CpteNom" Margin="0,0,0,8"/>
+                <TextBlock Text="Compte :" Margin="0,0,8,8"/><ComboBox Grid.Column="1" ItemsSource="{Binding Comptes}" SelectedItem="{Binding CompteSelectionne}" Margin="0,0,0,8">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding CpteNom}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <TextBlock Grid.Row="1" Text="Type :" Margin="0,0,8,8"/><ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding TypesTransaction}" SelectedItem="{Binding TypeTransaction}" Margin="0,0,0,8"/>
                 <TextBlock Grid.Row="2" Text="Quantité :" Margin="0,0,8,8"/><TextBox Grid.Row="2" Grid.Column="1" Text="{Binding QuantiteTexte, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
                 <TextBlock Grid.Row="3" Text="Frais :" Margin="0,0,8,8"/><TextBox Grid.Row="3" Grid.Column="1" Text="{Binding FraisTexte, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>

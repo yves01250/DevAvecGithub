@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using SuiviPortefolio.Portefeuille.PortefeuilleModel;
 using SuiviPortefolio.Portefeuille.PortefeuilleViewModel;
 using System.Windows;
+using System.Diagnostics;
 
 
 
@@ -29,6 +30,14 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
         public MainWindow()
         {
             InitializeComponent();
+
+                // Récupère la police par défaut de la fenêtre (dont héritent tous les TextBlock)
+    FontFamily currentFont = this.FontFamily;
+    double fontSize = this.FontSize;
+    Debug.WriteLine($"Police par défaut : {currentFont.Source}");
+    Debug.WriteLine($"Taille par défaut : {fontSize}");    
+    // Ou l'afficher dans une boîte de message au lancement :
+    //MessageBox.Show($"Police : {currentFont.Source} | Taille : {fontSize}");
 
             DataContext = new MainViewModel(); // ViewModel associé
             
