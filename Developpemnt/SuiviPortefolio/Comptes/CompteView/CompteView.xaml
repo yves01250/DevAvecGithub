@@ -8,7 +8,7 @@
              
     <Grid Margin="10">
         <StackPanel>
-            <TextBlock Text="COMPTES" FontWeight="Bold" FontSize="20" Margin="0,0,0,10"/>
+            <TextBlock Text="COMPTES" Style="{StaticResource TitleH1Style}" Margin="0,0,0,10"/>
 
             <ComboBox ItemsSource="{Binding Comptes}"
                       SelectedItem="{Binding CompteSelectionne, Mode=TwoWay}"
@@ -30,7 +30,7 @@
                     Command="{Binding ModifierCompteCommand}"
                     Width="220"
                     HorizontalAlignment="Left"
-                    Margin="0,0,0,10"/>
+                    Margin="0,0,0,10" Click="Button_Click"/>
 
             <Button Content="Définir comme compte par défaut"
                     Command="{Binding SetCompteDefautCommand}"

@@ -33,7 +33,7 @@
         <Setter Property="FontFamily" Value="Segoe UI"/> 
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <!--<Setter Property="Foreground" Value="#000000"/> -->
+        <Setter Property="Foreground" Value="{DynamicResource TitleForeground}"/>
     </Style>
 
     <!-- Style pour les ComboBox -->
@@ -201,4 +201,5 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="10" />
     </Style>
+
 </ResourceDictionary>

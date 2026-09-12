@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Mode Sombre -->
-    <Color x:Key="PrimaryColor">#FF2D2D30</Color>    
-    <Color x:Key="SecondaryColor">#FF0078D7</Color>
-    <Color x:Key="BackgroundColor">#FF1E1E1E</Color>
-    <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="PrimaryColor">#2D2D30</Color>    
+    <Color x:Key="SecondaryColor">#0078D7</Color>
+    <Color x:Key="BackgroundColor">#1E1E1E</Color>
+    <Color x:Key="ForegroundColor">#FFFFFF</Color> 
     <Color x:Key="TitreColor">#FEFEE4</Color>
 
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource BackgroundColor}" />
@@ -13,11 +13,15 @@
     <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource SecondaryColor}" />
     <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush x:Key="ButtonBorder" Color="{StaticResource SecondaryColor}" />
-    <SolidColorBrush x:Key="TitleH1Style" Color="{StaticResource TitreColor}" />
+    <SolidColorBrush x:Key="TitleForeground" Color="{StaticResource TitreColor}" />
 
     <SolidColorBrush x:Key="TextForeground" Color="{StaticResource ForegroundColor}" />
 
-    <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="TextBoxForeground" Color="{StaticResource ForegroundColor}" />
+    <SolidColorBrush x:Key="TextBoxBorder" Color="{StaticResource SecondaryColor}" />
+
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource BackgroundColor}" />
     <SolidColorBrush x:Key="ComboBoxForeground" Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush x:Key="ComboBoxBorder" Color="{StaticResource SecondaryColor}" />
     <SolidColorBrush x:Key="ComboBoxItemSelectedBackground" Color="{StaticResource SecondaryColor}" />
@@ -38,4 +42,6 @@
     <SolidColorBrush x:Key="GroupBoxBackground" Color="{StaticResource PrimaryColor}" />
     <SolidColorBrush x:Key="GroupBoxForeground" Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush x:Key="GroupBoxBorder" Color="{StaticResource SecondaryColor}" />
+
+    <SolidColorBrush x:Key="FenetreGroundBrush" Color="{StaticResource BackgroundColor}" />
 </ResourceDictionary>

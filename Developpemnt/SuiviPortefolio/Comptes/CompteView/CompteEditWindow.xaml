@@ -4,8 +4,9 @@
         Title="Compte"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize">
-    <Grid Margin="20">
+        ResizeMode="NoResize"
+        Background="{DynamicResource WindowBackgroundBrush}">
+    <Grid Background="{DynamicResource WindowBackgroundBrush}" Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

@@ -46,7 +46,7 @@ namespace SuiviPortefolio {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.11.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.12.0")]
         public void InitializeComponent() {
             if (_contentLoaded) {
                 return;
@@ -72,7 +72,7 @@ namespace SuiviPortefolio {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.11.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "10.0.12.0")]
         public static void Main() {
             SuiviPortefolio.App app = new SuiviPortefolio.App();
             app.InitializeComponent();

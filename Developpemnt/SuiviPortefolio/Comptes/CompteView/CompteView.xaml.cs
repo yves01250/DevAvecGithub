@@ -13,5 +13,10 @@ namespace SuiviPortefolio.Comptes.CompteView
             DataContext = new CompteViewModel();
 
         }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

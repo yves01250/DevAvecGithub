@@ -7,7 +7,7 @@
             <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="170"/>
             <RowDefinition Height="*"/><RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="TRANSACTIONS" FontWeight="Bold" FontSize="20" Margin="0,0,0,10"/>
+        <TextBlock Text="TRANSACTIONS" Style="{StaticResource TitleH1Style}" Margin="0,0,0,10"/>
         <Grid Grid.Row="1" Margin="0,0,0,10">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
             <ComboBox ItemsSource="{Binding Cotations}" SelectedItem="{Binding CotationSelectionnee, Mode=TwoWay}">

@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+        <!-- Ajoutez cette ligne pour forcer la correspondance avec vos x:Class -->
+    <RootNamespace>SuiviPortefolio</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

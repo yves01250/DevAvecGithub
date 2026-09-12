@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Windows;
 using SuiviPortefolio.Comptes.CompteModel;
 using SuiviPortefolio.Comptes.CompteRepository;
 using SuiviPortefolio.Comptes.CompteView;

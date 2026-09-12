@@ -2,16 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Mode Clair (par défaut) -->
-    <Color x:Key="PrimaryColor">#FF2D2D30</Color>
-    <Color x:Key="SecondaryColor">#FF0078D7</Color>
-    <Color x:Key="BackgroundColor">#FFFFFFFF</Color>
-    <Color x:Key="ForegroundColor">#FF000000</Color>
+    <Color x:Key="PrimaryColor">#2D2D30</Color>
+    <Color x:Key="SecondaryColor">#0078D7</Color>
+    <Color x:Key="BackgroundColor">#FFFFFF</Color>
+    <Color x:Key="ForegroundColor">#000000</Color>
 
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource BackgroundColor}" />   
 
     <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource SecondaryColor}" />
     <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush x:Key="ButtonBorder" Color="{StaticResource SecondaryColor}" />
+    <SolidColorBrush x:Key="TitleForeground" Color="{StaticResource ForegroundColor}" />
 
     <SolidColorBrush x:Key="TextForeground" Color="{StaticResource ForegroundColor}" />
     
@@ -39,4 +40,7 @@
     <SolidColorBrush x:Key="GroupBoxBackground" Color="{StaticResource BackgroundColor}" />
     <SolidColorBrush x:Key="GroupBoxForeground" Color="{StaticResource ForegroundColor}" />
     <SolidColorBrush x:Key="GroupBoxBorder" Color="{StaticResource SecondaryColor}" />
+    
+    <SolidColorBrush x:Key="FenetreGroundBrush" Color="{StaticResource BackgroundColor}" />
+
 </ResourceDictionary>
