@@ -3,11 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\ressources\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:ressources\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\portefeuille\\portefeuilleview\\editmainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:portefeuille\\portefeuilleview\\editmainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yves_\\AppData\\Local\\Temp\\.vsdbgsrc\\e2831c258b6c3af697f3e6e568acc9ea232f9b81c026a8c0d9913a4844d64d3b\\XamlReader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\portefeuille\\portefeuilleview\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:portefeuille\\portefeuilleview\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\portefeuille\\portefeuilleview\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,27 +43,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Styles.xaml",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Ressources\\Styles.xaml",
-              "RelativeDocumentMoniker": "Ressources\\Styles.xaml",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Ressources\\Styles.xaml",
-              "RelativeToolTip": "Ressources\\Styles.xaml",
+              "Title": "EditMainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\EditMainWindow.xaml",
+              "RelativeDocumentMoniker": "Portefeuille\\PortefeuilleView\\EditMainWindow.xaml",
+              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\EditMainWindow.xaml",
+              "RelativeToolTip": "Portefeuille\\PortefeuilleView\\EditMainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-09-12T16:30:10.625Z",
+              "WhenOpened": "2026-09-13T12:43:53.345Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "XamlReader.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\AppData\\Local\\Temp\\.vsdbgsrc\\e2831c258b6c3af697f3e6e568acc9ea232f9b81c026a8c0d9913a4844d64d3b\\XamlReader.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\e2831c258b6c3af697f3e6e568acc9ea232f9b81c026a8c0d9913a4844d64d3b\\XamlReader.cs",
-              "ToolTip": "C:\\Users\\yves_\\AppData\\Local\\Temp\\.vsdbgsrc\\e2831c258b6c3af697f3e6e568acc9ea232f9b81c026a8c0d9913a4844d64d3b\\XamlReader.cs [Lecture seule]",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\e2831c258b6c3af697f3e6e568acc9ea232f9b81c026a8c0d9913a4844d64d3b\\XamlReader.cs [Lecture seule]",
-              "ViewState": "AgIAAPEBAAAAAAAAAAAgwAECAAACAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-12T16:29:31.593Z",
-              "EditorCaption": " [Lecture seule]"
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Portefeuille\\PortefeuilleView\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\MainWindow.xaml",
+              "RelativeToolTip": "Portefeuille\\PortefeuilleView\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-09-13T12:26:33.23Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,10 +72,9 @@
               "RelativeDocumentMoniker": "Portefeuille\\PortefeuilleView\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\MainWindow.xaml.cs",
               "RelativeToolTip": "Portefeuille\\PortefeuilleView\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAnwB8AAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAnwCcAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-12T16:22:14.552Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-12T16:22:14.552Z"
             }
           ]
         }

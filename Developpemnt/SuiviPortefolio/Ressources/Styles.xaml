@@ -27,7 +27,7 @@
         <Setter Property="Padding" Value="4" />
     </Style>
 
-        <!-- Style pour vos Titres principaux (H1) -->
+        <!-- Style pour les Titres principaux (H1) -->
     <Style x:Key="TitleH1Style" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
         <!-- Option A: Utilisation d'une police système Windows standard -->
         <Setter Property="FontFamily" Value="Segoe UI"/> 

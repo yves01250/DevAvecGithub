@@ -1,5 +1,3 @@
-﻿using Microsoft.Data.Sqlite;
-using SuiviPortefolio.Data;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +10,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SuiviPortefolio.Portefeuille.PortefeuilleModel;
 using SuiviPortefolio.Portefeuille.PortefeuilleViewModel;
-using System.Windows;
 using System.Diagnostics;
 
 
@@ -25,7 +22,6 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
     public partial class MainWindow : Window
     {
         private bool IsDarkTheme { get; set; } = false;
-        private readonly SqliteRepository _database;
         //private readonly MonPf _viewModel;
         public MainWindow()
         {
@@ -70,14 +66,9 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
             }
         }
 
-            private void Enregistrer_Click(
-            object sender,
-            RoutedEventArgs e)
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (DataContext is MainViewModel viewModel)
-            {
-                viewModel.EnregistrerPortefeuille();
-            }
+
         }
     }
 }

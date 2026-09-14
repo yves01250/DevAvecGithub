@@ -61,27 +61,37 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
 
-                        <Button Content="Ajouter un portefeuille"
-                                Command="{Binding }"
+                        <Button Content="Ajouter/Modifier un portefeuille"
+                                Command="{Binding AjouterPortefeuilleCommand}"
+                                Width="220"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,10"/>
+                        <Button Content="Modifier le portefeuille sélectionné"
+                                Command="{Binding ModifierPortefeuilleCommand}"
                                 Width="220"
                                 HorizontalAlignment="Left"
                                 Margin="0,0,0,10"/>
 
                         <Button Content="Définir comme portefeuille par défaut"
-                                Command="{Binding }"
+                                Command="{Binding DefinirPortefeuilleDefautCommand}"
                                 Width="220"
                                 HorizontalAlignment="Left"
                                 Margin="0,0,0,10"/>
 
                         <GroupBox Header="Portefeuille sélectionné" Margin="0,10,0,0">
                             <StackPanel Margin="10">
-                                <TextBlock 
-                                    Text="{Binding Portefeuille.PtfNom, Mode=TwoWay,
-                                    UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Text="{Binding Portefeuille.PtfNom}" />
+                                <TextBlock Text="{Binding Portefeuille.PtfType}" />
+                                <TextBlock Text="{Binding Portefeuille.PtfDevise}" />
                                 <TextBlock Text="Solde :" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Portefeuille.PtfSolde, StringFormat='{}{0:F2}'}" />
                             </StackPanel>
                         </GroupBox>
+                        <Button Content="Supprimer le portefeuille sélectionné"
+                                Command="{Binding SupprimerPortefeuilleCommand}"
+                                Width="240"
+                                HorizontalAlignment="Left"
+                                Margin="0,10,0,0"/>
                     </StackPanel>
                 </Grid>    
             </TabItem>

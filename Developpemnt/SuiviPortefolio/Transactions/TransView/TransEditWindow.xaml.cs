@@ -91,6 +91,7 @@ public partial class TransEditWindow : Window
     {
         Cotation.Name = cotation.Name;
         Cotation.Symbol = cotation.Symbol;
+        Cotation.Isin = cotation.Isin;
         Cotation.Instrument = cotation.Instrument;
         Cotation.Marche = cotation.Marche;
         Cotation.Devise = cotation.Devise;

@@ -35,6 +35,8 @@ public class SqliteRepository
             CREATE TABLE IF NOT EXISTS Portefeuille (
                 PtfId INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT,
                 PtfNom TEXT NOT NULL,
+                PtfType TEXT NOT NULL DEFAULT 'Général',
+                PtfDevise TEXT NOT NULL DEFAULT 'EUR',
                 PtfSolde DECIMAL  DEFAULT 0,
                 PtfEstDefaut INTEGER DEFAULT 0
             );
@@ -85,6 +87,8 @@ public class SqliteRepository
                 TransDateTransac DATETIME NOT NULL,
                 TransCpteId INTEGER NOT NULL,
                 TransActifId INTEGER NOT NULL,
+                TransPrix DECIMAL(18, 2) NOT NULL DEFAULT 0,
+                TransFrais DECIMAL(18, 2) NOT NULL DEFAULT 0,
                 FOREIGN KEY ( TransCpteId ) REFERENCES Compte( CpteId ),
                 FOREIGN KEY ( TransActifId ) REFERENCES Actif( ActifId )
             );
@@ -114,7 +118,29 @@ public class SqliteRepository
             );
         ";
         command.ExecuteNonQuery();
+
+        // Keep databases created by earlier versions compatible with the editor.
+        AddColumnIfMissing(connection, "Portefeuille", "PtfType", "TEXT NOT NULL DEFAULT 'Général'");
+        AddColumnIfMissing(connection, "Portefeuille", "PtfDevise", "TEXT NOT NULL DEFAULT 'EUR'");
+        AddColumnIfMissing(connection, "TransacFin", "TransPrix", "DECIMAL(18, 2) NOT NULL DEFAULT 0");
+        AddColumnIfMissing(connection, "TransacFin", "TransFrais", "DECIMAL(18, 2) NOT NULL DEFAULT 0");
         
+    }
+
+    private static void AddColumnIfMissing(SqliteConnection connection, string table, string column, string definition)
+    {
+        using var command = connection.CreateCommand();
+        command.CommandText = $"PRAGMA table_info({table});";
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            if (string.Equals(reader.GetString(1), column, StringComparison.OrdinalIgnoreCase))
+                return;
+        }
+
+        using var alter = connection.CreateCommand();
+        alter.CommandText = $"ALTER TABLE {table} ADD COLUMN {column} {definition};";
+        alter.ExecuteNonQuery();
     }
 
     public IEnumerable<monPortefeuille> GetAllPortefeuilles()
@@ -122,7 +148,7 @@ public class SqliteRepository
     using var connection = new SqliteConnection(_connectionString);
     connection.Open();
     using var cmd = connection.CreateCommand();
-    cmd.CommandText = "SELECT PtfId, PtfNom, PtfSolde FROM Portefeuille";
+    cmd.CommandText = "SELECT PtfId, PtfNom, PtfType, PtfDevise, PtfSolde, PtfEstDefaut FROM Portefeuille ORDER BY PtfId";
 
     var list = new List<monPortefeuille>();
     using var reader = cmd.ExecuteReader();
@@ -132,13 +158,16 @@ public class SqliteRepository
         {
             PtfId = reader.GetInt32(0),
             PtfNom = reader.GetString(1),
-            PtfSolde = reader.GetDecimal(2)
+            PtfType = reader.GetString(2),
+            PtfDevise = reader.GetString(3),
+            PtfSolde = reader.GetDecimal(4),
+            PtfEstDefaut = reader.GetBoolean(5)
         });
     }
     return list;
 }
 
-    public void Ajouter(monPortefeuille portefeuille)
+    public int Ajouter(monPortefeuille portefeuille)
     {
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
@@ -146,19 +175,53 @@ public class SqliteRepository
         
         command.CommandText = """
             INSERT INTO Portefeuille
-                (PtfNom, PtfSolde)
+                (PtfNom, PtfType, PtfDevise, PtfSolde, PtfEstDefaut)
             VALUES
-                ($nom, $solde);
+                ($nom, $type, $devise, $solde, $defaut);
+            SELECT last_insert_rowid();
             """;
 
         command.Parameters.AddWithValue(
             "$nom",
             portefeuille.PtfNom);
+        command.Parameters.AddWithValue("$type", portefeuille.PtfType);
+        command.Parameters.AddWithValue("$devise", portefeuille.PtfDevise);
 
         command.Parameters.AddWithValue(
             "$solde",
             portefeuille.PtfSolde);
+        command.Parameters.AddWithValue("$defaut", portefeuille.PtfEstDefaut ? 1 : 0);
 
+        return Convert.ToInt32(command.ExecuteScalar());
+    }
+
+    public void Modifier(monPortefeuille portefeuille)
+    {
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = """
+            UPDATE Portefeuille
+            SET PtfNom = $nom, PtfType = $type, PtfDevise = $devise,
+                PtfSolde = $solde, PtfEstDefaut = $defaut
+            WHERE PtfId = $id;
+            """;
+        command.Parameters.AddWithValue("$id", portefeuille.PtfId);
+        command.Parameters.AddWithValue("$nom", portefeuille.PtfNom);
+        command.Parameters.AddWithValue("$type", portefeuille.PtfType);
+        command.Parameters.AddWithValue("$devise", portefeuille.PtfDevise);
+        command.Parameters.AddWithValue("$solde", portefeuille.PtfSolde);
+        command.Parameters.AddWithValue("$defaut", portefeuille.PtfEstDefaut ? 1 : 0);
+        command.ExecuteNonQuery();
+    }
+
+    public void Supprimer(int id)
+    {
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM Portefeuille WHERE PtfId = $id;";
+        command.Parameters.AddWithValue("$id", id);
         command.ExecuteNonQuery();
     }
 
@@ -187,4 +250,3 @@ public class SqliteRepository
 }
 
 }  
-

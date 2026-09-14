@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -20,9 +21,11 @@ public class TransactionViewModel : INotifyPropertyChanged
     private TransactionFinanciere? _transactionSelectionnee;
     private Compte? _compteSelectionne;
     private string _quantiteTexte = string.Empty;
+    private string _coursTexte = string.Empty;
     private string _fraisTexte = "0";
     private string _totalTexte = "0,00";
     private string _typeTransaction = "Achat";
+    private DateTime? _dateTransaction = DateTime.Today;
 
     public TransactionViewModel(ITransRepository? transactions = null, ICompteRepository? comptes = null)
     {
@@ -32,6 +35,10 @@ public class TransactionViewModel : INotifyPropertyChanged
         foreach (var compte in _comptes.GetAll())
             Comptes.Add(compte);
         CompteSelectionne = Comptes.FirstOrDefault(c => c.CpteEstDefaut) ?? Comptes.FirstOrDefault();
+
+        foreach (var cotation in _transactions.GetCotations())
+            Cotations.Add(cotation);
+        CotationSelectionnee = Cotations.FirstOrDefault();
     }
 
     public ObservableCollection<Cotation> Cotations { get; } = new();
@@ -47,6 +54,7 @@ public class TransactionViewModel : INotifyPropertyChanged
             if (ReferenceEquals(_cotationSelectionnee, value)) return;
             _cotationSelectionnee = value;
             OnPropertyChanged();
+            CoursTexte = value?.Close.ToString("N2", CultureInfo.CurrentCulture) ?? string.Empty;
             ChargerTransactions();
         }
     }
@@ -62,18 +70,22 @@ public class TransactionViewModel : INotifyPropertyChanged
             if (value != null)
             {
                 TypeTransaction = value.TransType;
-                QuantiteTexte = value.TransQte.ToString(CultureInfo.CurrentCulture);
-                FraisTexte = value.TransFrais.ToString(CultureInfo.CurrentCulture);
+                DateTransaction = value.TransDateTransac;
+                QuantiteTexte = value.TransQte.ToString("N2", CultureInfo.CurrentCulture);
+                CoursTexte = value.TransPrix.ToString("N2", CultureInfo.CurrentCulture);
+                FraisTexte = value.TransFrais.ToString("N2", CultureInfo.CurrentCulture);
                 RecalculerTotal();
             }
         }
     }
 
     public Compte? CompteSelectionne { get => _compteSelectionne; set { _compteSelectionne = value; OnPropertyChanged(); } }
-    public string TypeTransaction { get => _typeTransaction; set { _typeTransaction = value; OnPropertyChanged(); } }
+    public string TypeTransaction { get => _typeTransaction; set { _typeTransaction = value; OnPropertyChanged(); RecalculerTotal(); } }
     public string QuantiteTexte { get => _quantiteTexte; set { _quantiteTexte = value; OnPropertyChanged(); RecalculerTotal(); } }
-    public string FraisTexte { get => _fraisTexte; set { _fraisTexte = value; OnPropertyChanged(); } }
+    public string CoursTexte { get => _coursTexte; set { _coursTexte = value; OnPropertyChanged(); RecalculerTotal(); } }
+    public string FraisTexte { get => _fraisTexte; set { _fraisTexte = value; OnPropertyChanged(); RecalculerTotal(); } }
     public string TotalTexte { get => _totalTexte; private set { _totalTexte = value; OnPropertyChanged(); } }
+    public DateTime? DateTransaction { get => _dateTransaction; set { _dateTransaction = value; OnPropertyChanged(); } }
 
     public void RechercherCotation(Window owner)
     {
@@ -94,19 +106,26 @@ public class TransactionViewModel : INotifyPropertyChanged
             MessageBox.Show("Sélectionnez une cotation, un compte et saisissez une quantité et des frais valides.", "Transaction", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
+        if (!decimal.TryParse(CoursTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var course) || course < 0)
+        {
+            MessageBox.Show("Saisissez un cours valide.", "Transaction", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
 
         var oldQuantity = TransactionSelectionnee?.TransQte;
         var item = TransactionSelectionnee ?? new TransactionFinanciere();
         item.TransType = TypeTransaction;
         item.TransQte = quantity;
-        item.TransPrix = Convert.ToDecimal(CotationSelectionnee.Close);
+        item.TransPrix = course;
         item.TransFrais = fees;
-        item.TransDateTransac = DateTime.Now;
+        item.TransDateTransac = DateTransaction ?? DateTime.Today;
         item.TransCpteId = CompteSelectionne.CpteId;
+        CotationSelectionnee.Close = (double)course;
         _transactions.Save(item, CotationSelectionnee, oldQuantity);
         ChargerTransactions();
         TransactionSelectionnee = TransactionsRecentes.FirstOrDefault(t => t.TransId == item.TransId);
         QuantiteTexte = string.Empty;
+        CoursTexte = CotationSelectionnee.Close.ToString("N2", CultureInfo.CurrentCulture);
         FraisTexte = "0";
     }
 
@@ -114,8 +133,10 @@ public class TransactionViewModel : INotifyPropertyChanged
     {
         TransactionSelectionnee = null;
         QuantiteTexte = string.Empty;
+        CoursTexte = CotationSelectionnee?.Close.ToString("N2", CultureInfo.CurrentCulture) ?? string.Empty;
         FraisTexte = "0";
         TypeTransaction = "Achat";
+        DateTransaction = DateTime.Today;
         RecalculerTotal();
     }
 
@@ -128,14 +149,20 @@ public class TransactionViewModel : INotifyPropertyChanged
             TransactionsRecentes.Add(transaction);
     }
 
+
     private void RecalculerTotal()
     {
-        if (CotationSelectionnee == null || !decimal.TryParse(QuantiteTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var quantity))
+        if (CotationSelectionnee == null ||
+            !decimal.TryParse(QuantiteTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var quantity) ||
+            !decimal.TryParse(CoursTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var course) ||
+            !decimal.TryParse(FraisTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var fees))
         {
             TotalTexte = "0,00";
             return;
         }
-        TotalTexte = (quantity * Convert.ToDecimal(CotationSelectionnee.Close)).ToString("N2", CultureInfo.CurrentCulture);
+        var amount = quantity * course;
+        var total = TypeTransaction == "Vente" ? amount - fees : amount + fees;
+        TotalTexte = total.ToString("N2", CultureInfo.CurrentCulture);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

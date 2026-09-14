@@ -8,6 +8,8 @@ public class TransactionFinanciere
     public DateTime TransDateTransac { get; set; }
     public int TransCpteId { get; set; }
     public long TransActifId { get; set; }
+    public string Isin { get; set; } = string.Empty;
+    public string Symbol { get; set; } = string.Empty;
     public decimal TransPrix { get; set; }
     public decimal TransFrais { get; set; }
     public string CompteNom { get; set; } = string.Empty;

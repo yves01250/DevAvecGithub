@@ -1,4 +1,5 @@
 using Microsoft.Data.Sqlite;
+using SuiviPortefolio.Data;
 using SuiviPortefolio.Transactions.TransModel;
 
 namespace SuiviPortefolio.Transactions.TransRepository;
@@ -10,7 +11,38 @@ public sealed class TransRepository : ITransRepository
     public TransRepository(string dbPath)
     {
         _connectionString = new SqliteConnectionStringBuilder { DataSource = dbPath, Mode = SqliteOpenMode.ReadWriteCreate }.ToString();
-        EnsureSchema();
+        _ = new SqliteRepository(dbPath);
+    }
+
+    public IReadOnlyList<Cotation> GetCotations()
+    {
+        using var connection = OpenConnection();
+        using var command = connection.CreateCommand();
+        command.CommandText = """
+            SELECT ActifId, ActifNom, ActifTicker, ActifIsin, ActifMarche,
+                   ActifDevise, ActifCoursActuel, ActifDateDernierCours
+            FROM Actif
+            ORDER BY ActifTicker;
+            """;
+
+        var result = new List<Cotation>();
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            result.Add(new Cotation
+            {
+                Id = reader.GetInt64(0),
+                Name = reader.GetString(1),
+                Symbol = reader.GetString(2),
+                Isin = reader.GetString(3),
+                Marche = reader.GetString(4),
+                Devise = reader.GetString(5),
+                Close = reader.GetDouble(6),
+                Date = DateTime.Parse(reader.GetString(7))
+            });
+        }
+
+        return result;
     }
 
     public IReadOnlyList<TransactionFinanciere> GetRecent(int actifId, int count = 5)
@@ -19,8 +51,10 @@ public sealed class TransRepository : ITransRepository
         using var command = connection.CreateCommand();
         command.CommandText = """
             SELECT t.TransId, t.TransType, t.TransQte, t.TransDateTransac,
-                   t.TransCpteId, t.TransActifId, t.TransPrix, t.TransFrais, c.CpteNom
+                   t.TransCpteId, t.TransActifId, t.TransPrix, t.TransFrais, c.CpteNom,
+                   a.ActifTicker, a.ActifIsin
             FROM TransacFin t LEFT JOIN Compte c ON c.CpteId = t.TransCpteId
+            LEFT JOIN Actif a ON a.ActifId = t.TransActifId
             WHERE t.TransActifId = $actifId
             ORDER BY datetime(t.TransDateTransac) DESC, t.TransId DESC LIMIT $count;
             """;
@@ -37,7 +71,9 @@ public sealed class TransRepository : ITransRepository
                 TransQte = reader.GetDecimal(2), TransDateTransac = DateTime.Parse(reader.GetString(3)),
                 TransCpteId = reader.GetInt32(4), TransActifId = reader.GetInt64(5),
                 TransPrix = reader.GetDecimal(6), TransFrais = reader.GetDecimal(7),
-                CompteNom = reader.IsDBNull(8) ? string.Empty : reader.GetString(8)
+                CompteNom = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                Symbol = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
+                Isin = reader.IsDBNull(10) ? string.Empty : reader.GetString(10)
             });
         }
         return result;
@@ -150,7 +186,7 @@ public sealed class TransRepository : ITransRepository
         using var command = connection.CreateCommand();
         command.Transaction = transaction;
         command.CommandText = """
-            SELECT TransId, TransType, TransQte, TransCpteId, TransActifId,
+            SELECT TransId, TransType, TransQte, TransDateTransac, TransCpteId, TransActifId,
                    TransPrix, TransFrais
             FROM TransacFin
             WHERE TransId = $id;
@@ -166,36 +202,12 @@ public sealed class TransRepository : ITransRepository
             TransId = reader.GetInt64(0),
             TransType = reader.GetString(1),
             TransQte = reader.GetDecimal(2),
-            TransCpteId = reader.GetInt32(3),
-            TransActifId = reader.GetInt64(4),
-            TransPrix = reader.GetDecimal(5),
-            TransFrais = reader.GetDecimal(6)
+            TransDateTransac = DateTime.Parse(reader.GetString(3)),
+            TransCpteId = reader.GetInt32(4),
+            TransActifId = reader.GetInt64(5),
+            TransPrix = reader.GetDecimal(6),
+            TransFrais = reader.GetDecimal(7)
         };
-    }
-
-    private void EnsureSchema()
-    {
-        using var connection = OpenConnection();
-        using var command = connection.CreateCommand();
-        command.CommandText = """
-            CREATE TABLE IF NOT EXISTS Actif (
-              ActifId INTEGER PRIMARY KEY AUTOINCREMENT, ActifNom TEXT NOT NULL,
-              ActifTicker TEXT NOT NULL UNIQUE, ActifIsin TEXT NOT NULL, ActifMarche TEXT NOT NULL,
-              ActifDevise TEXT NOT NULL, ActifCoursActuel DECIMAL(18,2) NOT NULL,
-              ActifDateDernierCours TEXT NOT NULL, ActifTransID INTEGER NOT NULL DEFAULT 0);
-            CREATE TABLE IF NOT EXISTS TransacFin (
-              TransId INTEGER PRIMARY KEY AUTOINCREMENT, TransType TEXT NOT NULL,
-              TransQte DECIMAL(18,2) NOT NULL, TransDateTransac TEXT NOT NULL,
-              TransCpteId INTEGER NOT NULL, TransActifId INTEGER NOT NULL,
-              TransPrix DECIMAL(18,2) NOT NULL DEFAULT 0, TransFrais DECIMAL(18,2) NOT NULL DEFAULT 0);
-            CREATE TABLE IF NOT EXISTS Position (
-              PosId INTEGER PRIMARY KEY AUTOINCREMENT, PosActifId INTEGER NOT NULL,
-              PosQte DECIMAL(18,2) NOT NULL, PosPrixMoyen DECIMAL(18,2) NOT NULL,
-              PosCpteId INTEGER NOT NULL, UNIQUE(PosCpteId,PosActifId));
-            """;
-        command.ExecuteNonQuery();
-        AddColumnIfMissing(connection, "TransacFin", "TransPrix", "DECIMAL(18,2) NOT NULL DEFAULT 0");
-        AddColumnIfMissing(connection, "TransacFin", "TransFrais", "DECIMAL(18,2) NOT NULL DEFAULT 0");
     }
 
     private static int EnsureActif(SqliteConnection connection, SqliteTransaction transaction, Cotation cotation)
@@ -215,7 +227,7 @@ public sealed class TransRepository : ITransRepository
               SELECT last_insert_rowid();
               """
             : """
-              UPDATE Actif SET ActifNom=$nom, ActifMarche=$marche, ActifDevise=$devise,
+              UPDATE Actif SET ActifNom=$nom, ActifIsin=$isin, ActifMarche=$marche, ActifDevise=$devise,
                 ActifCoursActuel=$cours, ActifDateDernierCours=$date
               WHERE ActifId=$id;
               SELECT ActifId FROM Actif WHERE ActifId=$id;
@@ -224,7 +236,7 @@ public sealed class TransRepository : ITransRepository
             command.Parameters.AddWithValue("$id", existingId);
         command.Parameters.AddWithValue("$nom", cotation.Name ?? string.Empty);
         command.Parameters.AddWithValue("$ticker", cotation.Symbol ?? string.Empty);
-        command.Parameters.AddWithValue("$isin", cotation.Symbol ?? string.Empty);
+        command.Parameters.AddWithValue("$isin", cotation.Isin ?? string.Empty);
         command.Parameters.AddWithValue("$marche", cotation.Marche ?? string.Empty);
         command.Parameters.AddWithValue("$devise", cotation.Devise ?? string.Empty);
         command.Parameters.AddWithValue("$cours", cotation.Close);
@@ -243,23 +255,13 @@ public sealed class TransRepository : ITransRepository
         command.Parameters.AddWithValue("$frais", item.TransFrais);
     }
 
-    private static void AddColumnIfMissing(SqliteConnection connection, string table, string column, string definition)
-    {
-        using var check = connection.CreateCommand();
-        check.CommandText = $"SELECT COUNT(*) FROM pragma_table_info('{table}') WHERE name=$column";
-        check.Parameters.AddWithValue("$column", column);
-        if (Convert.ToInt32(check.ExecuteScalar()) == 0)
-        {
-            using var alter = connection.CreateCommand();
-            alter.CommandText = $"ALTER TABLE {table} ADD COLUMN {column} {definition}";
-            alter.ExecuteNonQuery();
-        }
-    }
-
     private SqliteConnection OpenConnection()
     {
         var connection = new SqliteConnection(_connectionString);
         connection.Open();
+        using var command = connection.CreateCommand();
+        command.CommandText = "PRAGMA foreign_keys = ON;";
+        command.ExecuteNonQuery();
         return connection;
     }
 }

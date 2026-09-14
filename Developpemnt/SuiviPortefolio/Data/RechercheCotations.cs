@@ -53,6 +53,7 @@ public class CotationFetcher
             results.Add(new Cotation
             {
                 Symbol = symbol,
+                Isin = GetString(quote, "isin"),
                 Name = GetString(quote, "longname") ?? GetString(quote, "shortname") ?? symbol,
                 Instrument = GetString(quote, "quoteType") ?? string.Empty
             });
@@ -94,6 +95,7 @@ public class CotationFetcher
         var currency = meta.TryGetProperty("currency", out var curr) && curr.ValueKind == JsonValueKind.String
                 ? curr.GetString()
                 : symbol;
+        var isin = GetString(meta, "isin");
 
         // Dernier cours de clôture : priorité au dernier point de la série (close de séance),
         // repli sur meta.regularMarketPrice si la série est vide.
@@ -103,6 +105,7 @@ public class CotationFetcher
         return new Cotation
         {
             Symbol = symbol,
+            Isin = isin,
             Name = shortName,
             Instrument = instrumentType,
             Marche = fullExchangeName,

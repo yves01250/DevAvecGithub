@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP1_0_OR_GREATER;NETCOREAPP1_1_OR_GREATER;NETCOREAPP2_0_OR_GREATER;NETCOREAPP2_1_OR_GREATER;NETCOREAPP2_2_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\App.xaml
-8633947708
+910193456
 
-24-958740488
+25-869211645
 210-273351056
-Comptes\CompteView\CompteEditWindow.xaml;Comptes\CompteView\CompteView.xaml;Portefeuille\PortefeuilleView\MainWindow.xaml;Ressources\DarkTheme.xaml;Ressources\Styles.xaml;Ressources\Theme.xaml;Transactions\TransView\TransEditWindow.xaml;Transactions\TransView\TransView.xaml;
+Comptes\CompteView\CompteEditWindow.xaml;Comptes\CompteView\CompteView.xaml;Portefeuille\PortefeuilleView\EditMainWindow.xaml;Portefeuille\PortefeuilleView\MainWindow.xaml;Ressources\DarkTheme.xaml;Ressources\Styles.xaml;Ressources\Theme.xaml;Transactions\TransView\TransEditWindow.xaml;Transactions\TransView\TransView.xaml;
 
 True
 
