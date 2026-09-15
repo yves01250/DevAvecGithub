@@ -19,92 +19,121 @@
             GlassFrameThickness="0"
             UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome> -->
+    <DockPanel>
+        <!-- La barre de menu principale fixée en haut -->
+        <Menu DockPanel.Dock="Top" Background="#F0F0F0">
+            
+            <!-- Menu Fichier -->
+            <MenuItem Header="_Fichier">
+                <MenuItem Header="_Sauvegarder" Click="MenuSauvegarder_Click" />
+                <MenuItem Header="_Restaurer" Click="MenuRestaurer_Click" />
+                <Separator />
+                <MenuItem Header="_Quitter" Click="MenuQuitter_Click" />
+            </MenuItem>
+            
+            <!-- Menu Édition
+            <MenuItem Header="_Édition">
+                
+                <MenuItem Header="Cop_ier" Command="Copy" />
+                <MenuItem Header="Co_ller" Command="Paste" />
+            </MenuItem>
+             -->
+            
+            <!-- Menu Aide 
+            <MenuItem Header="A_ide">
+                <MenuItem Header="À _propos" Click="MenuApropos_Click" />
+            </MenuItem>
+            -->            
+            
+        </Menu>
 
-    <Grid Background="{DynamicResource WindowBackgroundBrush}">
+        <!-- Le reste du contenu de l'application se place ici -->
+        <Grid Background="{DynamicResource WindowBackgroundBrush}">
+            
+            
+            <Grid.RowDefinitions>
+                <!-- Ligne pour le bouton -->
+                <RowDefinition Height="Auto" />
+                <!-- Ligne pour le TabControl -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+                    <!-- Bouton pour basculer entre les thèmes -->
+            <Button Grid.Row="0"                
+                    Content="🌓 Basculer en mode sombre"
+                    Click="ToggleTheme_Click"
+                    HorizontalAlignment="Right"
+                    Margin="10" />
         
-        
-        <Grid.RowDefinitions>
-            <!-- Ligne pour le bouton -->
-            <RowDefinition Height="Auto" />
-            <!-- Ligne pour le TabControl -->
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        
-                <!-- Bouton pour basculer entre les thèmes -->
-        <Button Grid.Row="0"                
-                Content="🌓 Basculer en mode sombre"
-                Click="ToggleTheme_Click"
-                HorizontalAlignment="Right"
-                Margin="10" />
-       
 
-        <!-- Onglets sur toute la largeur -->
-        <TabControl Margin="0" Padding="0"
-                SelectionChanged="TabControl_SelectionChanged"
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="2">
+            <!-- Onglets sur toute la largeur -->
+            <TabControl Margin="0" Padding="0"
+                    SelectionChanged="TabControl_SelectionChanged"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
 
-            <TabItem Header="Portefeuille">
-                <!--<"Contenu de l'onglet 1"/> -->
-                <Grid Margin="10">
-                    <StackPanel>
-                        <TextBlock Text="PORTEFEUILLES" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
+                <TabItem Header="Portefeuille">
+                    <!--<"Contenu de l'onglet 1"/> -->
+                    <Grid Margin="10">
+                        <StackPanel>
+                            <TextBlock Text="PORTEFEUILLES" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
 
-                        <ComboBox ItemsSource="{Binding ListePortefeuilles}"
-                                SelectedItem="{Binding PortefeuilleSelectionne, Mode=TwoWay}"
-                                Margin="0,5,0,10">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding PtfNom}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
+                            <ComboBox ItemsSource="{Binding ListePortefeuilles}"
+                                    SelectedItem="{Binding PortefeuilleSelectionne, Mode=TwoWay}"
+                                    Margin="0,5,0,10">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding PtfNom}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
 
-                        <Button Content="Ajouter/Modifier un portefeuille"
-                                Command="{Binding AjouterPortefeuilleCommand}"
-                                Width="220"
-                                HorizontalAlignment="Left"
-                                Margin="0,0,0,10"/>
-                        <Button Content="Modifier le portefeuille sélectionné"
-                                Command="{Binding ModifierPortefeuilleCommand}"
-                                Width="220"
-                                HorizontalAlignment="Left"
-                                Margin="0,0,0,10"/>
+                            <Button Content="Ajouter/Modifier un portefeuille"
+                                    Command="{Binding AjouterPortefeuilleCommand}"
+                                    Width="220"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,0,0,10"/>
+                            <Button Content="Modifier le portefeuille sélectionné"
+                                    Command="{Binding ModifierPortefeuilleCommand}"
+                                    Width="220"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,0,0,10"/>
 
-                        <Button Content="Définir comme portefeuille par défaut"
-                                Command="{Binding DefinirPortefeuilleDefautCommand}"
-                                Width="220"
-                                HorizontalAlignment="Left"
-                                Margin="0,0,0,10"/>
+                            <Button Content="Définir comme portefeuille par défaut"
+                                    Command="{Binding DefinirPortefeuilleDefautCommand}"
+                                    Width="220"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,0,0,10"/>
 
-                        <GroupBox Header="Portefeuille sélectionné" Margin="0,10,0,0">
-                            <StackPanel Margin="10">
-                                <TextBlock Text="{Binding Portefeuille.PtfNom}" />
-                                <TextBlock Text="{Binding Portefeuille.PtfType}" />
-                                <TextBlock Text="{Binding Portefeuille.PtfDevise}" />
-                                <TextBlock Text="Solde :" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Portefeuille.PtfSolde, StringFormat='{}{0:F2}'}" />
-                            </StackPanel>
-                        </GroupBox>
-                        <Button Content="Supprimer le portefeuille sélectionné"
-                                Command="{Binding SupprimerPortefeuilleCommand}"
-                                Width="240"
-                                HorizontalAlignment="Left"
-                                Margin="0,10,0,0"/>
-                    </StackPanel>
-                </Grid>    
-            </TabItem>
+                            <GroupBox Header="Portefeuille sélectionné" Margin="0,10,0,0">
+                                <StackPanel Margin="10">
+                                    <TextBlock Text="{Binding Portefeuille.PtfNom}" />
+                                    <TextBlock Text="{Binding Portefeuille.PtfType}" />
+                                    <TextBlock Text="{Binding Portefeuille.PtfDevise}" />
+                                    <TextBlock Text="Solde :" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Portefeuille.PtfSolde, StringFormat='{}{0:F2}'}" />
+                                </StackPanel>
+                            </GroupBox>
+                            <Button Content="Supprimer le portefeuille sélectionné"
+                                    Command="{Binding SupprimerPortefeuilleCommand}"
+                                    Width="240"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Grid>    
+                </TabItem>
 
-            <TabItem x:Name="ComptesTab" Header="Comptes">
-                <!--<local:CompteView />-->
-                <compte:CompteView x:Name="ComptesView" />
-            </TabItem>
+                <TabItem x:Name="ComptesTab" Header="Comptes">
+                    <!--<local:CompteView />-->
+                    <compte:CompteView x:Name="ComptesView" />
+                </TabItem>
 
-            <TabItem Header="Transactions">
-                <transaction:TransView/>
-            </TabItem>
+                <TabItem Header="Transactions">
+                    <transaction:TransView/>
+                </TabItem>
 
-        </TabControl>        
-    </Grid>
+            </TabControl>        
+        </Grid>
+    </DockPanel>
 </Window>
