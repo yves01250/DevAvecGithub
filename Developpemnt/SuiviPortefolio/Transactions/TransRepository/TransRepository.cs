@@ -81,6 +81,7 @@ public sealed class TransRepository : ITransRepository
 
     public int EnsureActif(Cotation cotation)
     {
+        //Ouvre connexion. Demarre transactionSQL. appelle EnsureActif. Commit transactionSQL. Retourne Id de l'actif et ferme connexion.
         using var connection = OpenConnection();
         using var transaction = connection.BeginTransaction();
         var id = EnsureActif(connection, transaction, cotation);
@@ -148,6 +149,41 @@ public sealed class TransRepository : ITransRepository
 
         transaction.Commit();
         item.TransActifId = actifId;
+    }
+
+    public void SaveDividend(decimal amount, DateTime date, int accountId, Cotation cotation)
+    {
+        if (amount <= 0)
+            throw new ArgumentOutOfRangeException(nameof(amount), "Le dividende doit être positif.");
+
+        using var connection = OpenConnection();
+        using var transaction = connection.BeginTransaction();
+        var actifId = EnsureActif(connection, transaction, cotation);
+
+        using var balance = connection.CreateCommand();
+        balance.Transaction = transaction;
+        balance.CommandText = "SELECT CpteSolde FROM Compte WHERE CpteId = $compte;";
+        balance.Parameters.AddWithValue("$compte", accountId);
+        var currentBalance = balance.ExecuteScalar();
+        if (currentBalance == null || currentBalance == DBNull.Value)
+            throw new InvalidOperationException($"Le compte {accountId} est introuvable.");
+
+        var newBalance = Convert.ToDecimal(currentBalance) + amount;
+        using var dividend = connection.CreateCommand();
+        dividend.Transaction = transaction;
+        dividend.CommandText = """
+            INSERT INTO Dividende (DvdMontant, DvdDate, DvdActifId, DvdSolde, DvdCpteId)
+            VALUES ($montant, $date, $actif, $solde, $compte);
+            """;
+        dividend.Parameters.AddWithValue("$montant", amount);
+        dividend.Parameters.AddWithValue("$date", date.ToString("O"));
+        dividend.Parameters.AddWithValue("$actif", actifId);
+        dividend.Parameters.AddWithValue("$solde", newBalance);
+        dividend.Parameters.AddWithValue("$compte", accountId);
+        dividend.ExecuteNonQuery();
+
+        MettreAJourSoldeCompte(connection, transaction, accountId, amount);
+        transaction.Commit();
     }
 
     private static decimal CalculerVariationSolde(TransactionFinanciere transaction)

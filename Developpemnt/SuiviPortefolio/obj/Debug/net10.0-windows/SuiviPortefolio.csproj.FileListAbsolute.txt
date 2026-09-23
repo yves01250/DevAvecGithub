@@ -62,3 +62,9 @@ C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\ob
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\ref\SuiviPortefolio.dll
 c:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Portefeuille\PortefeuilleView\EditMainWindow.baml
 c:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Portefeuille\PortefeuilleView\EditMainWindow.g.cs
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Consultations\ConsultationsView\ConsultationsView.baml
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Consultations\ConsultationsView\ConsultationsView.g.cs
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Consultations\ConsultationsView\AnalysisWindow.baml
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Consultations\ConsultationsView\AnalysisWindow.g.cs
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Consultations\ConsultationsView\Window1.baml
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\Consultations\ConsultationsView\Window1.g.cs

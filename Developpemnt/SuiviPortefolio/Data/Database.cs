@@ -114,16 +114,12 @@ public class SqliteRepository
                 DvdDate DATETIME NOT NULL,
                 DvdActifId INTEGER NOT NULL,
                 DvdSolde decimal(18, 2) NOT NULL,
-                FOREIGN KEY ( DvdActifId ) REFERENCES Actif( ActifId )
+                DvdCpteId INTEGER NOT NULL,
+                FOREIGN KEY ( DvdActifId ) REFERENCES Actif( ActifId ),
+                FOREIGN KEY ( DvdCpteId ) REFERENCES Compte( CpteId )
             );
         ";
-        command.ExecuteNonQuery();
-
-        // Keep databases created by earlier versions compatible with the editor.
-        AddColumnIfMissing(connection, "Portefeuille", "PtfType", "TEXT NOT NULL DEFAULT 'Général'");
-        AddColumnIfMissing(connection, "Portefeuille", "PtfDevise", "TEXT NOT NULL DEFAULT 'EUR'");
-        AddColumnIfMissing(connection, "TransacFin", "TransPrix", "DECIMAL(18, 2) NOT NULL DEFAULT 0");
-        AddColumnIfMissing(connection, "TransacFin", "TransFrais", "DECIMAL(18, 2) NOT NULL DEFAULT 0");
+        command.ExecuteNonQuery();      
         
     }
 

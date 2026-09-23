@@ -16,8 +16,10 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+   
     public partial class MainWindow : Window
     {
+        //choix du thème par défaut (clair ou sombre)
         private bool IsDarkTheme { get; set; } = false;
         //private readonly MonPf _viewModel;
         public MainWindow()

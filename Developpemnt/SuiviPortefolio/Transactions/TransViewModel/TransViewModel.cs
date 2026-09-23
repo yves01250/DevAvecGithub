@@ -44,7 +44,7 @@ public class TransactionViewModel : INotifyPropertyChanged
     public ObservableCollection<Cotation> Cotations { get; } = new();
     public ObservableCollection<TransactionFinanciere> TransactionsRecentes { get; } = new();
     public ObservableCollection<Compte> Comptes { get; } = new();
-    public IReadOnlyList<string> TypesTransaction { get; } = new[] { "Achat", "Vente" };
+    public IReadOnlyList<string> TypesTransaction { get; } = new[] { "Achat", "Vente", "Dividende" };
 
     public Cotation? CotationSelectionnee
     {
@@ -80,7 +80,21 @@ public class TransactionViewModel : INotifyPropertyChanged
     }
 
     public Compte? CompteSelectionne { get => _compteSelectionne; set { _compteSelectionne = value; OnPropertyChanged(); } }
-    public string TypeTransaction { get => _typeTransaction; set { _typeTransaction = value; OnPropertyChanged(); RecalculerTotal(); } }
+    public string TypeTransaction
+    {
+        get => _typeTransaction;
+        set
+        {
+            _typeTransaction = value;
+            if (value == "Dividende")
+            {
+                QuantiteTexte = "1";
+                FraisTexte = "0";
+            }
+            OnPropertyChanged();
+            RecalculerTotal();
+        }
+    }
     public string QuantiteTexte { get => _quantiteTexte; set { _quantiteTexte = value; OnPropertyChanged(); RecalculerTotal(); } }
     public string CoursTexte { get => _coursTexte; set { _coursTexte = value; OnPropertyChanged(); RecalculerTotal(); } }
     public string FraisTexte { get => _fraisTexte; set { _fraisTexte = value; OnPropertyChanged(); RecalculerTotal(); } }
@@ -99,11 +113,32 @@ public class TransactionViewModel : INotifyPropertyChanged
 
     public void Enregistrer()
     {
-        if (CotationSelectionnee == null || CompteSelectionne == null ||
-            !decimal.TryParse(QuantiteTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var quantity) ||
+        if (CotationSelectionnee == null || CompteSelectionne == null)
+        {
+            MessageBox.Show("Sélectionnez une cotation et un compte.", "Transaction", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        if (TypeTransaction == "Dividende")
+        {
+            if (!decimal.TryParse(CoursTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var dividendAmount) ||
+                dividendAmount <= 0)
+            {
+                MessageBox.Show("Saisissez un montant de dividende positif.", "Dividende", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            _transactions.SaveDividend(dividendAmount, DateTransaction ?? DateTime.Today, CompteSelectionne.CpteId, CotationSelectionnee);
+            ChargerTransactions();
+            MessageBox.Show("Le dividende a été enregistré et crédité sur le compte.", "Dividende", MessageBoxButton.OK, MessageBoxImage.Information);
+            Annuler();
+            return;
+        }
+
+        if (!decimal.TryParse(QuantiteTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var quantity) ||
             quantity <= 0 || !decimal.TryParse(FraisTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var fees) || fees < 0)
         {
-            MessageBox.Show("Sélectionnez une cotation, un compte et saisissez une quantité et des frais valides.", "Transaction", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Saisissez une quantité et des frais valides.", "Transaction", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
         if (!decimal.TryParse(CoursTexte, NumberStyles.Number, CultureInfo.CurrentCulture, out var course) || course < 0)

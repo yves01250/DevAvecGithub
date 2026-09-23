@@ -100,6 +100,12 @@ La base SQLite contient notamment les tables suivantes :
 - `MouvementTresorerie`
 - `Dividende`
 
+La saisie d'un dividende est disponible depuis l'écran **Transactions** en
+sélectionnant le type `Dividende`. Le montant demandé est le montant net total
+effectivement crédité (et non le montant par action). Il est enregistré avec
+l'actif, la date et le compte sélectionnés, sans modifier la position, puis le
+solde du compte est crédité du même montant.
+
 Le fichier de base de données est local à l'application et n'est pas nécessaire au clonage du projet. Pour repartir d'une base vierge, arrêtez l'application puis supprimez `SuiviPortefeuille.sqlite` dans le dossier de sortie.
 
 ## Technologies

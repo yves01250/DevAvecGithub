@@ -8,7 +8,7 @@
              
     <Grid Margin="10">
         <StackPanel>
-            <TextBlock Text="COMPTES" Style="{StaticResource TitleH1Style}" Margin="0,0,0,10"/>
+            <TextBlock Text="COMPTES" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
 
             <ComboBox ItemsSource="{Binding Comptes}"
                       SelectedItem="{Binding CompteSelectionne, Mode=TwoWay}"
@@ -47,7 +47,7 @@
                     <TextBlock Text="{Binding CompteSelectionne.CpteType}" Margin="0,0,0,5"/>
 
                     <TextBlock Text="Solde :" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding CompteSelectionne.CpteSolde, StringFormat='{}{0:F2}'}" />
+                    <TextBlock Text="{Binding CompteSelectionne.CpteSolde, StringFormat=N2}" />
                 </StackPanel>
             </GroupBox>
         </StackPanel>

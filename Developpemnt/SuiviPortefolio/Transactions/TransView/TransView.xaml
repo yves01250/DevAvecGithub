@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/><!-- 6 -->
             <RowDefinition Height="Auto"/><!-- 7 -->
         </Grid.RowDefinitions>
-        <TextBlock Text="TRANSACTIONS" Style="{StaticResource TitleH1Style}" Margin="0,0,0,10"/>
+        <TextBlock Text="TRANSACTIONS" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
         <Grid Grid.Row="1" Margin="0,0,0,10">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
             <ComboBox ItemsSource="{Binding Cotations}" SelectedItem="{Binding CotationSelectionnee, Mode=TwoWay}">
@@ -31,9 +31,9 @@
         </StackPanel>
         <ListBox Grid.Row="3" ItemsSource="{Binding TransactionsRecentes}" SelectedItem="{Binding TransactionSelectionnee, Mode=TwoWay}">
             <ListBox.ItemTemplate><DataTemplate><TextBlock>
-                <Run Text="{Binding TransDateTransac, StringFormat={}{0:g}}"/><Run Text="  "/>
+                <Run Text="{Binding TransDateTransac, StringFormat=dd-MM-yyyy}"/><Run Text="  "/>
                 <Run Text="{Binding TransType}"/><Run Text="  "/><Run Text="{Binding TransQte}"/>
-                <Run Text="  "/><Run Text="{Binding TransPrix, StringFormat={}{0:N2}}"/><Run Text="  "/><Run Text="{Binding CompteNom}"/>
+                <Run Text="  "/><Run Text="{Binding TransPrix, StringFormat=N2}"/><Run Text="  "/><Run Text="{Binding CompteNom}"/>
             </TextBlock></DataTemplate></ListBox.ItemTemplate>
         </ListBox>
         <GroupBox Grid.Row="4" Header="Transaction" Margin="0,10,0,10">
@@ -48,8 +48,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <TextBlock Grid.Row="1" Text="Type :" Margin="0,0,8,8"/><ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding TypesTransaction}" SelectedItem="{Binding TypeTransaction}" Margin="0,0,0,8"/>
-                <TextBlock Grid.Row="2" Text="Cours :" Margin="0,0,8,8"/><TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CoursTexte, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
-                <TextBlock Grid.Row="3" Text="Quantité :" Margin="0,0,8,8"/><TextBox Grid.Row="3" Grid.Column="1" Text="{Binding QuantiteTexte, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
+                <TextBlock Grid.Row="2" Text="Cours / montant :" Margin="0,0,8,8"/><TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CoursTexte, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
+                <TextBlock Grid.Row="3" Text="Quantité (1 pour dividende) :" Margin="0,0,8,8"/><TextBox Grid.Row="3" Grid.Column="1" Text="{Binding QuantiteTexte, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
                 <TextBlock Grid.Row="4" Text="Frais :" Margin="0,0,8,8"/><TextBox Grid.Row="4" Grid.Column="1" Text="{Binding FraisTexte, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8"/>
                 <TextBlock Grid.Row="5" Text="Date :" Margin="0,0,8,8"/><DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding DateTransaction, Mode=TwoWay}" Margin="0,0,0,8"/>
                 <TextBlock Grid.Row="6" Text="Total :" Margin="0,0,8,0"/><TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding TotalTexte}"/>

@@ -14,3 +14,13 @@ public class TransactionFinanciere
     public decimal TransFrais { get; set; }
     public string CompteNom { get; set; } = string.Empty;
 }
+
+public class Dividende
+{
+    public long DvdId { get; set; }
+    public decimal DvdMontant { get; set; }
+    public DateTime DvdDate { get; set; }
+    public long DvdActifId { get; set; }
+    public decimal DvdSolde { get; set; }
+    public int DvdCpteId { get; set; }
+}

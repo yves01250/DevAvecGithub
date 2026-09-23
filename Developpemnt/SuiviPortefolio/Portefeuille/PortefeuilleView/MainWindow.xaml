@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SuiviPortefolio"
         xmlns:compte="clr-namespace:SuiviPortefolio.Comptes.CompteView"
         xmlns:transaction="clr-namespace:SuiviPortefolio.Transactions.TransView"
+        xmlns:consultation="clr-namespace:SuiviPortefolio.Consultations.ConsultationsView"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000">
         <!-- A remplacer pour fenêtre s'adaptant à l'ecran-->
@@ -131,6 +132,10 @@
 
                 <TabItem Header="Transactions">
                     <transaction:TransView/>
+                </TabItem>
+
+                <TabItem Header="Consultations">
+                    <consultation:ConsultationsView/>
                 </TabItem>
 
             </TabControl>        

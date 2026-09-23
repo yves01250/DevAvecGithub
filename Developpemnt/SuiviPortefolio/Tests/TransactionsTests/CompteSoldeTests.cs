@@ -75,6 +75,21 @@ public sealed class CompteSoldeTests : IDisposable
         Assert.Equal(1197m, ReadBalance());
     }
 
+    [Fact]
+    public void EnregistrerDividende_CrediteLeCompteSansModifierLaPosition()
+    {
+        var repository = new TransRepository(_databasePath);
+
+        repository.SaveDividend(
+            12.50m,
+            new DateTime(2026, 1, 15),
+            1,
+            CreateCotation());
+
+        Assert.Equal(1012.50m, ReadBalance());
+        Assert.Equal(12.50m, ReadDividendAmount());
+    }
+
     public void Dispose()
     {
         SqliteConnection.ClearAllPools();
@@ -90,6 +105,17 @@ public sealed class CompteSoldeTests : IDisposable
 
         using var command = connection.CreateCommand();
         command.CommandText = "SELECT CpteSolde FROM Compte WHERE CpteId = 1;";
+        return Convert.ToDecimal(command.ExecuteScalar());
+    }
+
+    private decimal ReadDividendAmount()
+    {
+        using var connection = new SqliteConnection(
+            new SqliteConnectionStringBuilder { DataSource = _databasePath }.ToString());
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = "SELECT DvdMontant FROM Dividende;";
         return Convert.ToDecimal(command.ExecuteScalar());
     }
 
