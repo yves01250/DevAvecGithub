@@ -4,9 +4,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         Title="Analyse de la sélection"
-        Height="400" Width="700">
+        Height="400" Width="700"
+        Background="{DynamicResource WindowBackgroundBrush}">
 
-    <Grid Margin="10">
+    <Grid Background="{DynamicResource WindowBackgroundBrush}" Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -25,18 +26,51 @@
         </StackPanel>
 
         <!-- Liste des tickers sélectionnés -->
-        <DataGrid Grid.Row="1"
+        <Border Grid.Row="1"
+            BorderBrush="#FF2E86C1"
+            BorderThickness="1"
+            CornerRadius="4"
+            Padding="1"
+            Background="White"
+            ClipToBounds="True">                  
+
+            <DataGrid Grid.Row="1"
                   ItemsSource="{Binding SelectedPositions}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
-                  IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Ticker" Binding="{Binding Ticker}" />
-                <DataGridTextColumn Header="Type"   Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Qté"    Binding="{Binding Quantity, StringFormat=N2}" />
-                <DataGridTextColumn Header="Cours"  Binding="{Binding Price, StringFormat=N2}" />
-                <DataGridTextColumn Header="Valeur" Binding="{Binding Value, StringFormat=N2}" />
-            </DataGrid.Columns>
-        </DataGrid>
+                  IsReadOnly="True"
+                    BorderBrush="DodgerBlue"
+                    BorderThickness="0"
+                    Background="White"
+                    GridLinesVisibility="All"
+                    HorizontalGridLinesBrush="LightBlue"
+                    VerticalGridLinesBrush="LightBlue" >
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background"
+                                Value="{DynamicResource DataGridHeaderBackgroundBrush}" />
+
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource DataGridHeaderForegroundBrush}" />
+
+                        <Setter Property="BorderBrush"
+                                Value="{DynamicResource DataGridHeaderBorderBrush}" />
+
+                        <Setter Property="BorderThickness" Value="0,0,1,1" />
+                        <Setter Property="Height" Value="32" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ticker" Binding="{Binding Ticker}" />
+                    <DataGridTextColumn Header="Type"   Binding="{Binding Type}" />
+                    <DataGridTextColumn Header="Qté"    Binding="{Binding Quantity, StringFormat=N2}" />
+                    <DataGridTextColumn Header="Cours"  Binding="{Binding Price, StringFormat=N2}" />
+                    <DataGridTextColumn Header="Valeur" Binding="{Binding Value, StringFormat=N2}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
     </Grid>
 </Window>

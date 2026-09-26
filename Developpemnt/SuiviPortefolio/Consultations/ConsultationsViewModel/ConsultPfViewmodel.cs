@@ -9,26 +9,71 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using SuiviPortefolio.Consultations.ConsultationsView;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using System.Collections.Generic;
 
 namespace SuiviPortefolio.Consultations.ConsultationsViewModel;
 public class PortfolioViewModel : INotifyPropertyChanged
 {
     private readonly ConsultPositionRepository _repository;
+    private readonly CotationFetcher _cotationFetcher = new();
     private readonly ObservableCollection<PositionViewModel> _allPositions;
     private readonly RelayCommand _analyzeCommand;
     private readonly RelayCommand _refreshPricesCommand;
 
     private bool _isLoading;
 
+    private string _selectedPeriod = "1y";
+    private bool _isChartLoading;
+
+    public PlotModel ChartModel { get; }
+    public IReadOnlyDictionary<string, string> Periods { get; } =
+        new Dictionary<string, string>
+        {
+            ["1 mois"] = "1mo",
+            ["3 mois"] = "3mo",
+            ["6 mois"] = "6mo",
+            ["1 an"] = "1y",
+            ["2 ans"] = "2y",
+            ["5 ans"] = "5y"
+        };
+
+    public string SelectedPeriod
+    {
+        get => _selectedPeriod;
+        set
+        {
+            if (_selectedPeriod == value) return;
+            _selectedPeriod = value;
+            OnPropertyChanged();
+            _ = RefreshChartAsync();
+        }
+    }
+
+    public bool IsChartLoading
+    {
+        get => _isChartLoading;
+        private set { _isChartLoading = value; OnPropertyChanged(); }
+    }
+
     public PortfolioViewModel(ConsultPositionRepository repository)
     {
         _repository = repository;
         _allPositions = new ObservableCollection<PositionViewModel>();
 
-        _analyzeCommand = new RelayCommand(async _ => await AnalyzeSelectedAsync(), _ => CanAnalyze);
-        _refreshPricesCommand = new RelayCommand(async _ => await RefreshPricesAsync(), _ => !IsLoading);
+        ChartModel = new PlotModel
+        {
+            Title = "Évolution des positions sélectionnées",
+            LegendPosition = LegendPosition.RightTop,
+            LegendPlacement = LegendPlacement.Outside
+        };
 
-        LoadCommand = new RelayCommand(async _ => await LoadAsync(), _ => !IsLoading);
+    _analyzeCommand = new RelayCommand(async _ => await AnalyzeSelectedAsync(), _ => CanAnalyze);
+    _refreshPricesCommand = new RelayCommand(async _ => await RefreshPricesAsync(), _ => !IsLoading);
+
+    LoadCommand = new RelayCommand(async _ => await LoadAsync(), _ => !IsLoading);
     }
 
     public ICommand LoadCommand { get; }
@@ -72,15 +117,19 @@ public class PortfolioViewModel : INotifyPropertyChanged
         {
             IsLoading = false;
         }
+
+        await RefreshPricesAsync();
     }
 
-    private void Position_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    private async void Position_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(PositionViewModel.IsSelected))
+        {
             _analyzeCommand.RaiseCanExecuteChanged();
+            await RefreshChartAsync();
+        }
     }
 
-    // Simulation de mise à jour des cours (à remplacer par un appel API réel)
     public async Task RefreshPricesAsync()
     {
         if (IsLoading) return;
@@ -88,28 +137,79 @@ public class PortfolioViewModel : INotifyPropertyChanged
 
         try
         {
-            var now = DateTime.UtcNow;
-            var random = new Random();
-
-            // Mise à jour en mémoire + persistance SQLite
             foreach (var vm in _allPositions.Where(p => p.Quantity > 0))
             {
-                // Exemple : variation aléatoire entre -2% et +2%
-                var variation = (decimal)(random.NextDouble() * 0.04 - 0.02);
-                var newPrice = Math.Max(0.01m, vm.Price * (1 + variation));
+                var snapshot = await _cotationFetcher.FetchSnapshotAsync(vm.Ticker);
+                if (snapshot is null || snapshot.Close <= 0)
+                    continue;
 
-                vm.UpdatePrice(newPrice, now);
-
-                // Persistance (optionnel, peut être batché)
-                await _repository.UpdatePriceAsync(vm.Id, newPrice, now);
+                var price = (decimal)snapshot.Close;
+                vm.UpdatePrice(price, snapshot.Date);
+                await _repository.UpdatePriceAsync(vm.Id, price, snapshot.Date);
             }
 
-            // Notifier que la liste a changé (si besoin pour l’UI)
             OnPropertyChanged(nameof(ActivePositions));
+            await RefreshChartAsync();
         }
         finally
         {
             IsLoading = false;
+        }
+    }
+
+    private async Task RefreshChartAsync()
+    {
+        if (IsChartLoading) return;
+
+        var selected = _allPositions
+            .Where(p => p.IsSelected && p.Quantity > 0)
+            .ToList();
+
+        IsChartLoading = true;
+        try
+        {
+            var histories = await Task.WhenAll(selected.Select(async position =>
+                (position, history: await _cotationFetcher.FetchHistoryAsync(
+                    position.Ticker, SelectedPeriod))));
+
+            ChartModel.Series.Clear();
+            ChartModel.Axes.Clear();
+            ChartModel.Axes.Add(new DateTimeAxis
+            {
+                Position = AxisPosition.Bottom,
+                Title = "Date",
+                StringFormat = "MM/yyyy"
+            });
+            ChartModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Title = "Valeur de la position"
+            });
+
+            foreach (var (position, history) in histories)
+            {
+                var series = new LineSeries
+                {
+                    Title = position.Ticker,
+                    StrokeThickness = 2
+                };
+
+                foreach (var point in history)
+                {
+                    series.Points.Add(new DataPoint(
+                        DateTimeAxis.ToDouble(point.Date),
+                        point.Close * (double)position.Quantity));
+                }
+
+                if (series.Points.Count > 0)
+                    ChartModel.Series.Add(series);
+            }
+
+            ChartModel.InvalidatePlot(true);
+        }
+        finally
+        {
+            IsChartLoading = false;
         }
     }
 

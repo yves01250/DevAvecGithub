@@ -116,6 +116,53 @@ public class CotationFetcher
         };
     }
 
+    public async Task<IReadOnlyList<HistoricalPrice>> FetchHistoryAsync(
+        string symbol,
+        string range = "1y",
+        string interval = "1d")
+    {
+        if (string.IsNullOrWhiteSpace(symbol))
+            throw new ArgumentException("Le symbole est obligatoire.", nameof(symbol));
+
+        var url = $"https://query1.finance.yahoo.com/v8/finance/chart/{Uri.EscapeDataString(symbol)}" +
+                  $"?interval={Uri.EscapeDataString(interval)}&range={Uri.EscapeDataString(range)}";
+        using var response = await _httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+
+        await using var stream = await response.Content.ReadAsStreamAsync();
+        using var document = await JsonDocument.ParseAsync(stream);
+        var chart = document.RootElement.GetProperty("chart");
+
+        if (chart.TryGetProperty("error", out var error) && error.ValueKind != JsonValueKind.Null)
+            throw new InvalidOperationException($"Erreur Yahoo pour {symbol} : {error}");
+
+        var result = chart.GetProperty("result")[0];
+        var timestamps = result.GetProperty("timestamp").EnumerateArray()
+            .Select(value => value.GetInt64())
+            .ToList();
+        var closes = result.GetProperty("indicators")
+            .GetProperty("quote")[0]
+            .GetProperty("close")
+            .EnumerateArray()
+            .Select(value => value.ValueKind == JsonValueKind.Number
+                ? value.GetDouble()
+                : (double?)null)
+            .ToList();
+
+        var prices = new List<HistoricalPrice>();
+        for (var i = 0; i < Math.Min(timestamps.Count, closes.Count); i++)
+        {
+            if (closes[i] is double close)
+            {
+                prices.Add(new HistoricalPrice(
+                    DateTimeOffset.FromUnixTimeSeconds(timestamps[i]).DateTime,
+                    close));
+            }
+        }
+
+        return prices;
+    }
+
     private static (double close, DateTime date) ExtractLastClose(JsonElement result, string symbol)
     {
         // 1) Dernier point exploitable de timestamp[] / close[] (close de séance stricte)
@@ -164,3 +211,5 @@ public class CotationFetcher
             : null;
     }
 }
+
+public sealed record HistoricalPrice(DateTime Date, double Close);

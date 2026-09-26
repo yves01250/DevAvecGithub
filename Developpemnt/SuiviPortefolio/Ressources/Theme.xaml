@@ -43,4 +43,15 @@
     
     <SolidColorBrush x:Key="FenetreGroundBrush" Color="{StaticResource BackgroundColor}" />
 
+    <SolidColorBrush x:Key="BorderBorder" Color="{StaticResource SecondaryColor}" />
+
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundBrush"
+                 Color="#F1F1F1" />
+
+    <SolidColorBrush x:Key="DataGridHeaderForegroundBrush"
+                    Color="#202020" />
+
+    <SolidColorBrush x:Key="DataGridHeaderBorderBrush"
+                    Color="#D0D0D0" />
+
 </ResourceDictionary>

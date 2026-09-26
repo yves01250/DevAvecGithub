@@ -1,19 +1,54 @@
 <UserControl x:Class="SuiviPortefolio.Consultations.ConsultationsView.ConsultationsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
              
     <Grid Margin="10">
-        <StackPanel>
-            <TextBlock Text="CONSULTATIONS" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="350"/>
+            </Grid.RowDefinitions>
+        
+            <TextBlock Grid.Row="0" Text="CONSULTATIONS" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
 
-            <DataGrid ItemsSource="{Binding ActivePositions}"
-          AutoGenerateColumns="False"
-          CanUserAddRows="False"
-          SelectionMode="Extended">
+            <DataGrid Grid.Row="1"
+                    RowHeight="24"
+                    ItemsSource="{Binding ActivePositions}"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    SelectionMode="Extended"
+                    BorderBrush="DodgerBlue"
+                    BorderThickness="1"
+                    Background="White"
+                    GridLinesVisibility="All"
+                    HorizontalGridLinesBrush="LightBlue"
+                    VerticalGridLinesBrush="LightBlue" 
+                    >
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background"
+                                Value="{DynamicResource DataGridHeaderBackgroundBrush}" />
+
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource DataGridHeaderForegroundBrush}" />
+
+                        <Setter Property="BorderBrush"
+                                Value="{DynamicResource DataGridHeaderBorderBrush}" />
+
+                        <Setter Property="BorderThickness" Value="0,0,1,1" />
+                        <Setter Property="Height" Value="32" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
                 <DataGrid.Columns>
                     <!-- Colonne de sélection -->
                     <DataGridTemplateColumn Header="Sélection">
@@ -33,53 +68,26 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button Content="Analyser"
+            <Button Grid.Row="2" Content="Analyser"
         Command="{Binding AnalyzeCommand}"
         HorizontalAlignment="Right"
         Margin="0,8,0,0"/>
-            <!--
-            <ComboBox ItemsSource="{Binding Comptes}"
-                      SelectedItem="{Binding CompteSelectionne, Mode=TwoWay}"
-                      Margin="0,0,0,10">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding CpteNom}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
 
-            <Button Content="Ajouter un compte"
-                    Command="{Binding AjouterCompteCommand}"
-                    Width="160"
-                    HorizontalAlignment="Left"
-                    Margin="0,0,0,10"/>
-
-            <Button Content="Modifier le compte sélectionné"
-                    Command="{Binding ModifierCompteCommand}"
-                    Width="220"
-                    HorizontalAlignment="Left"
-                    Margin="0,0,0,10" Click="Button_Click"/>
-
-            <Button Content="Définir comme compte par défaut"
-                    Command="{Binding SetCompteDefautCommand}"
-                    Width="220"
-                    HorizontalAlignment="Left"
-                    Margin="0,0,0,10"/>
-
-            <GroupBox Header="Compte sélectionné" Margin="0,10,0,0">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Nom :" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding CompteSelectionne.CpteNom}" Margin="0,0,0,5"/>
-
-                    <TextBlock Text="Type :" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding CompteSelectionne.CpteType}" Margin="0,0,0,5"/>
-
-                    <TextBlock Text="Solde :" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding CompteSelectionne.CpteSolde, StringFormat='{}{0:F2}'}" />
-                </StackPanel>
-            </GroupBox>
-            -->
-
-        </StackPanel>
+            <Border Grid.Row="3" Style="{StaticResource PanelBorderStyle}">                
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="Évolution de la valeur investie" VerticalAlignment="Center"/>
+                        <TextBlock Text="Période :" Margin="20,0,5,0" VerticalAlignment="Center"/>
+                        <ComboBox Width="100"
+                                  ItemsSource="{Binding Periods}"
+                                  DisplayMemberPath="Key"
+                                  SelectedValuePath="Value"
+                                  SelectedValue="{Binding SelectedPeriod, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <oxy:PlotView x:Name="PerformanceChart" 
+                                    Height="300"
+                                    Model="{Binding ChartModel}" />
+                </DockPanel>
+            </Border>
     </Grid>
 </UserControl>

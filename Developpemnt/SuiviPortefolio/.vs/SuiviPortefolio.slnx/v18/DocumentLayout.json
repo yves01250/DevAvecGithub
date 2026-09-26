@@ -3,80 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsviewmodel\\consultpfviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsviewmodel\\consultpfviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\essai01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:essai01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsviewmodel\\consultviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsviewmodel\\consultviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\essai01.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:essai01.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\comptes\\compteview\\compteview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:comptes\\compteview\\compteview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsviewmodel\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsviewmodel\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsviewmodel\\analysisviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsviewmodel\\analysisviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsview\\consultationsview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsview\\consultationsview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsmodel\\consultposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsmodel\\consultposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsview\\analysiswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsview\\analysiswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsview\\analysiswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsview\\analysiswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\consultations\\consultationsview\\consultationsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:consultations\\consultationsview\\consultationsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\comptes\\compteview\\compteview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:comptes\\compteview\\compteview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\comptes\\compteviewmodel\\compteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:comptes\\compteviewmodel\\compteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\data\\consultpositionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:data\\consultpositionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\data\\dbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:data\\dbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\data\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:data\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\data\\recherchecotations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:data\\recherchecotations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\portefeuille\\portefeuilleviewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:portefeuille\\portefeuilleviewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\portefeuille\\portefeuilleview\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:portefeuille\\portefeuilleview\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\portefeuille\\portefeuilleview\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:portefeuille\\portefeuilleview\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|c:\\users\\yves_\\mesdocuments\\github\\devavecgithub\\developpemnt\\suiviportefolio\\suiviportefolio.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F67CC60A-2BF3-073A-7DA9-D8CD3F5421A8}|SuiviPortefolio.csproj|solutionrelative:suiviportefolio.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -86,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -107,230 +43,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CompteView.xaml",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Comptes\\CompteView\\CompteView.xaml",
-              "RelativeDocumentMoniker": "Comptes\\CompteView\\CompteView.xaml",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Comptes\\CompteView\\CompteView.xaml",
-              "RelativeToolTip": "Comptes\\CompteView\\CompteView.xaml",
+              "Title": "SuiviPortefolio.csproj",
+              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio.csproj",
+              "RelativeDocumentMoniker": "SuiviPortefolio.csproj",
+              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\SuiviPortefolio.csproj",
+              "RelativeToolTip": "SuiviPortefolio.csproj",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAQwBYAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-23T17:08:49.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Essai01.xaml",
+              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Essai01.xaml",
+              "RelativeDocumentMoniker": "Essai01.xaml",
+              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Essai01.xaml",
+              "RelativeToolTip": "Essai01.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-09-22T15:09:55.398Z",
+              "WhenOpened": "2026-09-23T16:28:26.784Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ConsultPfViewmodel.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsViewModel\\ConsultPfViewmodel.cs",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsViewModel\\ConsultPfViewmodel.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsViewModel\\ConsultPfViewmodel.cs",
-              "RelativeToolTip": "Consultations\\ConsultationsViewModel\\ConsultPfViewmodel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBEAAAAAAAAAAAAAAA==",
+              "Title": "Essai01.cs",
+              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Essai01.cs",
+              "RelativeDocumentMoniker": "Essai01.cs",
+              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Essai01.cs",
+              "RelativeToolTip": "Essai01.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-21T17:37:21.274Z",
+              "WhenOpened": "2026-09-23T16:18:50.138Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AnalysisWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsView\\AnalysisWindow.xaml",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsView\\AnalysisWindow.xaml",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsView\\AnalysisWindow.xaml",
-              "RelativeToolTip": "Consultations\\ConsultationsView\\AnalysisWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-09-22T14:51:04.26Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AnalysisWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsView\\AnalysisWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsView\\AnalysisWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsView\\AnalysisWindow.xaml.cs",
-              "RelativeToolTip": "Consultations\\ConsultationsView\\AnalysisWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-22T14:44:00.337Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AnalysisViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsViewModel\\AnalysisViewModel.cs",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsViewModel\\AnalysisViewModel.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsViewModel\\AnalysisViewModel.cs",
-              "RelativeToolTip": "Consultations\\ConsultationsViewModel\\AnalysisViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-22T14:41:44.041Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RelayCommand.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsViewModel\\RelayCommand.cs",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsViewModel\\RelayCommand.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsViewModel\\RelayCommand.cs",
-              "RelativeToolTip": "Consultations\\ConsultationsViewModel\\RelayCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-21T17:54:23.862Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ConsultViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsViewModel\\ConsultViewModel.cs",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsViewModel\\ConsultViewModel.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsViewModel\\ConsultViewModel.cs",
-              "RelativeToolTip": "Consultations\\ConsultationsViewModel\\ConsultViewModel.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAxwBEAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-21T16:14:08.051Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ConsultPositionRepository.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Data\\ConsultPositionRepository.cs",
-              "RelativeDocumentMoniker": "Data\\ConsultPositionRepository.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Data\\ConsultPositionRepository.cs",
-              "RelativeToolTip": "Data\\ConsultPositionRepository.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwCQAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-21T17:56:07.725Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ConsultPosition.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsModel\\ConsultPosition.cs",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsModel\\ConsultPosition.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsModel\\ConsultPosition.cs",
-              "RelativeToolTip": "Consultations\\ConsultationsModel\\ConsultPosition.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-21T17:59:14.347Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ConsultationsView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsView\\ConsultationsView.xaml.cs",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsView\\ConsultationsView.xaml.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsView\\ConsultationsView.xaml.cs",
-              "RelativeToolTip": "Consultations\\ConsultationsView\\ConsultationsView.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-22T14:55:02.57Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CompteView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Comptes\\CompteView\\CompteView.xaml.cs",
-              "RelativeDocumentMoniker": "Comptes\\CompteView\\CompteView.xaml.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Comptes\\CompteView\\CompteView.xaml.cs",
-              "RelativeToolTip": "Comptes\\CompteView\\CompteView.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-21T17:42:51.093Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ConsultationsView.xaml",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsView\\ConsultationsView.xaml",
-              "RelativeDocumentMoniker": "Consultations\\ConsultationsView\\ConsultationsView.xaml",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Consultations\\ConsultationsView\\ConsultationsView.xaml",
-              "RelativeToolTip": "Consultations\\ConsultationsView\\ConsultationsView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-09-21T16:08:33.541Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CompteViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Comptes\\CompteViewModel\\CompteViewModel.cs",
-              "RelativeDocumentMoniker": "Comptes\\CompteViewModel\\CompteViewModel.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Comptes\\CompteViewModel\\CompteViewModel.cs",
-              "RelativeToolTip": "Comptes\\CompteViewModel\\CompteViewModel.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-21T17:41:21.871Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Database.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Data\\Database.cs",
-              "RelativeDocumentMoniker": "Data\\Database.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Data\\Database.cs",
-              "RelativeToolTip": "Data\\Database.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-15T15:05:07.052Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "DBManager.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Data\\DBManager.cs",
-              "RelativeDocumentMoniker": "Data\\DBManager.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Data\\DBManager.cs",
-              "RelativeToolTip": "Data\\DBManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-15T15:01:51.526Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "RechercheCotations.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Data\\RechercheCotations.cs",
-              "RelativeDocumentMoniker": "Data\\RechercheCotations.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Data\\RechercheCotations.cs",
-              "RelativeToolTip": "Data\\RechercheCotations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-15T15:01:09.988Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "MainViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleViewModel\\MainViewModel.cs",
-              "RelativeDocumentMoniker": "Portefeuille\\PortefeuilleViewModel\\MainViewModel.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleViewModel\\MainViewModel.cs",
-              "RelativeToolTip": "Portefeuille\\PortefeuilleViewModel\\MainViewModel.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-15T14:58:33.404Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "Portefeuille\\PortefeuilleView\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\MainWindow.xaml",
-              "RelativeToolTip": "Portefeuille\\PortefeuilleView\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-09-13T12:26:33.23Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Portefeuille\\PortefeuilleView\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\yves_\\MesDocuments\\Github\\DevAvecGithub\\Developpemnt\\SuiviPortefolio\\Portefeuille\\PortefeuilleView\\MainWindow.xaml.cs",
-              "RelativeToolTip": "Portefeuille\\PortefeuilleView\\MainWindow.xaml.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAawCcAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-12T16:22:14.552Z"
             }
           ]
         }

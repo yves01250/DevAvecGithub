@@ -44,4 +44,16 @@
     <SolidColorBrush x:Key="GroupBoxBorder" Color="{StaticResource SecondaryColor}" />
 
     <SolidColorBrush x:Key="FenetreGroundBrush" Color="{StaticResource BackgroundColor}" />
+
+    <SolidColorBrush x:Key="BorderBorder" Color="{StaticResource SecondaryColor}" />
+
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundBrush"
+                 Color="#2D2D30" />
+
+    <SolidColorBrush x:Key="DataGridHeaderForegroundBrush"
+                    Color="#F2F2F2" />
+
+    <SolidColorBrush x:Key="DataGridHeaderBorderBrush"
+                    Color="#45454A" />
+
 </ResourceDictionary>
