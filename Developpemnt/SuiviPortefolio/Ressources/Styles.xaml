@@ -12,14 +12,6 @@
         <Setter Property="FontSize" Value="14" />
     </Style>
 
-    <!-- Style pour les TextBlock -->
-    <Style TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource TextForeground}" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-
     <!-- Style pour les TextBox -->
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="{DynamicResource TextBoxBackground}" />
@@ -30,6 +22,17 @@
         <Setter Property="Padding" Value="5,2" />
         <Setter Property="MinHeight" Value="0" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+        <!-- Style pour les TextBlock -->
+    <Style TargetType="TextBlock">
+
+        <Setter Property="Foreground" Value="{DynamicResource TextBlockForeground}" />
+
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="5,2" />
+        <Setter Property="MinHeight" Value="0" />
+
     </Style>
 
         <!-- Style pour les Titres principaux (H1) -->
@@ -210,15 +213,15 @@
         <Setter Property="Padding" Value="10" />
     </Style>
 
-        <!-- Style pour les Border
-    <Style TargetType="Border">
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBorder}" />
+        <!-- Style pour les Stackpanel
+    <Style TargetType="StackPanel">
+        <Setter Property="BorderBrush" Value="{DynamicResource StackPanelColor}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="4" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
     </Style>
-     -->
+    -->
 
         <!-- À appliquer explicitement aux panneaux -->
     <Style x:Key="PanelBorderStyle" TargetType="Border">
@@ -229,6 +232,7 @@
         <Setter Property="Margin" Value="0,8,0,0" />
     </Style>
 
+    <!-- Style pour les DataGrid  -->
     <Style x:Key="DataGridColumnHeaderThemeStyle"
        TargetType="DataGridColumnHeader">
     
@@ -242,6 +246,24 @@
                 Value="{DynamicResource DataGridHeaderBorderBrush}" />
 
         <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="DataGridThemeStyle"
+       TargetType="DataGridRow">
+    
+        <Setter Property="Background"
+                Value="{DynamicResource DataGridBackgroundBrush}" />
+
+        <Setter Property="Foreground"
+                Value="{DynamicResource DataGridForegroundBrush}" />
+
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource DataGridBorderBrush}" />
+
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Height" Value="32" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />

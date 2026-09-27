@@ -17,56 +17,67 @@
         
             <TextBlock Grid.Row="0" Text="CONSULTATIONS" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
 
-            <DataGrid Grid.Row="1"
-                    RowHeight="24"
-                    ItemsSource="{Binding ActivePositions}"
-                    AutoGenerateColumns="False"
-                    CanUserAddRows="False"
-                    SelectionMode="Extended"
-                    BorderBrush="DodgerBlue"
+            <Border Grid.Row="1" Style="{StaticResource PanelBorderStyle}"
+                    
                     BorderThickness="1"
-                    Background="White"
-                    GridLinesVisibility="All"
-                    HorizontalGridLinesBrush="LightBlue"
-                    VerticalGridLinesBrush="LightBlue" 
-                    >
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background"
-                                Value="{DynamicResource DataGridHeaderBackgroundBrush}" />
+                    CornerRadius="4"
+                    Padding="1"
+                    Background="{DynamicResource WindowBackgroundBrush}"
+                    ClipToBounds="True">
+                <DataGrid Grid.Row="1"
+                        RowHeight="24"
+                        RowStyle="{DynamicResource DataGridThemeStyle}"
+                        ItemsSource="{Binding ActivePositions}"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        SelectionMode="Extended"
 
-                        <Setter Property="Foreground"
-                                Value="{DynamicResource DataGridHeaderForegroundBrush}" />
+                        BorderThickness="0"
+                        HeadersVisibility="Column"
+                        Background="White"
+                        GridLinesVisibility="All"
+                        HorizontalGridLinesBrush="LightBlue"
+                        VerticalGridLinesBrush="LightBlue" 
+                        >
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource DataGridHeaderBackgroundBrush}" />
 
-                        <Setter Property="BorderBrush"
-                                Value="{DynamicResource DataGridHeaderBorderBrush}" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource DataGridHeaderForegroundBrush}" />
 
-                        <Setter Property="BorderThickness" Value="0,0,1,1" />
-                        <Setter Property="Height" Value="32" />
-                        <Setter Property="FontWeight" Value="SemiBold" />
-                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource DataGridHeaderBorderBrush}" />
 
-                <DataGrid.Columns>
-                    <!-- Colonne de sélection -->
-                    <DataGridTemplateColumn Header="Sélection">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
-                              HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Height" Value="32" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
 
-                    <DataGridTextColumn Header="Ticker" Binding="{Binding Ticker}" />
-                    <DataGridTextColumn Header="Type"   Binding="{Binding Type}" />
-                    <DataGridTextColumn Header="Cours"  Binding="{Binding Price, StringFormat=N2}" />
-                    <DataGridTextColumn Header="Date"   Binding="{Binding Date, StringFormat=dd-MM-yyyy}" />
-                    <DataGridTextColumn Header="Qté"   Binding="{Binding Quantity, StringFormat=N2}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <!-- Colonne de sélection -->
+                        <DataGridTemplateColumn Header="Sélection">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+                                HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Ticker" Binding="{Binding Ticker}" />
+                        <DataGridTextColumn Header="Type"   Binding="{Binding Type}" />
+                        <DataGridTextColumn Header="Cours"  Binding="{Binding Price, StringFormat=N2}" />
+                        <DataGridTextColumn Header="Date"   Binding="{Binding Date, StringFormat=dd-MM-yyyy}" />
+                        <DataGridTextColumn Header="Qté"   Binding="{Binding Quantity, StringFormat=N2}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
 
             <Button Grid.Row="2" Content="Analyser"
         Command="{Binding AnalyzeCommand}"

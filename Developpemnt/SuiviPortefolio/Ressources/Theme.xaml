@@ -4,6 +4,7 @@
     <!-- Mode Clair (par défaut) -->
     <Color x:Key="PrimaryColor">#2D2D30</Color>
     <Color x:Key="SecondaryColor">#0078D7</Color>
+    <Color x:Key="TertiaryColor">#A6A6A6</Color>
     <Color x:Key="BackgroundColor">#FFFFFF</Color>
     <Color x:Key="ForegroundColor">#000000</Color>
 
@@ -45,13 +46,13 @@
 
     <SolidColorBrush x:Key="BorderBorder" Color="{StaticResource SecondaryColor}" />
 
-    <SolidColorBrush x:Key="DataGridHeaderBackgroundBrush"
-                 Color="#F1F1F1" />
+    <SolidColorBrush x:Key="DataGridHeaderBackgroundBrush" Color="{StaticResource TertiaryColor}" />
 
-    <SolidColorBrush x:Key="DataGridHeaderForegroundBrush"
-                    Color="#202020" />
+    <SolidColorBrush x:Key="DataGridHeaderForegroundBrush" Color="{StaticResource ForegroundColor}" />
 
-    <SolidColorBrush x:Key="DataGridHeaderBorderBrush"
-                    Color="#D0D0D0" />
+    <SolidColorBrush x:Key="DataGridHeaderBorderBrush" Color="{StaticResource PrimaryColor}"/>
+    <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource BackgroundColor}" />
+
+    <SolidColorBrush x:Key="DataGridForegroundBrush" Color="{StaticResource ForegroundColor}" />
 
 </ResourceDictionary>

@@ -26,22 +26,24 @@
         </StackPanel>
 
         <!-- Liste des tickers sélectionnés -->
-        <Border Grid.Row="1"
-            BorderBrush="#FF2E86C1"
+        <Border Grid.Row="1" Style="{StaticResource PanelBorderStyle}"
+
             BorderThickness="1"
             CornerRadius="4"
             Padding="1"
-            Background="White"
+            Background="{DynamicResource WindowBackgroundBrush}"
             ClipToBounds="True">                  
 
             <DataGrid Grid.Row="1"
+                  RowStyle="{StaticResource DataGridThemeStyle}"
                   ItemsSource="{Binding SelectedPositions}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
-                    BorderBrush="DodgerBlue"
+                
                     BorderThickness="0"
-                    Background="White"
+                    HeadersVisibility="Column"
+                    
                     GridLinesVisibility="All"
                     HorizontalGridLinesBrush="LightBlue"
                     VerticalGridLinesBrush="LightBlue" >
@@ -63,6 +65,7 @@
                         <Setter Property="VerticalContentAlignment" Value="Center" />
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Ticker" Binding="{Binding Ticker}" />
                     <DataGridTextColumn Header="Type"   Binding="{Binding Type}" />
