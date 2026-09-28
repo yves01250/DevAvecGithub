@@ -67,7 +67,13 @@ public class PortfolioViewModel : INotifyPropertyChanged
         {
             Title = "Évolution des positions sélectionnées",
             LegendPosition = LegendPosition.RightTop,
-            LegendPlacement = LegendPlacement.Outside
+            LegendPlacement = LegendPlacement.Outside,
+            // LegendBackground = OxyColor.FromAColor(220, OxyColors.White),
+            //LegendBorder = OxyColors.DimGray,
+            // LegendBorderThickness = 1,
+            LegendMaxWidth = double.PositiveInfinity,
+            LegendFontSize = 10,
+            LegendSymbolLength = 10
         };
 
     _analyzeCommand = new RelayCommand(async _ => await AnalyzeSelectedAsync(), _ => CanAnalyze);
@@ -174,11 +180,26 @@ public class PortfolioViewModel : INotifyPropertyChanged
 
             ChartModel.Series.Clear();
             ChartModel.Axes.Clear();
+            
+            // Ajustement dynamique du pas des dates en fonction de la période sélectionnée
+            var majorStep = SelectedPeriod switch
+            {
+                "1mo"  => 7,    // 1 semaine
+                "3mo"  => 15,   // 15 jours
+                "6mo"  => 30,   // 1 mois
+                "1y"   => 30,   // 1 mois
+                "2y"   => 60,   // 2 mois
+                "5y"   => 180,  // 6 mois
+                _      => 30     // Défaut
+            };
+            
             ChartModel.Axes.Add(new DateTimeAxis
             {
                 Position = AxisPosition.Bottom,
                 Title = "Date",
-                StringFormat = "MM/yyyy"
+                StringFormat = "MM/yyyy",
+                MajorStep = majorStep,
+                IntervalLength = majorStep
             });
             ChartModel.Axes.Add(new LinearAxis
             {
@@ -187,23 +208,29 @@ public class PortfolioViewModel : INotifyPropertyChanged
             });
 
             foreach (var (position, history) in histories)
-            {
-                var series = new LineSeries
-                {
-                    Title = position.Ticker,
-                    StrokeThickness = 2
-                };
+{
+    if (!history.Any()) continue;  // Ignore les séries vides
 
-                foreach (var point in history)
-                {
-                    series.Points.Add(new DataPoint(
-                        DateTimeAxis.ToDouble(point.Date),
-                        point.Close * (double)position.Quantity));
-                }
+    var series = new LineSeries
+    {
+        Title = position.Ticker + "--", // le "--" permet d'avoir le texte complet de la légende visible               
+        StrokeThickness = 2,
+        TrackerFormatString = "{0}\nDate : {2:dd/MM/yyyy}\nValeur : {4:0.##}"
+    };
 
-                if (series.Points.Count > 0)
-                    ChartModel.Series.Add(series);
-            }
+    var firstClose = history.First().Close;  // Valeur de référence (100%)
+    foreach (var point in history)
+    {
+        // Normalisation : (Close / Close_initial) * 100
+        var normalizedValue = (point.Close / firstClose) * 100;
+        series.Points.Add(new DataPoint(
+            DateTimeAxis.ToDouble(point.Date),
+            normalizedValue));
+    }
+
+    if (series.Points.Count > 0)
+        ChartModel.Series.Add(series);
+}
 
             ChartModel.InvalidatePlot(true);
         }

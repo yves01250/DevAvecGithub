@@ -84,7 +84,10 @@
         HorizontalAlignment="Right"
         Margin="0,8,0,0"/>
 
-            <Border Grid.Row="3" Style="{StaticResource PanelBorderStyle}">                
+
+
+            <Border Grid.Row="3" Style="{StaticResource PanelBorderStyle}"> 
+               
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
                         <TextBlock Text="Évolution de la valeur investie" VerticalAlignment="Center"/>
@@ -95,7 +98,8 @@
                                   SelectedValuePath="Value"
                                   SelectedValue="{Binding SelectedPeriod, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
-                    <oxy:PlotView x:Name="PerformanceChart" 
+                    <oxy:PlotView x:Name="PerformanceChart"
+                                    Width="Auto" 
                                     Height="300"
                                     Model="{Binding ChartModel}" />
                 </DockPanel>
