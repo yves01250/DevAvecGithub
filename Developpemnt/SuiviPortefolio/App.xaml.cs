@@ -1,7 +1,6 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
+using SuiviPortefolio.Data;
 
 namespace SuiviPortefolio
 {
@@ -17,6 +16,8 @@ namespace SuiviPortefolio
 
             CultureInfo.DefaultThreadCurrentUICulture =
                 CultureInfo.GetCultureInfo("fr-FR");
+
+            DatabaseLocation.Initialize();
         }
     }
 

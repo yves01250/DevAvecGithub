@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Windows;
+using SuiviPortefolio.Data;
 using SuiviPortefolio.Comptes.CompteModel;
 using SuiviPortefolio.Comptes.CompteRepository;
 using SuiviPortefolio.Comptes.CompteView;
@@ -18,7 +19,7 @@ public class CompteViewModel : INotifyPropertyChanged
     public CompteViewModel(ICompteRepository? repository = null)
     {
         _repository = repository ?? new CompteRepository.CompteRepository(
-            System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SuiviPortefeuille.sqlite"));
+            DatabaseLocation.DatabasePath);
 
         AjouterCompteCommand = new RelayCommand(_ => AjouterCompte());
         ModifierCompteCommand = new RelayCommand(_ => ModifierCompte(),

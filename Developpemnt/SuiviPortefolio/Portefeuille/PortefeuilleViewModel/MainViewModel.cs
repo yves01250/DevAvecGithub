@@ -20,8 +20,7 @@ public class MainViewModel : INotifyPropertyChanged
     public MainViewModel()
     {
 
-        var dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SuiviPortefeuille.sqlite");
-            _database = new SqliteRepository(dbPath);
+        _database = new SqliteRepository(DatabaseLocation.DatabasePath);
 
         AjouterPortefeuilleCommand = new RelayCommand(_ => AjouterPortefeuille());
         ModifierPortefeuilleCommand = new RelayCommand(_ => ModifierPortefeuille(), _ => PortefeuilleSelectionne != null);
@@ -94,7 +93,6 @@ public class MainViewModel : INotifyPropertyChanged
             }
         }
     }
-    //private readonly SqliteRepository _database = new SqliteRepository("SuiviPortefeuille.sqlite");
     public ICommand AjouterPortefeuilleCommand { get; }
     public ICommand ModifierPortefeuilleCommand { get; }
     public ICommand SupprimerPortefeuilleCommand { get; }

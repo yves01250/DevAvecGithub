@@ -89,6 +89,55 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
             }
         }
 
+        private void MenuChoisirDossierBase_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFolderDialog
+            {
+                Title = "Choisir le dossier de la base de données",
+                InitialDirectory = DatabaseLocation.DirectoryPath,
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog(this) != true)
+                return;
+
+            var selectedDirectory = Path.GetFullPath(dialog.FolderName);
+            if (string.Equals(
+                    selectedDirectory,
+                    DatabaseLocation.DirectoryPath,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            var selectedDatabasePath = Path.Combine(selectedDirectory, "SuiviPortefeuille.sqlite");
+            if (File.Exists(selectedDatabasePath) &&
+                MessageBox.Show(
+                    "Ce dossier contient déjà une base de données. Elle sera remplacée par la base actuellement utilisée. Continuer ?",
+                    "Remplacer la base existante",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                if (!DatabaseLocation.ChangeDirectory(selectedDirectory))
+                    return;
+
+                ReloadWithConfiguredDatabase();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(
+                    $"Impossible de déplacer la base de données : {exception.Message}",
+                    "Erreur",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
         private void MenuRestaurer_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog
@@ -114,7 +163,7 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
             SqliteConnection.ClearAllPools();
             if (DatabaseManager.RestoreDatabase(dialog.FileName, GetDatabasePath()))
             {
-                DataContext = new MainViewModel();
+                ReloadWithConfiguredDatabase();
                 MessageBox.Show(
                     "La base de données a été restaurée.",
                     "Restauration",
@@ -128,8 +177,15 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
             Application.Current.Shutdown();
         }
 
-        private static string GetDatabasePath() =>
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SuiviPortefeuille.sqlite");
+        private static string GetDatabasePath() => DatabaseLocation.DatabasePath;
+
+        private void ReloadWithConfiguredDatabase()
+        {
+            var newWindow = new MainWindow();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            Close();
+        }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {

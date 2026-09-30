@@ -1,0 +1,28 @@
+# Dossiers générés par Visual Studio
+/bin/
+/obj/
+/*.user
+/*.suo
+_UpgradeReport_Files/
+upgrade.log
+
+# Fichiers de build
+*.exe
+*.dll
+*.pdb
+*.cache
+
+# Dossier des packages NuGet (si utilisé)
+packages/
+
+# Fichiers IDE (VS Code, etc.)
+.vscode/
+.idea/
+*.swp
+
+# Fichiers temporaires
+*.tmp
+*.bak
+
+# Fichiers InnoSetup
+/artifacts/

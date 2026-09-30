@@ -14,6 +14,7 @@ public class PositionViewModel : INotifyPropertyChanged
 
     public int Id => Model.Id;
     public string Ticker => Model.Ticker;
+    public string Name => Model.Nom;
     public string Type => Model.Type;
     public decimal Quantity => Model.Quantite;
     public decimal Price => Model.PrixMoyen;

@@ -8,101 +8,161 @@
              d:DesignHeight="300" d:DesignWidth="300">
              
     <Grid Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="350"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="350"/>
+        </Grid.RowDefinitions>
         
-            <TextBlock Grid.Row="0" Text="CONSULTATIONS" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
+        <TextBlock Grid.Row="0" Text="CONSULTATIONS" Style="{DynamicResource TitleH1Style}" Margin="0,0,0,10"/>
 
-            <Border Grid.Row="1" Style="{StaticResource PanelBorderStyle}"
-                    
+        <Border Grid.Row="1" Style="{StaticResource PanelBorderStyle}"
+                
+                BorderThickness="1"
+                CornerRadius="4"
+                Padding="1"
+                Background="{DynamicResource WindowBackgroundBrush}"
+                ClipToBounds="True">
+            <DataGrid Grid.Row="1"
+                    RowHeight="24"
+                    RowStyle="{DynamicResource DataGridThemeStyle}"
+                    ItemsSource="{Binding ActivePositions}"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    SelectionMode="Extended"
+
+                    BorderThickness="0"
+                    HeadersVisibility="Column"
+                    Background="White"
+                    GridLinesVisibility="All"
+                    HorizontalGridLinesBrush="LightBlue"
+                    VerticalGridLinesBrush="LightBlue" 
+                    >
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background"
+                                Value="{DynamicResource DataGridHeaderBackgroundBrush}" />
+
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource DataGridHeaderForegroundBrush}" />
+
+                        <Setter Property="BorderBrush"
+                                Value="{DynamicResource DataGridHeaderBorderBrush}" />
+
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Height" Value="32" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.Columns>
+                    <!-- Colonne de sélection -->
+                    <DataGridTemplateColumn Header="Sélection">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+                            HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Ticker" Binding="{Binding Ticker}" />
+                    <DataGridTextColumn Header="Nom" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Type"   Binding="{Binding Type}" />
+                    <DataGridTextColumn Header="Cours"  Binding="{Binding Price, StringFormat=N2}" />
+                    <DataGridTextColumn Header="Date"   Binding="{Binding Date, StringFormat=dd-MM-yyyy}" />
+                    <DataGridTextColumn Header="Qté"   Binding="{Binding Quantity, StringFormat=N2}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+
+        <Button Grid.Row="2" Content="Analyser"
+            Command="{Binding AnalyzeCommand}"
+            HorizontalAlignment="Right"
+            Margin="0,8,0,0"/>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.2*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Style="{StaticResource PanelBorderStyle}"
                     BorderThickness="1"
                     CornerRadius="4"
-                    Padding="1"
+                    Padding="10"
+                    Margin="0,8,8,0"
                     Background="{DynamicResource WindowBackgroundBrush}"
                     ClipToBounds="True">
-                <DataGrid Grid.Row="1"
-                        RowHeight="24"
-                        RowStyle="{DynamicResource DataGridThemeStyle}"
-                        ItemsSource="{Binding ActivePositions}"
-                        AutoGenerateColumns="False"
-                        CanUserAddRows="False"
-                        SelectionMode="Extended"
-
-                        BorderThickness="0"
-                        HeadersVisibility="Column"
-                        Background="White"
-                        GridLinesVisibility="All"
-                        HorizontalGridLinesBrush="LightBlue"
-                        VerticalGridLinesBrush="LightBlue" 
-                        >
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Background"
-                                    Value="{DynamicResource DataGridHeaderBackgroundBrush}" />
-
-                            <Setter Property="Foreground"
-                                    Value="{DynamicResource DataGridHeaderForegroundBrush}" />
-
-                            <Setter Property="BorderBrush"
-                                    Value="{DynamicResource DataGridHeaderBorderBrush}" />
-
-                            <Setter Property="BorderThickness" Value="0" />
-                            <Setter Property="Height" Value="32" />
-                            <Setter Property="FontWeight" Value="SemiBold" />
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Setter Property="VerticalContentAlignment" Value="Center" />
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>
-
-                    <DataGrid.Columns>
-                        <!-- Colonne de sélection -->
-                        <DataGridTemplateColumn Header="Sélection">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
-                                HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTextColumn Header="Ticker" Binding="{Binding Ticker}" />
-                        <DataGridTextColumn Header="Type"   Binding="{Binding Type}" />
-                        <DataGridTextColumn Header="Cours"  Binding="{Binding Price, StringFormat=N2}" />
-                        <DataGridTextColumn Header="Date"   Binding="{Binding Date, StringFormat=dd-MM-yyyy}" />
-                        <DataGridTextColumn Header="Qté"   Binding="{Binding Quantity, StringFormat=N2}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Border>
-
-
-            <Button Grid.Row="2" Content="Analyser"
-        Command="{Binding AnalyzeCommand}"
-        HorizontalAlignment="Right"
-        Margin="0,8,0,0"/>
-
-
-
-            <Border Grid.Row="3" Style="{StaticResource PanelBorderStyle}"> 
-               
+                    
                 <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
-                        <TextBlock Text="Évolution de la valeur investie" VerticalAlignment="Center"/>
-                        <TextBlock Text="Période :" Margin="20,0,5,0" VerticalAlignment="Center"/>
+                    <StackPanel DockPanel.Dock="Top"
+                                Orientation="Horizontal"
+                                Margin="0,0,0,8">
+                        <TextBlock Text="Évolution de la valeur investie"
+                                FontSize="18" FontWeight="SemiBold"
+                                VerticalAlignment="Center"/>
+                        <TextBlock Text="Période :"
+                                Margin="20,0,5,0"
+                                VerticalAlignment="Center"/>
                         <ComboBox Width="100"
-                                  ItemsSource="{Binding Periods}"
-                                  DisplayMemberPath="Key"
-                                  SelectedValuePath="Value"
-                                  SelectedValue="{Binding SelectedPeriod, UpdateSourceTrigger=PropertyChanged}"/>
+                                ItemsSource="{Binding Periods}"
+                                DisplayMemberPath="Key"
+                                SelectedValuePath="Value"
+                                SelectedValue="{Binding SelectedPeriod,
+                                                        UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
+
                     <oxy:PlotView x:Name="PerformanceChart"
-                                    Width="Auto" 
-                                    Height="300"
-                                    Model="{Binding ChartModel}" />
+                                Height="300"
+                                Model="{Binding ChartModel}">
+                        <oxy:PlotView.DefaultTrackerTemplate>
+                            <ControlTemplate>
+                                <oxy:TrackerControl
+                                    Position="{Binding Position}"
+                                    LineExtents="{Binding PlotModel.PlotArea}"
+                                    Background="#565555"
+                                    BorderBrush="#4CAF50"
+                                    BorderThickness="2"
+                                    Padding="8">
+                                    <oxy:TrackerControl.Content>
+                                        <TextBlock Text="{Binding}"
+                                                   Foreground="White"
+                                                   FontSize="13" />
+                                    </oxy:TrackerControl.Content>
+                                </oxy:TrackerControl>
+                            </ControlTemplate>
+                        </oxy:PlotView.DefaultTrackerTemplate>
+                    </oxy:PlotView> 
+
                 </DockPanel>
             </Border>
+
+            <Border Grid.Column="1"
+                    Style="{StaticResource PanelBorderStyle}"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    Padding="10"
+                    Margin="0,8,0,0"
+                    Background="{DynamicResource WindowBackgroundBrush}"
+                    ClipToBounds="True">
+
+                <StackPanel Margin="8,0,0,0">
+                    <TextBlock Text="Résumé de la comparaison"
+                            FontSize="18" FontWeight="SemiBold"
+                            VerticalAlignment="Top"/>
+                    <TextBlock Text="{Binding SummaryText}"
+                            TextWrapping="Wrap"
+                            LineHeight="12"
+                            LineStackingStrategy="BlockLineHeight"
+                            VerticalAlignment="Top"/>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

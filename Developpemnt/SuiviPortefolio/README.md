@@ -43,7 +43,7 @@ Pour lancer l'application depuis la ligne de commande :
 dotnet run --project .\SuiviPortefolio.csproj
 ```
 
-La base `SuiviPortefeuille.sqlite` est créée dans le dossier de sortie de l'application au premier démarrage. Son schéma est initialisé automatiquement par `SqliteRepository`.
+La base `SuiviPortefeuille.sqlite` est créée dans `%LOCALAPPDATA%\SuiviPortefolio` au premier démarrage. L'application importe automatiquement une ancienne base présente à côté de l'exécutable si aucune base n'existe encore à cet emplacement. Le dossier actif peut ensuite être modifié dans **Fichier > Choisir le dossier de la base de données** ; les données courantes sont copiées vers le nouvel emplacement et l'application recharge ses écrans. Si une base porte déjà le même nom dans le dossier choisi, l'application demande confirmation avant de la remplacer.
 
 Pour utiliser Visual Studio, ouvrez [`SuiviPortefolio.slnx`](./SuiviPortefolio.slnx), sélectionnez le projet `SuiviPortefolio` comme projet de démarrage, puis lancez-le avec `F5`.
 

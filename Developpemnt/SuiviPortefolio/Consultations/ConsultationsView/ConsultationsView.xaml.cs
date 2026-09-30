@@ -1,5 +1,4 @@
 using System.Windows.Controls;
-using System.IO;
 using SuiviPortefolio.Data;
 using SuiviPortefolio.Consultations.ConsultationsViewModel;
 
@@ -11,11 +10,8 @@ namespace SuiviPortefolio.Consultations.ConsultationsView
         public ConsultationsView()
         {
             InitializeComponent();
-            var databasePath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "SuiviPortefeuille.sqlite");
             var viewModel = new PortfolioViewModel(
-                new ConsultPositionRepository(databasePath));
+                new ConsultPositionRepository(DatabaseLocation.DatabasePath));
 
             DataContext = viewModel;
             Loaded += async (_, _) => await viewModel.LoadAsync();

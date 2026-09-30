@@ -26,6 +26,8 @@
             
             <!-- Menu Fichier -->
             <MenuItem Header="_Fichier">
+                <MenuItem Header="Choisir le dossier de la _base de données..." Click="MenuChoisirDossierBase_Click" />
+                <Separator />
                 <MenuItem Header="_Sauvegarder" Click="MenuSauvegarder_Click" />
                 <MenuItem Header="_Restaurer" Click="MenuRestaurer_Click" />
                 <Separator />

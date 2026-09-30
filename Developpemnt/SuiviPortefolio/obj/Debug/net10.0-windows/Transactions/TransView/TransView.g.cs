@@ -51,7 +51,7 @@ namespace SuiviPortefolio.Transactions.TransView {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SuiviPortefolio;component/transactions/transview/transview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SuiviPortefolio;V1.0.0.0;component/transactions/transview/transview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Transactions\TransView\TransView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

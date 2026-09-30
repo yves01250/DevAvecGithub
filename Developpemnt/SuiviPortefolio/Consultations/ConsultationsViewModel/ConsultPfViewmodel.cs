@@ -27,8 +27,20 @@ public class PortfolioViewModel : INotifyPropertyChanged
 
     private string _selectedPeriod = "1y";
     private bool _isChartLoading;
+    private string _summaryText = "Aucune donnée disponible pour les Tickers sélectionnés.";
 
     public PlotModel ChartModel { get; }
+    public string SummaryText
+    {
+        get => _summaryText;
+        private set
+        {
+            if (_summaryText == value) return;
+            _summaryText = value;
+            OnPropertyChanged();
+        }
+    }
+
     public IReadOnlyDictionary<string, string> Periods { get; } =
         new Dictionary<string, string>
         {
@@ -177,6 +189,38 @@ public class PortfolioViewModel : INotifyPropertyChanged
             var histories = await Task.WhenAll(selected.Select(async position =>
                 (position, history: await _cotationFetcher.FetchHistoryAsync(
                     position.Ticker, SelectedPeriod))));
+
+            var summaries = histories
+                .Where(item => item.history.Count > 0)
+                .GroupBy(item => item.position.Ticker)
+                .Select(group =>
+                {
+                    var points = group.First().history;
+                    var first = points.OrderBy(point => point.Date).First();
+                    var latest = points.OrderByDescending(point => point.Date).First();
+                    var performancePct = first.Close == 0
+                        ? 0
+                        : (latest.Close / first.Close - 1) * 100;
+
+                    return new
+                    {
+                        Ticker = group.Key,
+                        Performance = performancePct,
+                        LastPrice = latest.Close,
+                        Points = points.Count
+                    };
+                })
+                .OrderByDescending(summary => summary.Performance) // Tri sur la performance            
+                .Select(summary =>
+                    $"{summary.Ticker}  " +
+                    $"Performance : {summary.Performance:+0.00;-0.00;0.00}%  " +
+                    $"Dernier cours : {summary.LastPrice:N2}  " +
+                    $"Points : {summary.Points}")
+                .ToList();
+
+            SummaryText = summaries.Count == 0
+                ? "Aucune donnée disponible pour les Tickers sélectionnés."
+                : string.Join("\n\n", summaries);
 
             ChartModel.Series.Clear();
             ChartModel.Axes.Clear();

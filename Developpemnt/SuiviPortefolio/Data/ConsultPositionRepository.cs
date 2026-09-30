@@ -29,6 +29,7 @@ public class ConsultPositionRepository
             SELECT
                 p.PosId,
                 a.ActifTicker,
+                a.ActifNom,
                 c.CpteType,
                 p.PosQte,
                 p.PosPrixMoyen,
@@ -59,10 +60,11 @@ public class ConsultPositionRepository
             {
                 Id = reader.GetInt32(0),
                 Ticker = reader.GetString(1),
-                Type = reader.GetString(2),
-                Quantite = reader.GetDecimal(3),
-                PrixMoyen = reader.GetDecimal(4),
-                Date = DateTime.Parse(reader.GetString(5))
+                Nom = reader.GetString(2),
+                Type = reader.GetString(3),
+                Quantite = reader.GetDecimal(4),
+                PrixMoyen = reader.GetDecimal(5),
+                Date = DateTime.Parse(reader.GetString(6))
             });
         }
 

@@ -2,11 +2,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using SuiviPortefolio.Comptes.CompteModel;
 using SuiviPortefolio.Comptes.CompteRepository;
+using SuiviPortefolio.Data;
 using SuiviPortefolio.Transactions.TransModel;
 using SuiviPortefolio.Transactions.TransRepository;
 using SuiviPortefolio.Transactions.TransView;
@@ -29,7 +29,7 @@ public class TransactionViewModel : INotifyPropertyChanged
 
     public TransactionViewModel(ITransRepository? transactions = null, ICompteRepository? comptes = null)
     {
-        var dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SuiviPortefeuille.sqlite");
+        var dbPath = DatabaseLocation.DatabasePath;
         _transactions = transactions ?? new SuiviPortefolio.Transactions.TransRepository.TransRepository(dbPath);
         _comptes = comptes ?? new CompteRepository(dbPath);
         foreach (var compte in _comptes.GetAll())
