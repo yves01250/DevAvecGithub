@@ -27,6 +27,9 @@ C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bi
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\SuiviPortefolio.dll
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\SuiviPortefolio.pdb
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\Microsoft.Data.Sqlite.dll
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\OxyPlot.dll
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\OxyPlot.Wpf.dll
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\OxyPlot.Xps.dll
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\SQLitePCLRaw.batteries_v2.dll
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\SQLitePCLRaw.core.dll
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\SQLitePCLRaw.provider.e_sqlite3.dll
@@ -66,6 +69,8 @@ C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\ob
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\SuiviPortefolio.pdb
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\SuiviPortefolio.genruntimeconfig.cache
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\obj\Debug\net10.0-windows\ref\SuiviPortefolio.dll
-C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\OxyPlot.dll
-C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\OxyPlot.Wpf.dll
-C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\OxyPlot.Xps.dll
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-validation\SuiviPortefolio.exe
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-validation\SuiviPortefolio.deps.json
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-validation\SuiviPortefolio.runtimeconfig.json
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-validation\SuiviPortefolio.dll
+C:\Users\yves_\AppData\Local\Temp\SuiviPortefolio-validation\SuiviPortefolio.pdb

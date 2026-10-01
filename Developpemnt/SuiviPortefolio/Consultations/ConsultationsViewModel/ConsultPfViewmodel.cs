@@ -22,8 +22,10 @@ public class PortfolioViewModel : INotifyPropertyChanged
     private readonly ObservableCollection<PositionViewModel> _allPositions;
     private readonly RelayCommand _analyzeCommand;
     private readonly RelayCommand _refreshPricesCommand;
+    private readonly RelayCommand _toggleAllSelectionCommand;
 
     private bool _isLoading;
+    private bool _isUpdatingSelection;
 
     private string _selectedPeriod = "1y";
     private bool _isChartLoading;
@@ -90,6 +92,7 @@ public class PortfolioViewModel : INotifyPropertyChanged
 
     _analyzeCommand = new RelayCommand(async _ => await AnalyzeSelectedAsync(), _ => CanAnalyze);
     _refreshPricesCommand = new RelayCommand(async _ => await RefreshPricesAsync(), _ => !IsLoading);
+    _toggleAllSelectionCommand = new RelayCommand(async _ => await ToggleAllSelectionAsync());
 
     LoadCommand = new RelayCommand(async _ => await LoadAsync(), _ => !IsLoading);
     }
@@ -97,6 +100,19 @@ public class PortfolioViewModel : INotifyPropertyChanged
     public ICommand LoadCommand { get; }
     public ICommand AnalyzeCommand => _analyzeCommand;
     public ICommand RefreshPricesCommand => _refreshPricesCommand;
+    public ICommand ToggleAllSelectionCommand => _toggleAllSelectionCommand;
+
+    public bool? IsAllSelected
+    {
+        get
+        {
+            var activePositions = _allPositions.Where(position => position.Quantity > 0).ToList();
+            if (activePositions.Count == 0 || activePositions.All(position => !position.IsSelected))
+                return false;
+
+            return activePositions.All(position => position.IsSelected) ? true : null;
+        }
+    }
 
     public bool IsLoading
     {
@@ -143,9 +159,32 @@ public class PortfolioViewModel : INotifyPropertyChanged
     {
         if (e.PropertyName == nameof(PositionViewModel.IsSelected))
         {
+            if (_isUpdatingSelection)
+                return;
+
+            OnPropertyChanged(nameof(IsAllSelected));
             _analyzeCommand.RaiseCanExecuteChanged();
             await RefreshChartAsync();
         }
+    }
+
+    private async Task ToggleAllSelectionAsync()
+    {
+        var selectAll = IsAllSelected != true;
+        _isUpdatingSelection = true;
+        try
+        {
+            foreach (var position in _allPositions.Where(position => position.Quantity > 0))
+                position.IsSelected = selectAll;
+        }
+        finally
+        {
+            _isUpdatingSelection = false;
+        }
+
+        OnPropertyChanged(nameof(IsAllSelected));
+        _analyzeCommand.RaiseCanExecuteChanged();
+        await RefreshChartAsync();
     }
 
     public async Task RefreshPricesAsync()

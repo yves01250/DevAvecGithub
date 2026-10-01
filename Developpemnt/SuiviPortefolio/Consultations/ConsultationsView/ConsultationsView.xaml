@@ -60,7 +60,19 @@
 
                 <DataGrid.Columns>
                     <!-- Colonne de sélection -->
-                    <DataGridTemplateColumn Header="Sélection">
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="Tout"
+                                          IsThreeState="True"
+                                          IsChecked="{Binding DataContext.IsAllSelected,
+                                              RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                              Mode=OneWay}"
+                                          Command="{Binding DataContext.ToggleAllSelectionCommand,
+                                              RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                          ToolTip="Sélectionner ou désélectionner toutes les positions"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
