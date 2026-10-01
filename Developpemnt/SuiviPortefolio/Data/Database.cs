@@ -144,7 +144,17 @@ public class SqliteRepository
     using var connection = new SqliteConnection(_connectionString);
     connection.Open();
     using var cmd = connection.CreateCommand();
-    cmd.CommandText = "SELECT PtfId, PtfNom, PtfType, PtfDevise, PtfSolde, PtfEstDefaut FROM Portefeuille ORDER BY PtfId";
+    cmd.CommandText = """
+        SELECT p.PtfId, p.PtfNom, p.PtfType, p.PtfDevise,
+               COALESCE((
+                   SELECT SUM(c.CpteSolde)
+                   FROM Compte c
+                   WHERE c.CptePtfId = p.PtfId
+               ), 0),
+               p.PtfEstDefaut
+        FROM Portefeuille p
+        ORDER BY p.PtfId;
+        """;
 
     var list = new List<monPortefeuille>();
     using var reader = cmd.ExecuteReader();
@@ -173,7 +183,7 @@ public class SqliteRepository
             INSERT INTO Portefeuille
                 (PtfNom, PtfType, PtfDevise, PtfSolde, PtfEstDefaut)
             VALUES
-                ($nom, $type, $devise, $solde, $defaut);
+                ($nom, $type, $devise, 0, $defaut);
             SELECT last_insert_rowid();
             """;
 
@@ -183,9 +193,6 @@ public class SqliteRepository
         command.Parameters.AddWithValue("$type", portefeuille.PtfType);
         command.Parameters.AddWithValue("$devise", portefeuille.PtfDevise);
 
-        command.Parameters.AddWithValue(
-            "$solde",
-            portefeuille.PtfSolde);
         command.Parameters.AddWithValue("$defaut", portefeuille.PtfEstDefaut ? 1 : 0);
 
         return Convert.ToInt32(command.ExecuteScalar());
@@ -199,14 +206,13 @@ public class SqliteRepository
         command.CommandText = """
             UPDATE Portefeuille
             SET PtfNom = $nom, PtfType = $type, PtfDevise = $devise,
-                PtfSolde = $solde, PtfEstDefaut = $defaut
+                PtfEstDefaut = $defaut
             WHERE PtfId = $id;
             """;
         command.Parameters.AddWithValue("$id", portefeuille.PtfId);
         command.Parameters.AddWithValue("$nom", portefeuille.PtfNom);
         command.Parameters.AddWithValue("$type", portefeuille.PtfType);
         command.Parameters.AddWithValue("$devise", portefeuille.PtfDevise);
-        command.Parameters.AddWithValue("$solde", portefeuille.PtfSolde);
         command.Parameters.AddWithValue("$defaut", portefeuille.PtfEstDefaut ? 1 : 0);
         command.ExecuteNonQuery();
     }

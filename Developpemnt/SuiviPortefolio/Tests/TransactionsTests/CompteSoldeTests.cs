@@ -1,4 +1,5 @@
 using Microsoft.Data.Sqlite;
+using SuiviPortefolio.Data;
 using SuiviPortefolio.Transactions.TransModel;
 using SuiviPortefolio.Transactions.TransRepository;
 using Xunit;
@@ -73,6 +74,63 @@ public sealed class CompteSoldeTests : IDisposable
             CreateCotation());
 
         Assert.Equal(1197m, ReadBalance());
+    }
+
+    [Fact]
+    public async Task ModifierTransaction_ReaffecteLaPositionAuNouveauCompte()
+    {
+        using (var connection = new SqliteConnection(
+            new SqliteConnectionStringBuilder { DataSource = _databasePath }.ToString()))
+        {
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = """
+                INSERT INTO Compte
+                    (CpteId, CpteNom, CpteType, CpteDevise, CpteSolde, CpteEstDefaut, CptePtfId)
+                VALUES (2, 'Compte titres', 'CompteTitre', 'EUR', 2000, 0, 1);
+                """;
+            command.ExecuteNonQuery();
+        }
+
+        var repository = new TransRepository(_databasePath);
+        var transaction = new TransactionFinanciere
+        {
+            TransType = "Achat",
+            TransQte = 2,
+            TransPrix = 100,
+            TransFrais = 0,
+            TransDateTransac = new DateTime(2026, 1, 1),
+            TransCpteId = 1
+        };
+        var cotation = CreateCotation();
+        repository.Save(transaction, cotation);
+
+        transaction.TransQte = 3;
+        transaction.TransCpteId = 2;
+        repository.Save(transaction, cotation);
+
+        using (var stalePositionConnection = new SqliteConnection(
+            new SqliteConnectionStringBuilder { DataSource = _databasePath }.ToString()))
+        {
+            stalePositionConnection.Open();
+            using var stalePosition = stalePositionConnection.CreateCommand();
+            stalePosition.CommandText = "UPDATE Position SET PosCpteId = 1;";
+            stalePosition.ExecuteNonQuery();
+        }
+
+        _ = await new ConsultPositionRepository(_databasePath).GetAllAsync();
+
+        using var resultConnection = new SqliteConnection(
+            new SqliteConnectionStringBuilder { DataSource = _databasePath }.ToString());
+        resultConnection.Open();
+        using var resultCommand = resultConnection.CreateCommand();
+        resultCommand.CommandText = "SELECT PosCpteId, PosQte FROM Position;";
+        using var reader = resultCommand.ExecuteReader();
+
+        Assert.True(reader.Read());
+        Assert.Equal(2, reader.GetInt32(0));
+        Assert.Equal(3m, reader.GetDecimal(1));
+        Assert.False(reader.Read());
     }
 
     [Fact]

@@ -60,8 +60,7 @@ namespace SuiviPortefolio.Consultations.ConsultationsView {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri(("/SuiviPortefolio;V1.0.0.0;component/consultations/consultationsview/consultations" +
-                    "view.xaml"), System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SuiviPortefolio;component/consultations/consultationsview/consultationsview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Consultations\ConsultationsView\ConsultationsView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

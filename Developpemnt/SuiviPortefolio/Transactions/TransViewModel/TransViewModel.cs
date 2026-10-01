@@ -69,6 +69,7 @@ public class TransactionViewModel : INotifyPropertyChanged
             OnPropertyChanged();
             if (value != null)
             {
+                CompteSelectionne = Comptes.FirstOrDefault(c => c.CpteId == value.TransCpteId);
                 TypeTransaction = value.TransType;
                 DateTransaction = value.TransDateTransac;
                 QuantiteTexte = value.TransQte.ToString("N2", CultureInfo.CurrentCulture);
@@ -147,7 +148,6 @@ public class TransactionViewModel : INotifyPropertyChanged
             return;
         }
 
-        var oldQuantity = TransactionSelectionnee?.TransQte;
         var item = TransactionSelectionnee ?? new TransactionFinanciere();
         item.TransType = TypeTransaction;
         item.TransQte = quantity;
@@ -156,7 +156,7 @@ public class TransactionViewModel : INotifyPropertyChanged
         item.TransDateTransac = DateTransaction ?? DateTime.Today;
         item.TransCpteId = CompteSelectionne.CpteId;
         CotationSelectionnee.Close = (double)course;
-        _transactions.Save(item, CotationSelectionnee, oldQuantity);
+        _transactions.Save(item, CotationSelectionnee);
         ChargerTransactions();
         TransactionSelectionnee = TransactionsRecentes.FirstOrDefault(t => t.TransId == item.TransId);
         QuantiteTexte = string.Empty;

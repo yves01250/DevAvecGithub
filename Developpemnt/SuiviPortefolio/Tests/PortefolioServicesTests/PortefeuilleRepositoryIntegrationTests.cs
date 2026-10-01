@@ -12,16 +12,35 @@ public sealed class PortefeuilleRepositoryIntegrationTests : IDisposable
         $"suivi-portefolio-portefeuille-tests-{Guid.NewGuid():N}.sqlite");
 
     [Fact]
-    public void AjouterPuisRelirePortefeuille_PreserveLesDonneesDansSqlite()
+    public void GetAllPortefeuilles_CalculeLeSoldeDepuisTousLesComptesAssocies()
     {
         var portefeuille = new monPortefeuille
         {
             PtfNom = "Portefeuille d'intégration",
-            PtfSolde = 2450.75m
+            PtfSolde = 5.25m
         };
 
         var repository = new SqliteRepository(_databasePath);
-        repository.Ajouter(portefeuille);
+        var id = repository.Ajouter(portefeuille);
+
+        using (var connection = new SqliteConnection(new SqliteConnectionStringBuilder
+        {
+            DataSource = _databasePath,
+            Mode = SqliteOpenMode.ReadWrite
+        }.ToString()))
+        {
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = """
+                INSERT INTO Compte
+                    (CpteNom, CpteType, CpteDevise, CpteSolde, CpteEstDefaut, CptePtfId)
+                VALUES
+                    ('Compte 1', 'CompteCourant', 'EUR', 1200.50, 0, $portefeuilleId),
+                    ('Compte 2', 'CompteTitre', 'EUR', 1250.25, 0, $portefeuilleId);
+                """;
+            command.Parameters.AddWithValue("$portefeuilleId", id);
+            command.ExecuteNonQuery();
+        }
 
         var reouvertureRepository = new SqliteRepository(_databasePath);
         var portefeuilles = reouvertureRepository.GetAllPortefeuilles().ToList();
@@ -29,7 +48,7 @@ public sealed class PortefeuilleRepositoryIntegrationTests : IDisposable
         var portefeuilleRelu = Assert.Single(portefeuilles);
         Assert.NotEqual(0, portefeuilleRelu.PtfId);
         Assert.Equal(portefeuille.PtfNom, portefeuilleRelu.PtfNom);
-        Assert.Equal(portefeuille.PtfSolde, portefeuilleRelu.PtfSolde);
+        Assert.Equal(2450.75m, portefeuilleRelu.PtfSolde);
     }
 
     [Fact]

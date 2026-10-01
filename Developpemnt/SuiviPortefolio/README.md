@@ -6,6 +6,7 @@ Application de bureau Windows pour suivre un portefeuille d'investissement, ses 
 
 - Gestion des portefeuilles et sélection du portefeuille courant.
 - Gestion des comptes associés à un portefeuille.
+- Solde du portefeuille calculé automatiquement à partir des soldes de tous ses comptes.
 - Enregistrement et consultation des transactions financières.
 - Recherche de cotations d'actifs.
 - Calcul du montant total d'une transaction à partir de la quantité et des frais.

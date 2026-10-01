@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SuiviPortefolio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a6e0bd9bcebc2294f9395e3453268c38395c0a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c2324d6ea2449fa4dd3e4233c9f0f9c873c5c971")]
 [assembly: System.Reflection.AssemblyProductAttribute("SuiviPortefolio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SuiviPortefolio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

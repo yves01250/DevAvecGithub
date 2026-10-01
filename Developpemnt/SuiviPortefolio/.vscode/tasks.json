@@ -1,21 +1,35 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Inno Setup: Compile Script",
-      "type": "process",
-      "command": "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe",
-      "args": [
-        "${workspaceFolder}\\Installer\\SuiviPortefolio.iss"
-      ],
-      "presentation": {
-        "reveal": "always",
-        "echo": false
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Inno Setup: Compile Script",
+			"type": "process",
+			"command": "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe",
+			"args": [
+				"${workspaceFolder}\\Installer\\SuiviPortefolio.iss"
+			],
+			"presentation": {
+				"reveal": "always",
+				"echo": false
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"build",
+				".\\SuiviPortefolio.csproj"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		}
+	]
 }

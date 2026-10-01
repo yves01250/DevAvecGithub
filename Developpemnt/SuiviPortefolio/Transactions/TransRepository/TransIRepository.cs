@@ -7,6 +7,6 @@ public interface ITransRepository
     IReadOnlyList<Cotation> GetCotations();
     int EnsureActif(Cotation cotation);
     IReadOnlyList<TransactionFinanciere> GetRecent(int actifId, int count = 5);
-    void Save(TransactionFinanciere transaction, Cotation cotation, decimal? oldQuantity = null);
+    void Save(TransactionFinanciere transaction, Cotation cotation);
     void SaveDividend(decimal amount, DateTime date, int accountId, Cotation cotation);
 }

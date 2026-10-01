@@ -89,7 +89,7 @@ public sealed class TransRepository : ITransRepository
         return id;
     }
 
-    public void Save(TransactionFinanciere item, Cotation cotation, decimal? oldQuantity = null)
+    public void Save(TransactionFinanciere item, Cotation cotation)
     {
         using var connection = OpenConnection();
         using var transaction = connection.BeginTransaction();
@@ -111,26 +111,7 @@ public sealed class TransRepository : ITransRepository
         else
             command.ExecuteNonQuery();
 
-        var signedQuantity = item.TransType == "Vente" ? -item.TransQte : item.TransQte;
-        if (oldQuantity.HasValue)
-            signedQuantity -= item.TransType == "Vente" ? -oldQuantity.Value : oldQuantity.Value;
-
-        using var position = connection.CreateCommand();
-        position.Transaction = transaction;
-        position.CommandText = """
-            INSERT INTO Position (PosActifId,PosQte,PosPrixMoyen,PosCpteId)
-            VALUES ($actif,$qte,$prix,$cpte)
-            ON CONFLICT(PosCpteId,PosActifId) DO UPDATE SET
-              PosQte=PosQte+excluded.PosQte,
-              PosPrixMoyen=CASE WHEN PosQte+excluded.PosQte>0
-                THEN ((PosQte*PosPrixMoyen)+(excluded.PosQte*excluded.PosPrixMoyen))/(PosQte+excluded.PosQte)
-                ELSE 0 END;
-            """;
-        position.Parameters.AddWithValue("$actif", actifId);
-        position.Parameters.AddWithValue("$qte", signedQuantity);
-        position.Parameters.AddWithValue("$prix", item.TransPrix);
-        position.Parameters.AddWithValue("$cpte", item.TransCpteId);
-        position.ExecuteNonQuery();
+        PositionRebuilder.RebuildForAsset(connection, transaction, actifId);
 
         if (ancienneTransaction != null)
         {

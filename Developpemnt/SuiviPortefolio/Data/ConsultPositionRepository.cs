@@ -23,6 +23,7 @@ public class ConsultPositionRepository
 
         await using var connection = new SqliteConnection(_connectionString);
         await connection.OpenAsync();
+        PositionRebuilder.RebuildAll(connection);
 
         await using var command = connection.CreateCommand();
         command.CommandText = @"
@@ -36,21 +37,7 @@ public class ConsultPositionRepository
                 a.ActifDateDernierCours
             FROM Position p
             INNER JOIN Actif a ON a.ActifId = p.PosActifId
-            INNER JOIN (
-                SELECT TransActifId, TransCpteId
-                FROM (
-                    SELECT
-                        TransActifId,
-                        TransCpteId,
-                        ROW_NUMBER() OVER (
-                            PARTITION BY TransActifId
-                            ORDER BY TransDateTransac DESC, TransId DESC
-                        ) AS RowNumber
-                    FROM TransacFin
-                )
-                WHERE RowNumber = 1
-            ) latestTransaction ON latestTransaction.TransActifId = p.PosActifId
-            INNER JOIN Compte c ON c.CpteId = latestTransaction.TransCpteId
+            INNER JOIN Compte c ON c.CpteId = p.PosCpteId
             ORDER BY a.ActifTicker, c.CpteType";
 
         await using var reader = await command.ExecuteReaderAsync(CommandBehavior.Default);

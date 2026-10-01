@@ -76,7 +76,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2">
 
-                <TabItem Header="Portefeuille">
+                <TabItem x:Name="PortefeuilleTab" Header="Portefeuille">
                     <!--<"Contenu de l'onglet 1"/> -->
                     <Grid Margin="10">
                         <StackPanel>

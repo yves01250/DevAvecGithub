@@ -14,7 +14,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140"/>
@@ -35,13 +34,10 @@
         <TextBlock Grid.Row="3" Text="Devise :" VerticalAlignment="Center" Margin="0,0,10,8"/>
         <TextBox x:Name="DevisePtfTextBox" Grid.Row="3" Grid.Column="1" Margin="0,0,0,8"/>
 
-        <TextBlock Grid.Row="4" Text="Solde :" VerticalAlignment="Center" Margin="0,0,10,8"/>
-        <TextBox x:Name="SoldePtfTextBox" Grid.Row="4" Grid.Column="1" Margin="0,0,0,8"/>
-
-        <CheckBox x:Name="DefautCheckBox" Grid.Row="5" Grid.Column="1"
+        <CheckBox x:Name="DefautCheckBox" Grid.Row="4" Grid.Column="1"
                   Content="Portefeuille par défaut" Margin="0,0,0,15"/>
 
-        <StackPanel Grid.Row="6" Grid.ColumnSpan="2"
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2"
                     Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Annuler" IsCancel="True" Width="90" Margin="0,0,8,0"/>
             <Button Content="Enregistrer" IsDefault="True" Width="100"

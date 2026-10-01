@@ -57,8 +57,16 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.Source == sender &&
-                ComptesTab.IsSelected &&
+            if (e.Source != sender)
+                return;
+
+            if (PortefeuilleTab.IsSelected &&
+                DataContext is MainViewModel portefeuilleViewModel)
+            {
+                portefeuilleViewModel.ChargerPortefeuilles();
+            }
+
+            if (ComptesTab.IsSelected &&
                 ComptesView.DataContext is SuiviPortefolio.Comptes.CpteViewModel.CompteViewModel viewModel)
             {
                 viewModel.ChargerComptes();

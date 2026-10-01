@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Windows;
 using SuiviPortefolio.Portefeuille.PortefeuilleModel;
 
@@ -16,7 +15,6 @@ public partial class EditMainWindow : Window
         NomPtfTextBox.Text = portefeuille.PtfNom;
         TypeComboBox.SelectedItem = portefeuille.PtfType;
         DevisePtfTextBox.Text = portefeuille.PtfDevise;
-        SoldePtfTextBox.Text = portefeuille.PtfSolde.ToString("0.00", CultureInfo.CurrentCulture);
         DefautCheckBox.IsChecked = portefeuille.PtfEstDefaut;
     }
 
@@ -36,19 +34,9 @@ public partial class EditMainWindow : Window
             DevisePtfTextBox.Focus();
             return;
         }
-        if (!decimal.TryParse(SoldePtfTextBox.Text, NumberStyles.Number,
-                CultureInfo.CurrentCulture, out var solde))
-        {
-            MessageBox.Show("Le solde doit être un nombre valide.", "Portefeuille",
-                MessageBoxButton.OK, MessageBoxImage.Warning);
-            SoldePtfTextBox.Focus();
-            return;
-        }
-
         Portefeuille.PtfNom = NomPtfTextBox.Text.Trim();
         Portefeuille.PtfType = TypeComboBox.SelectedItem?.ToString() ?? "Général";
         Portefeuille.PtfDevise = DevisePtfTextBox.Text.Trim().ToUpperInvariant();
-        Portefeuille.PtfSolde = solde;
         Portefeuille.PtfEstDefaut = DefautCheckBox.IsChecked == true;
         DialogResult = true;
     }
