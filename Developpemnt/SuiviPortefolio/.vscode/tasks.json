@@ -1,35 +1,90 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Inno Setup: Compile Script",
-			"type": "process",
-			"command": "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe",
-			"args": [
-				"${workspaceFolder}\\Installer\\SuiviPortefolio.iss"
-			],
-			"presentation": {
-				"reveal": "always",
-				"echo": false
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
-		},
-		{
-			"label": "build",
-			"type": "shell",
-			"command": "dotnet",
-			"args": [
-				"build",
-				".\\SuiviPortefolio.csproj"
-			],
-			"isBackground": false,
-			"problemMatcher": [
-				"$msCompile"
-			],
-			"group": "build"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build SuiviPortefolio (Debug)",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}\\SuiviPortefolio.csproj",
+        "--configuration",
+        "Debug"
+      ],
+      "problemMatcher": ["$msCompile"],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "1. Build with dotnet publish",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "publish",
+        "--configuration", "Release",
+        "--output", "${workspaceFolder}/Artifacts/Publish",
+        "--self-contained", "false",
+        "--runtime", "win-x64"
+      ],
+      "problemMatcher": ["$msCompile"],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "silent",
+        "echo": true,
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "2. Generate version.iss from EXE",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/Installer/generate_version.ps1"
+      ],
+      "dependsOn": ["1. Build with dotnet publish"],
+      "presentation": {
+        "reveal": "silent",
+        "echo": true
+      }
+    },
+    {
+      "label": "3. Build Installer with InnoSetup",
+      "type": "process",
+      "command": "\"C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe\"",
+      "args": [
+        "${workspaceFolder}/Installer/SuiviPortefolio.iss"
+      ],
+      "dependsOn": ["2. Generate version.iss from EXE"],
+      "presentation": {
+        "reveal": "always",
+        "echo": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "build",
+      "dependsOn": [
+        "1. Build with dotnet publish",
+        "2. Generate version.iss from EXE",
+        "3. Build Installer with InnoSetup"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
 }

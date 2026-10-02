@@ -55,7 +55,7 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
             IsDarkTheme = !IsDarkTheme;
         }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.Source != sender)
                 return;
@@ -70,6 +70,7 @@ namespace SuiviPortefolio.Portefeuille.PortefeuilleView
                 ComptesView.DataContext is SuiviPortefolio.Comptes.CpteViewModel.CompteViewModel viewModel)
             {
                 viewModel.ChargerComptes();
+                await viewModel.ChargerValorisationsAsync();
             }
         }
 

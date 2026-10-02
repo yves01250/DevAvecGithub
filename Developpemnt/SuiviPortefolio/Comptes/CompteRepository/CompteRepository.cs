@@ -67,6 +67,48 @@ public class CompteRepository : ICompteRepository
         return result;
     }
 
+    public List<CompteExposition> GetExpositions()
+    {
+        var result = new List<CompteExposition>();
+
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+            SELECT
+                c.CpteId,
+                c.CpteNom,
+                c.CpteType,
+                c.CpteDevise,
+                c.CpteSolde,
+                a.ActifDevise,
+                COALESCE(SUM(p.PosQte * a.ActifCoursActuel), 0)
+            FROM Compte c
+            LEFT JOIN Position p ON p.PosCpteId = c.CpteId
+            LEFT JOIN Actif a ON a.ActifId = p.PosActifId
+            GROUP BY c.CpteId, c.CpteNom, c.CpteType, c.CpteDevise, c.CpteSolde, a.ActifDevise
+            ORDER BY c.CpteNom, a.ActifDevise;
+        ";
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            result.Add(new CompteExposition
+            {
+                CpteId = reader.GetInt32(0),
+                CpteNom = reader.GetString(1),
+                CpteType = reader.GetString(2),
+                CpteDevise = reader.GetString(3),
+                CpteSolde = reader.GetDecimal(4),
+                ActifDevise = reader.IsDBNull(5) ? null : reader.GetString(5),
+                ValorisationActifs = reader.GetDecimal(6)
+            });
+        }
+
+        return result;
+    }
+
     public int Add(Compte compte)
     {
         using var connection = new SqliteConnection(_connectionString);

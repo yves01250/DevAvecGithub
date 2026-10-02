@@ -48,6 +48,16 @@ La base `SuiviPortefeuille.sqlite` est créée dans `%LOCALAPPDATA%\SuiviPortefo
 
 Pour utiliser Visual Studio, ouvrez [`SuiviPortefolio.slnx`](./SuiviPortefolio.slnx), sélectionnez le projet `SuiviPortefolio` comme projet de démarrage, puis lancez-le avec `F5`.
 
+## Créer l'installateur Windows
+
+Installez le SDK .NET 10 et Inno Setup 6, puis exécutez depuis PowerShell :
+
+```powershell
+.\Installer\Build-Installer.ps1
+```
+
+Le script publie l'application en version autonome pour Windows x64, met à jour le numéro de version Inno Setup, puis compile `Installer\SuiviPortefolio.iss`. L'installateur est généré dans `Artifacts\Setup`. Ne compilez pas le fichier `.csproj` avec Inno Setup : ISCC doit recevoir le script `.iss`.
+
 ## Tests
 
 La suite de tests couvre notamment :

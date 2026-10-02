@@ -1,5 +1,5 @@
 ﻿SuiviPortefolio
-
+1.0.0.0
 
 winexe
 C#
@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP1_0_OR_GREATER;NETCOREAPP1_1_OR_GREATER;NETCOREAPP2_0_OR_GREATER;NETCOREAPP2_1_OR_GREATER;NETCOREAPP2_2_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\App.xaml
-11-272051196
+121012319412
 
-34-466502714
+44-391274796
 213-1379810051
-Comptes\CompteView\CompteEditWindow.xaml;Comptes\CompteView\CompteView.xaml;Consultations\ConsultationsView\AnalysisWindow.xaml;Consultations\ConsultationsView\ConsultationsView.xaml;Portefeuille\PortefeuilleView\EditMainWindow.xaml;Portefeuille\PortefeuilleView\MainWindow.xaml;Ressources\DarkTheme.xaml;Ressources\Styles.xaml;Ressources\Theme.xaml;Transactions\TransView\TransEditWindow.xaml;Transactions\TransView\TransView.xaml;
+Comptes\CompteView\CompteEditWindow.xaml;Comptes\CompteView\CompteView.xaml;Consultations\ConsultationsView\AnalysisWindow.xaml;Consultations\ConsultationsView\ConsultationsView.xaml;Portefeuille\PortefeuilleView\EditMainWindow.xaml;Portefeuille\PortefeuilleView\MainWindow.xaml;Ressources\DarkTheme.xaml;Ressources\Styles.xaml;Ressources\Theme.xaml;Transactions\MouvementView\MouvementView.xaml;Transactions\TransView\TransEditWindow.xaml;Transactions\TransView\TransView.xaml;
 
-False
+True
 

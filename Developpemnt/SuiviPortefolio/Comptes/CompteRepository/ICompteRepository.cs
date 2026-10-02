@@ -5,6 +5,7 @@ namespace SuiviPortefolio.Comptes.CompteRepository;
 public interface ICompteRepository
 {
     List<Compte> GetAll();
+    List<CompteExposition> GetExpositions();
     int Add(Compte compte);
     void Update(Compte compte);
     void Delete(int id);

@@ -14,9 +14,5 @@ namespace SuiviPortefolio.Comptes.CompteView
 
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
     }
 }
