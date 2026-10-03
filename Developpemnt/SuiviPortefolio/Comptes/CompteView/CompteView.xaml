@@ -57,7 +57,29 @@
                   RowStyle="{DynamicResource DataGridThemeStyle}"
                   HeadersVisibility="Column"
                   GridLinesVisibility="Horizontal"
-                  Margin="0,0,0,8">
+                  Margin="0,0,0,8"
+                    BorderThickness="0"
+                    Background="White"
+                    HorizontalGridLinesBrush="LightBlue"
+                    VerticalGridLinesBrush="LightBlue"> 
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background"
+                                Value="{DynamicResource DataGridHeaderBackgroundBrush}" />
+
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource DataGridHeaderForegroundBrush}" />
+
+                        <Setter Property="BorderBrush"
+                                Value="{DynamicResource DataGridHeaderBorderBrush}" />
+
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Height" Value="32" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Compte" Binding="{Binding CpteNom}" Width="2*"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding CpteType}" Width="*"/>

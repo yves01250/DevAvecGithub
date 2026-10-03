@@ -1,3 +1,58 @@
 {
-     "innosetup.pathToIscc": "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe"
+    "innosetup.pathToIscc": "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe",
+    
+    "better-todo-tree.general.tags": [
+        "TODO",
+        "FIXME",
+        "XXX",
+        "HACK",
+        "NOTE",
+        "BUG",
+        "OPTIMIZE",
+        "REFACTOR",
+        "TEST",
+        "AFFAIRE",
+        "AMELIORATION"
+    ],
+    "better-todo-tree.general.customTags": [
+        {
+            "tag": "AFFAIRE",
+            "color": "#FF5733",
+            "strikethrough": false,
+            "underline": true
+        },
+        {
+            "tag": "AMELIORATION",
+            "color": "#33FF57",
+            "strikethrough": false
+        }
+    ],
+    "better-todo-tree.general.highlightDiscoveryScope": "workspace",
+    "better-todo-tree.general.tagExpression": "(?:TODO|FIXME|XXX|HACK|NOTE|BUG|OPTIMIZE|REFACTOR|TEST|AFFAIRE|AMELIORATION)",
+    "better-todo-tree.general.tagRegex": "(^|\\s|//|#|<!--|\\*)\\s*\\b(TODO|FIXME|XXX|HACK|NOTE|BUG|OPTIMIZE|REFACTOR|TEST|AFFAIRE|AMELIORATION)\\b",
+    "better-todo-tree.general.include": [
+        "**/*.cs",
+        "**/*.xaml",
+        "**/*.md",
+        "**/*.txt"
+    ],
+    "better-todo-tree.general.markdownSupport": true,
+    "better-todo-tree.general.caseSensitiveTags": [],
+    "better-todo-tree.general.exclude": [
+        "**/bin/**",
+        "**/obj/**",
+        "**/.git/**",
+        "**/Artifacts/**",
+        "**/Installer/**"
+    ],
+    "better-todo-tree.general.ignoreFilesPattern": "*.min.*|*.dll|*.exe|*.pdb|*.cache",
+    "better-todo-tree.tree.groupByTag": true,
+    "better-todo-tree.tree.showTagName": true,
+    "better-todo-tree.tree.showFileName": true,
+    "better-todo-tree.tree.showLineNumber": true,
+    "better-todo-tree.tree.showFilePath": true,
+    "better-todo-tree.tree.showTreeInExplorer": true,
+    "better-todo-tree.tree.sortAlphabetically": true,
+    "better-todo-tree.tree.caseSensitive": false,
+    "better-todo-tree.tree.showBadges": true
 }
