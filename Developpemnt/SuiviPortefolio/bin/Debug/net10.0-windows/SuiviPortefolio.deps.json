@@ -8,12 +8,21 @@
     ".NETCoreApp,Version=v10.0": {
       "SuiviPortefolio/1.0.0": {
         "dependencies": {
+          "CommunityToolkit.Mvvm": "8.4.2",
           "Microsoft.Data.Sqlite": "10.0.12",
           "OxyPlot.Core": "2014.1.546",
           "OxyPlot.Wpf": "2014.1.546"
         },
         "runtime": {
           "SuiviPortefolio.dll": {}
+        }
+      },
+      "CommunityToolkit.Mvvm/8.4.2": {
+        "runtime": {
+          "lib/net8.0/CommunityToolkit.Mvvm.dll": {
+            "assemblyVersion": "8.4.0.0",
+            "fileVersion": "8.4.2.1"
+          }
         }
       },
       "Microsoft.Data.Sqlite/10.0.12": {
@@ -209,6 +218,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "CommunityToolkit.Mvvm/8.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WadCzGEc2U+3e20avRLng4qNtt4zoOGWrdUISqJWrHe3/FSnrYjuM5Sb4yQb09LhkBXrrI4Zt3dLKgRMbItsrg==",
+      "path": "communitytoolkit.mvvm/8.4.2",
+      "hashPath": "communitytoolkit.mvvm.8.4.2.nupkg.sha512"
     },
     "Microsoft.Data.Sqlite/10.0.12": {
       "type": "package",

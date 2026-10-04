@@ -86,3 +86,4 @@ C:\Users\yves_\.copilot\session-state\86226f22-0960-4209-84f9-bdfc7a503984\files
 C:\Users\yves_\.copilot\session-state\86226f22-0960-4209-84f9-bdfc7a503984\files\build-check\SuiviPortefolio.runtimeconfig.json
 C:\Users\yves_\.copilot\session-state\86226f22-0960-4209-84f9-bdfc7a503984\files\build-check\SuiviPortefolio.dll
 C:\Users\yves_\.copilot\session-state\86226f22-0960-4209-84f9-bdfc7a503984\files\build-check\SuiviPortefolio.pdb
+C:\Users\yves_\MesDocuments\Github\DevAvecGithub\Developpemnt\SuiviPortefolio\bin\Debug\net10.0-windows\CommunityToolkit.Mvvm.dll

@@ -93,7 +93,7 @@
 
 
         <Button Grid.Row="2" Content="Analyser"
-            Command="{Binding AnalyzeCommand}"
+            Command="{Binding AnalyzeSelectedCommand}"
             HorizontalAlignment="Right"
             Margin="0,8,0,0"/>
 

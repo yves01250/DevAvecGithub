@@ -1,107 +1,60 @@
 using SuiviPortefolio.Portefeuille.PortefeuilleModel;
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using SuiviPortefolio.Data;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using SuiviPortefolio.Data;
 
 namespace SuiviPortefolio.Portefeuille.PortefeuilleViewModel;
 
-public class MainViewModel : INotifyPropertyChanged
+[ObservableObject]
+public partial class MainViewModel
 {
-
     private readonly SqliteRepository _database;
+
+    public ObservableCollection<monPortefeuille> ListePortefeuilles { get; } = new();
+
+    [ObservableProperty]
+    private monPortefeuille? _portefeuilleSelectionne;
+
+    [ObservableProperty]
     private monPortefeuille? _portefeuille;
-
-
-    public MainViewModel()
-    {
-
-        _database = new SqliteRepository(DatabaseLocation.DatabasePath);
-
-        AjouterPortefeuilleCommand = new RelayCommand(_ => AjouterPortefeuille());
-        ModifierPortefeuilleCommand = new RelayCommand(_ => ModifierPortefeuille(), _ => PortefeuilleSelectionne != null);
-        SupprimerPortefeuilleCommand = new RelayCommand(_ => SupprimerPortefeuille(), _ => PortefeuilleSelectionne != null);
-        DefinirPortefeuilleDefautCommand = new RelayCommand(_ => DefinirPortefeuilleDefaut(), _ => PortefeuilleSelectionne != null);
-        ChargerPortefeuilles();
-    }
-            public ObservableCollection<monPortefeuille> ListePortefeuilles { get; } = new();
-
-        private monPortefeuille? _portefeuilleSelectionne;
-
-        public monPortefeuille? PortefeuilleSelectionne
-        {
-
-            get => _portefeuilleSelectionne;
-            set
-            {
-                if (_portefeuilleSelectionne != value)
-                {
-                    _portefeuilleSelectionne = value;
-                    OnPropertyChanged();
-                    // Quand on change de sélection, on en fait le portefeuille courant
-                    Portefeuille = value;
-                    ((RelayCommand)ModifierPortefeuilleCommand).RaiseCanExecuteChanged();
-                    ((RelayCommand)SupprimerPortefeuilleCommand).RaiseCanExecuteChanged();
-                    ((RelayCommand)DefinirPortefeuilleDefautCommand).RaiseCanExecuteChanged();
-                }
-            }
-        }
-
-        
-
-        public void ChargerPortefeuilles()
-        {
-            // À implémenter dans SqliteRepository : IEnumerable<monPortefeuille> GetAll()
-            var tous = _database.GetAllPortefeuilles(); 
-            ListePortefeuilles.Clear();
-            foreach (var p in tous)
-                ListePortefeuilles.Add(p);
-
-            // Optionnel : choisir un “défaut” (ex. le premier, ou celui avec un flag)
-            PortefeuilleSelectionne = ListePortefeuilles.FirstOrDefault(p => p.PtfEstDefaut)
-                ?? ListePortefeuilles.FirstOrDefault();
-        }
-    public monPortefeuille? Portefeuille
-    {
-        get
-        {
-            return _portefeuille;
-        }
-        set
-        {
-            if (_portefeuille != value)
-            {
-                _portefeuille = value;
-                OnPropertyChanged();
-            }
-        }
-    }
 
     public decimal Solde
     {
-                get => Portefeuille?.PtfSolde ?? 0m;
+        get => Portefeuille?.PtfSolde ?? 0m;
         set
         {
             if (Portefeuille != null && Portefeuille.PtfSolde != value)
             {
                 Portefeuille.PtfSolde = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Solde)); // ✅ OnPropertyChanged est fourni par ObservableObject
             }
         }
     }
-    public ICommand AjouterPortefeuilleCommand { get; }
-    public ICommand ModifierPortefeuilleCommand { get; }
-    public ICommand SupprimerPortefeuilleCommand { get; }
-    public ICommand DefinirPortefeuilleDefautCommand { get; }
 
+    partial void OnPortefeuilleSelectionneChanged(monPortefeuille? value)
+    {
+        Portefeuille = value;
+        ModifierPortefeuilleCommand.NotifyCanExecuteChanged();
+        SupprimerPortefeuilleCommand.NotifyCanExecuteChanged();
+        DefinirPortefeuilleDefautCommand.NotifyCanExecuteChanged();
+    }
+
+    public MainViewModel()
+    {
+        _database = new SqliteRepository(DatabaseLocation.DatabasePath);
+        ChargerPortefeuilles();
+    }
+
+    [RelayCommand]
     private void AjouterPortefeuille()
     {
         var portefeuille = new monPortefeuille();
-        var dialog = new PortefeuilleView.EditMainWindow(portefeuille, true) { Owner = Application.Current?.MainWindow };
+        var dialog = new PortefeuilleView.EditMainWindow(portefeuille, true)
+        { Owner = Application.Current?.MainWindow };
         if (dialog.ShowDialog() != true) return;
         var id = _database.Ajouter(portefeuille);
         if (portefeuille.PtfEstDefaut) _database.SetPortefeuilleDefaut(id);
@@ -109,11 +62,13 @@ public class MainViewModel : INotifyPropertyChanged
         PortefeuilleSelectionne = ListePortefeuilles.FirstOrDefault(p => p.PtfId == id);
     }
 
+    [RelayCommand(CanExecute = nameof(CanModifyPortefeuille))]
     private void ModifierPortefeuille()
     {
         if (PortefeuilleSelectionne == null) return;
         var portefeuille = Copier(PortefeuilleSelectionne);
-        var dialog = new PortefeuilleView.EditMainWindow(portefeuille, false) { Owner = Application.Current?.MainWindow };
+        var dialog = new PortefeuilleView.EditMainWindow(portefeuille, false)
+        { Owner = Application.Current?.MainWindow };
         if (dialog.ShowDialog() != true) return;
         _database.Modifier(portefeuille);
         if (portefeuille.PtfEstDefaut) _database.SetPortefeuilleDefaut(portefeuille.PtfId);
@@ -121,6 +76,9 @@ public class MainViewModel : INotifyPropertyChanged
         PortefeuilleSelectionne = ListePortefeuilles.FirstOrDefault(p => p.PtfId == portefeuille.PtfId);
     }
 
+    private bool CanModifyPortefeuille() => PortefeuilleSelectionne != null;
+
+    [RelayCommand(CanExecute = nameof(CanSupprimerPortefeuille))]
     private void SupprimerPortefeuille()
     {
         if (PortefeuilleSelectionne == null) return;
@@ -130,6 +88,9 @@ public class MainViewModel : INotifyPropertyChanged
         ChargerPortefeuilles();
     }
 
+    private bool CanSupprimerPortefeuille() => PortefeuilleSelectionne != null;
+
+    [RelayCommand(CanExecute = nameof(CanDefinirPortefeuilleDefaut))]
     private void DefinirPortefeuilleDefaut()
     {
         if (PortefeuilleSelectionne == null) return;
@@ -137,30 +98,22 @@ public class MainViewModel : INotifyPropertyChanged
         ChargerPortefeuilles();
     }
 
+    private bool CanDefinirPortefeuilleDefaut() => PortefeuilleSelectionne != null;
+
+    public void ChargerPortefeuilles()
+    {
+        var tous = _database.GetAllPortefeuilles();
+        ListePortefeuilles.Clear();
+        foreach (var p in tous)
+            ListePortefeuilles.Add(p);
+
+        PortefeuilleSelectionne = ListePortefeuilles.FirstOrDefault(p => p.PtfEstDefaut)
+            ?? ListePortefeuilles.FirstOrDefault();
+    }
+
     private static monPortefeuille Copier(monPortefeuille p) => new()
     {
         PtfId = p.PtfId, PtfNom = p.PtfNom, PtfType = p.PtfType, PtfDevise = p.PtfDevise,
         PtfSolde = p.PtfSolde, PtfEstDefaut = p.PtfEstDefaut
     };
-
-    private sealed class RelayCommand : ICommand
-    {
-        private readonly Action<object?> _execute;
-        private readonly Predicate<object?>? _canExecute;
-        public RelayCommand(Action<object?> execute, Predicate<object?>? canExecute = null)
-            => (_execute, _canExecute) = (execute, canExecute);
-        public bool CanExecute(object? parameter) => _canExecute?.Invoke(parameter) ?? true;
-        public void Execute(object? parameter) => _execute(parameter);
-        public event EventHandler? CanExecuteChanged;
-        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-    }
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected void OnPropertyChanged(
-        [CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(
-            this,
-            new PropertyChangedEventArgs(propertyName));
-    }    
 }

@@ -1,112 +1,72 @@
-
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
-using SuiviPortefolio.Data;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using SuiviPortefolio.Consultations.ConsultationsView;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-using System.Collections.Generic;
+using SuiviPortefolio.Consultations.ConsultationsModel;
+using SuiviPortefolio.Consultations.ConsultationsView;
+using SuiviPortefolio.Data;
 
 namespace SuiviPortefolio.Consultations.ConsultationsViewModel;
-public class PortfolioViewModel : INotifyPropertyChanged
+
+[ObservableObject]
+public partial class PortfolioViewModel
 {
     private readonly ConsultPositionRepository _repository;
     private readonly CotationFetcher _cotationFetcher = new();
-    private readonly ObservableCollection<PositionViewModel> _allPositions;
-    private readonly RelayCommand _analyzeCommand;
-    private readonly RelayCommand _refreshPricesCommand;
-    private readonly RelayCommand _toggleAllSelectionCommand;
-
-    private bool _isLoading;
+    private readonly ObservableCollection<PositionViewModel> _allPositions = new();
     private bool _isUpdatingSelection;
 
-    private string _selectedPeriod = "1y";
+    // ✅ Propriétés avec [ObservableProperty]
+    [ObservableProperty]
+    private bool _isLoading;
+
+    [ObservableProperty]
     private bool _isChartLoading;
+
+    [ObservableProperty]
     private string _summaryText = "Aucune donnée disponible pour les Tickers sélectionnés.";
 
-    public PlotModel ChartModel { get; }
-    public string SummaryText
+    [ObservableProperty]
+    private string _selectedPeriod = "1y";
+
+    // ✅ ChartModel reste inchangé (pas besoin de notification)
+    public PlotModel ChartModel { get; } = new()
     {
-        get => _summaryText;
-        private set
-        {
-            if (_summaryText == value) return;
-            _summaryText = value;
-            OnPropertyChanged();
-        }
-    }
+        Title = "Évolution des positions sélectionnées",
+        LegendPosition = LegendPosition.RightTop,
+        LegendPlacement = LegendPlacement.Outside,
+        LegendMaxWidth = double.PositiveInfinity,
+        LegendFontSize = 10,
+        LegendSymbolLength = 10
+    };
 
-    public IReadOnlyDictionary<string, string> Periods { get; } =
-        new Dictionary<string, string>
-        {
-            ["1 mois"] = "1mo",
-            ["3 mois"] = "3mo",
-            ["6 mois"] = "6mo",
-            ["1 an"] = "1y",
-            ["2 ans"] = "2y",
-            ["5 ans"] = "5y"
-        };
-
-    public string SelectedPeriod
+    public IReadOnlyDictionary<string, string> Periods { get; } = new Dictionary<string, string>
     {
-        get => _selectedPeriod;
-        set
-        {
-            if (_selectedPeriod == value) return;
-            _selectedPeriod = value;
-            OnPropertyChanged();
-            _ = RefreshChartAsync();
-        }
-    }
+        ["1 mois"] = "1mo",
+        ["3 mois"] = "3mo",
+        ["6 mois"] = "6mo",
+        ["1 an"] = "1y",
+        ["2 ans"] = "2y",
+        ["5 ans"] = "5y"
+    };
 
-    public bool IsChartLoading
-    {
-        get => _isChartLoading;
-        private set { _isChartLoading = value; OnPropertyChanged(); }
-    }
+    // ✅ ActivePositions devient une collection stockée (pas recréée à chaque accès)
+    public ObservableCollection<PositionViewModel> ActivePositions { get; } = new();
 
-    public PortfolioViewModel(ConsultPositionRepository repository)
-    {
-        _repository = repository;
-        _allPositions = new ObservableCollection<PositionViewModel>();
-
-        ChartModel = new PlotModel
-        {
-            Title = "Évolution des positions sélectionnées",
-            LegendPosition = LegendPosition.RightTop,
-            LegendPlacement = LegendPlacement.Outside,
-            // LegendBackground = OxyColor.FromAColor(220, OxyColors.White),
-            //LegendBorder = OxyColors.DimGray,
-            // LegendBorderThickness = 1,
-            LegendMaxWidth = double.PositiveInfinity,
-            LegendFontSize = 10,
-            LegendSymbolLength = 10
-        };
-
-    _analyzeCommand = new RelayCommand(async _ => await AnalyzeSelectedAsync(), _ => CanAnalyze);
-    _refreshPricesCommand = new RelayCommand(async _ => await RefreshPricesAsync(), _ => !IsLoading);
-    _toggleAllSelectionCommand = new RelayCommand(async _ => await ToggleAllSelectionAsync());
-
-    LoadCommand = new RelayCommand(async _ => await LoadAsync(), _ => !IsLoading);
-    }
-
-    public ICommand LoadCommand { get; }
-    public ICommand AnalyzeCommand => _analyzeCommand;
-    public ICommand RefreshPricesCommand => _refreshPricesCommand;
-    public ICommand ToggleAllSelectionCommand => _toggleAllSelectionCommand;
-
+    // ✅ Propriété calculée (pas de changement)
     public bool? IsAllSelected
     {
         get
         {
-            var activePositions = _allPositions.Where(position => position.Quantity > 0).ToList();
+            var activePositions = ActivePositions.ToList();
             if (activePositions.Count == 0 || activePositions.All(position => !position.IsSelected))
                 return false;
 
@@ -114,80 +74,36 @@ public class PortfolioViewModel : INotifyPropertyChanged
         }
     }
 
-    public bool IsLoading
-    {
-        get => _isLoading;
-        private set { _isLoading = value; OnPropertyChanged(); }
-    }
-
-    // Collection filtrée : uniquement les positions avec Quantity > 0
-    public ObservableCollection<PositionViewModel> ActivePositions =>
-        new ObservableCollection<PositionViewModel>(
-            _allPositions.Where(p => p.Quantity > 0)
-        );
-
+    // ✅ Méthodes pour CanExecute
     private bool CanAnalyze => _allPositions.Any(p => p.IsSelected && p.Quantity > 0);
+    private bool CanRefreshPrices => !IsLoading;
 
-    public async Task LoadAsync()
+    // ✅ Constructeur simplifié
+    public PortfolioViewModel(ConsultPositionRepository repository)
     {
-        if (IsLoading) return;
-        IsLoading = true;
-        OnPropertyChanged(nameof(ActivePositions)); // pour notifier si nécessaire
-
-        try
-        {
-            var positions = await _repository.GetAllAsync();
-            _allPositions.Clear();
-            foreach (var p in positions)
-            {
-                var position = new PositionViewModel(p);
-                position.PropertyChanged += Position_PropertyChanged;
-                _allPositions.Add(position);
-            }
-
-            OnPropertyChanged(nameof(ActivePositions));
-        }
-        finally
-        {
-            IsLoading = false;
-        }
-
-        await RefreshPricesAsync();
+        _repository = repository;
+        UpdateActivePositions();
     }
 
-    private async void Position_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    // ✅ Gestion du changement de SelectedPeriod
+    partial void OnSelectedPeriodChanged(string value)
     {
-        if (e.PropertyName == nameof(PositionViewModel.IsSelected))
-        {
-            if (_isUpdatingSelection)
-                return;
+        _ = RefreshChartAsync();
+    }
 
-            OnPropertyChanged(nameof(IsAllSelected));
-            _analyzeCommand.RaiseCanExecuteChanged();
-            await RefreshChartAsync();
+    // ✅ Méthode pour mettre à jour ActivePositions
+    private void UpdateActivePositions()
+    {
+        ActivePositions.Clear();
+        foreach (var p in _allPositions.Where(p => p.Quantity > 0))
+        {
+            ActivePositions.Add(p);
         }
     }
 
-    private async Task ToggleAllSelectionAsync()
-    {
-        var selectAll = IsAllSelected != true;
-        _isUpdatingSelection = true;
-        try
-        {
-            foreach (var position in _allPositions.Where(position => position.Quantity > 0))
-                position.IsSelected = selectAll;
-        }
-        finally
-        {
-            _isUpdatingSelection = false;
-        }
-
-        OnPropertyChanged(nameof(IsAllSelected));
-        _analyzeCommand.RaiseCanExecuteChanged();
-        await RefreshChartAsync();
-    }
-
-    public async Task RefreshPricesAsync()
+    // ✅ Commandes avec [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanRefreshPrices))]
+    private async Task RefreshPricesAsync()
     {
         if (IsLoading) return;
         IsLoading = true;
@@ -205,13 +121,77 @@ public class PortfolioViewModel : INotifyPropertyChanged
                 await _repository.UpdatePriceAsync(vm.Id, price, snapshot.Date);
             }
 
-            OnPropertyChanged(nameof(ActivePositions));
+            UpdateActivePositions();
             await RefreshChartAsync();
         }
         finally
         {
             IsLoading = false;
         }
+    }
+
+    [RelayCommand(CanExecute = nameof(CanAnalyze))]
+    private async Task AnalyzeSelectedAsync()
+    {
+        var selected = _allPositions
+            .Where(p => p.IsSelected && p.Quantity > 0)
+            .Select(p => p.Model)
+            .ToList();
+
+        if (selected.Count == 0) return;
+
+        var window = new AnalysisWindow(selected)
+        {
+            Owner = Application.Current.MainWindow
+        };
+        window.ShowDialog();
+    }
+
+    [RelayCommand]
+    private async Task ToggleAllSelectionAsync()
+    {
+        var selectAll = IsAllSelected != true;
+        _isUpdatingSelection = true;
+        try
+        {
+            foreach (var position in _allPositions.Where(position => position.Quantity > 0))
+                position.IsSelected = selectAll;
+        }
+        finally
+        {
+            _isUpdatingSelection = false;
+        }
+
+        OnPropertyChanged(nameof(IsAllSelected));
+        AnalyzeSelectedCommand.NotifyCanExecuteChanged();
+        await RefreshChartAsync();
+    }
+
+    [RelayCommand(CanExecute = nameof(CanRefreshPrices))] // ✅ Même condition que RefreshPrices
+    public async Task LoadAsync()
+    {
+        if (IsLoading) return;
+        IsLoading = true;
+
+        try
+        {
+            var positions = await _repository.GetAllAsync();
+            _allPositions.Clear();
+            foreach (var p in positions)
+            {
+                var position = new PositionViewModel(p);
+                position.PropertyChanged += Position_PropertyChanged;
+                _allPositions.Add(position);
+            }
+
+            UpdateActivePositions();
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+
+        await RefreshPricesAsync();
     }
 
     private async Task RefreshChartAsync()
@@ -229,6 +209,7 @@ public class PortfolioViewModel : INotifyPropertyChanged
                 (position, history: await _cotationFetcher.FetchHistoryAsync(
                     position.Ticker, SelectedPeriod))));
 
+            // ✅ Calcul des résumés
             var summaries = histories
                 .Where(item => item.history.Count > 0)
                 .GroupBy(item => item.position.Ticker)
@@ -249,7 +230,7 @@ public class PortfolioViewModel : INotifyPropertyChanged
                         Points = points.Count
                     };
                 })
-                .OrderByDescending(summary => summary.Performance) // Tri sur la performance            
+                .OrderByDescending(summary => summary.Performance)
                 .Select(summary =>
                     $"{summary.Ticker}  " +
                     $"Performance : {summary.Performance:+0.00;-0.00;0.00}%  " +
@@ -261,21 +242,21 @@ public class PortfolioViewModel : INotifyPropertyChanged
                 ? "Aucune donnée disponible pour les Tickers sélectionnés."
                 : string.Join("\n\n", summaries);
 
+            // ✅ Configuration du graphique
             ChartModel.Series.Clear();
             ChartModel.Axes.Clear();
-            
-            // Ajustement dynamique du pas des dates en fonction de la période sélectionnée
+
             var majorStep = SelectedPeriod switch
             {
-                "1mo"  => 7,    // 1 semaine
-                "3mo"  => 15,   // 15 jours
-                "6mo"  => 30,   // 1 mois
-                "1y"   => 30,   // 1 mois
-                "2y"   => 60,   // 2 mois
-                "5y"   => 180,  // 6 mois
-                _      => 30     // Défaut
+                "1mo"  => 7,
+                "3mo"  => 15,
+                "6mo"  => 30,
+                "1y"   => 30,
+                "2y"   => 60,
+                "5y"   => 180,
+                _      => 30
             };
-            
+
             ChartModel.Axes.Add(new DateTimeAxis
             {
                 Position = AxisPosition.Bottom,
@@ -291,29 +272,28 @@ public class PortfolioViewModel : INotifyPropertyChanged
             });
 
             foreach (var (position, history) in histories)
-{
-    if (!history.Any()) continue;  // Ignore les séries vides
+            {
+                if (!history.Any()) continue;
 
-    var series = new LineSeries
-    {
-        Title = position.Ticker + "--", // le "--" permet d'avoir le texte complet de la légende visible               
-        StrokeThickness = 2,
-        TrackerFormatString = "{0}\nDate : {2:dd/MM/yyyy}\nValeur : {4:0.##}"
-    };
+                var series = new LineSeries
+                {
+                    Title = position.Ticker + "--",
+                    StrokeThickness = 2,
+                    TrackerFormatString = "{0}\nDate : {2:dd/MM/yyyy}\nValeur : {4:0.##}"
+                };
 
-    var firstClose = history.First().Close;  // Valeur de référence (100%)
-    foreach (var point in history)
-    {
-        // Normalisation : (Close / Close_initial) * 100
-        var normalizedValue = (point.Close / firstClose) * 100;
-        series.Points.Add(new DataPoint(
-            DateTimeAxis.ToDouble(point.Date),
-            normalizedValue));
-    }
+                var firstClose = history.First().Close;
+                foreach (var point in history)
+                {
+                    var normalizedValue = (point.Close / firstClose) * 100;
+                    series.Points.Add(new DataPoint(
+                        DateTimeAxis.ToDouble(point.Date),
+                        normalizedValue));
+                }
 
-    if (series.Points.Count > 0)
-        ChartModel.Series.Add(series);
-}
+                if (series.Points.Count > 0)
+                    ChartModel.Series.Add(series);
+            }
 
             ChartModel.InvalidatePlot(true);
         }
@@ -323,23 +303,16 @@ public class PortfolioViewModel : INotifyPropertyChanged
         }
     }
 
-    private async Task AnalyzeSelectedAsync()
+    private async void Position_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        var selected = _allPositions
-            .Where(p => p.IsSelected && p.Quantity > 0)
-            .Select(p => p.Model)
-            .ToList();
-
-        if (selected.Count == 0) return;
-
-        var window = new AnalysisWindow(selected)
+        if (e.PropertyName == nameof(PositionViewModel.IsSelected))
         {
-            Owner = Application.Current.MainWindow
-        };
-        window.ShowDialog();
-    }
+            if (_isUpdatingSelection)
+                return;
 
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string name = null) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            OnPropertyChanged(nameof(IsAllSelected));
+            AnalyzeSelectedCommand.NotifyCanExecuteChanged();
+            await RefreshChartAsync();
+        }
+    }
 }

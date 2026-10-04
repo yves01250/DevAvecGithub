@@ -1,0 +1,299 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638\cocoasubrtf830
+{\fonttbl\f0\fnil\fcharset0 Arial;\f1\fnil\fcharset0 Arial Bold;\f2\fnil\fcharset0 Courier New;}
+{\colortbl ;\red255\green255\blue255;\red0\green0\blue0;\red255\green0\blue0;\red0\green0\blue255;\red0\green128\blue0;\red255\green165\blue0;}
+{\*\expandedcolortbl ;\csgray\c0;\csrgb\c100000\c0\c0;\csrgb\c0\c0\c100000;\csrgb\c0\c0\c100000;\csrgb\c0\c50196\c0;\csrgb\c100000\c64706\c0;}
+\paperw11906\paperh16838\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+
+\fs36\cf0 \uc0\u8236 Pr\'e9conisations pour l'adaptation de SuiviPortefolio aux \'e9crans de faible r\'e9solution\par
+\fs24\cf0 \uc0\u8211 Application concern\'e9e: SuiviPortefolio (WPF, .NET 10)\par
+\uc0\u8211 Objectif: Rendre l'application utilisable sur des \'e9crans de faible d\'e9finition (ex: 1024\u215 768, 1280\u215 720, \'e9crans tactiles)\par
+\uc0\u8211 Auteur: Assistant Mistral Vibe\par
+\uc0\u8211 Date: 2026-10-02\par
+\par
+{\ul \fs24\cf0 \uc0\u8211 \uc0\u8203 Table des matik\'e8res\par
+}
+\par
+\fs24\cf0 \uc0\u8226 1. \uc0\u8594 Probl\'e8mes identifi\'e9s\par
+\uc0\u8226 2. \uc0\u8594 Solutions d\'e9taill\'e9es\par
+\uc0\u8226 3. \uc0\u8594 Checklist des modifications\par
+\uc0\u8226 4. \uc0\u8594 Exemple complet: MainWindow.xaml optimis\'e9\par
+\uc0\u8226 5. \uc0\u8594 Outils pour tester\par
+\uc0\u8226 6. \uc0\u8594 Points d'attention suppl\'e9mentaires\par
+\uc0\u8226 7. \uc0\u8594 R\'e9sultat attendu\par
+\uc0\u8226 8. \uc0\u8594 Prochaines \'e9tapes\par
+\par
+\par
+{\b\fs32\cf0 \uc0\u8211 Probl\'e8mes identifi\'e9s\par
+}\fs24\cf0 \uc0\u8211\par
+Votre application WPF SuiviPortefolio pr\'e9sente plusieurs \'e9l\'e9ments non adapt\'e9s aux \'e9crans de faible r\'e9solution. Voici les probl\'e8mes majeurs:\par
+\par
+{\rtf1\ansi\trowd\trgaph108\trleft-108\trbrdrt\brdrs\brdrw15\brdrcf0 \trbrdrl\brdrs\brdrw15\brdrcf0 \trbrdrb\brdrs\brdrw15\brdrcf0 \trbrdrr\brdrs\brdrw15\brdrcf0 \trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx2880
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx5760
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx8640
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx11520
+\pard\intbl\itap0 \fs20 \cell \cell \cell \cell \row
+\pard\intbl\itap0 \fs20 \b Height=\"800\" Width=\"1000\" dans MainWindow \cell Fen\'eatre trop grande pour les \'e9crans \u2264 1024\u215768 \cell Portefeuille/PortefeuilleView/MainWindow.xaml:11 \cell \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 \cell \row
+\pard\intbl\itap0 \fs20 Absence de MinWidth/MinHeight \cell Risque de fen\'eatre illisible si redimensionn\'e9e \cell MainWindow.xaml \cell \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 \cell \row
+\pard\intbl\itap0 \fs20 FontSize fixes (13, 14, 20) \cell Texte trop petit/grand selon la r\'e9solution \cell Ressources/Styles.xaml \cell \'e2\'b5\'e2\'b5\'e2\'b5 \cell \row
+\pard\intbl\itap0 \fs20 Largeurs de boutons fixes (Width=\"220\") \cell Boutons coup\'e9s ou mal align\'e9s \cell MainWindow.xaml (lignes 42, 46, 50, etc.) \cell \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 \cell \row
+\pard\intbl\itap0 \fs20 Pas de ScrollViewer \cell Contenu d\'e9passant non accessible \cell Toutes les vues \cell \'e2\'b5\'e2\'b5\'e2\'b5 \cell \row
+\pard\intbl\itap0 \fs20 Pas de DpiAwareness \cell Interface floue sur \'e9crans haute DPI \cell App.xaml.cs \cell \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 \cell \row
+\pard\intbl\itap0 \fs20 Margin et Padding fixes \cell D\'e9s\'e9quilibre sur petits \'e9crans \cell Styles.xaml \cell \'e2\'b5\'e2\'b5 \cell \row
+}
+\par
+\par
+
+{\b\fs32\cf0 \uc0\u8211 Solutions d\'e9taill\'e9es\par
+}\fs24\cf0 \uc0\u8211\par
+
+{\b 1. Rendre la fen\'eatre principale adaptative}\par
+\fs20\cf0 \uc0\u8211 Fichier: Portefeuille/PortefeuilleView/MainWindow.xaml\par
+\uc0\u8211 Modification: Remplacer la d\'e9claration de la fen\'eatre\par
+\par
+\fs18\cf2 \uc0\u8220 Code \'e0 \'e9viter: taille fixe\par
+\fs18\cf0 Height=\"800\" Width=\"1000\"\par
+\par
+\fs18\cf2 \uc0\u8220 Solution: fen\'eatre adaptative\par
+\fs18\cf0 WindowState=\"Maximized\" MinWidth=\"800\" MinHeight=\"600\"\par
+WindowStartupLocation=\"CenterScreen\"\par
+\par
+\fs20\cf0 \uc0\u8211 Explications:\par
+\uc0\u8211 WindowState=\"Maximized\": Utilise toute la surface disponible\par
+\uc0\u8211 MinWidth/MinHeight: Emp\'eache la fen\'eatre de devenir trop petite\par
+\uc0\u8211 WindowStartupLocation: Centre la fen\'eatre\par
+\par
+\par
+
+{\b 2. Utiliser des tailles relatives pour les grilles}\par
+\fs20\cf0 \uc0\u8211 Fichier: MainWindow.xaml et toutes les vues\par
+\uc0\u8211 Principe: Utiliser * pour les largeurs/hauteurs relatives\par
+\par
+\fs18\cf2 \uc0\u8220 \'c0 \'e9viter: tailles fixes\par
+\fs18\cf0 <Grid.RowDefinitions>\par
+<RowDefinition Height=\"100\" />\par
+<RowDefinition Height=\"300\" />\par
+</Grid.RowDefinitions>\par
+\par
+\fs18\cf2 \uc0\u8220 Solution: tailles relatives\par
+\fs18\cf0 <Grid.RowDefinitions>\par
+<RowDefinition Height=\"Auto\" />\par
+<RowDefinition Height=\"*\" />\par
+</Grid.RowDefinitions>\par
+\par
+\par
+
+{\b 3. Adapter les tailles de police}\par
+\fs20\cf0 \uc0\u8211 Fichier: Ressources/Styles.xaml\par
+\uc0\u8211 Utiliser les tailles de police du syst\'e8me\par
+\par
+\fs18\cf2 \uc0\u8220 \'c0 \'e9viter:\par
+\fs18\cf0 <Setter Property=\"FontSize\" Value=\"14\" />\par
+\par
+\fs18\cf2 \uc0\u8220 Solution:\par
+\fs18\cf0 Value=\"{DynamicResource {x:Static SystemFonts.MessageFontSize}}\"\par
+Value=\"{DynamicResource {x:Static SystemFonts.TitleFontSize}}\"\par
+\par
+\par
+
+{\b 4. Activer le scaling DPI}\par
+\fs20\cf0 \uc0\u8211 Fichier: App.xaml.cs\par
+\par
+\fs18\cf2 \uc0\u8220 Code \'e0 ajouter:\par
+\fs18\cf0 System.Windows.Media.VisualTreeHelper.SetDpiAwareness(\par
+    System.Windows.Media.DpiAwarenessContext.SystemAware);\par
+\par
+\par
+
+{\b 5. Rendre les boutons adaptatifs}\par
+\fs20\cf0 \uc0\u8211 Fichier: MainWindow.xaml\par
+\uc0\u8211 Remplacer Width=\"220\" par HorizontalAlignment=\"Stretch\"\par
+\par
+\fs18\cf2 \uc0\u8220 \'c0 \'e9viter:\par
+\fs18\cf0 Width=\"220\" HorizontalAlignment=\"Left\"\par
+\par
+\fs18\cf2 \uc0\u8220 Solution:\par
+\fs18\cf0 HorizontalAlignment=\"Stretch\"\par
+\par
+\par
+
+{\b 6. Ajouter des ScrollViewer}\par
+\fs20\cf0 \uc0\u8211 Envelopper les contenus longs\par
+\par
+\fs18\cf2 \uc0\u8220 Risque:\par
+\fs18\cf0 <TabItem Header=\"Comptes\">\par
+<compte:CompteView />\par
+</TabItem>\par
+\par
+\fs18\cf2 \uc0\u8220 Solution:\par
+\fs18\cf0 <TabItem Header=\"Comptes\">\par
+<ScrollViewer VerticalScrollBarVisibility=\"Auto\">\par
+<compte:CompteView />\par
+</ScrollViewer>\par
+</TabItem>\par
+\par
+\par
+
+{\b\fs32\cf0 \uc0\u8211 Checklist des modifications\par
+}\fs20\cf0 \uc0\u8211\par
+{\rtf1\ansi\trowd\trgaph108\trleft-108\trbrdrt\brdrs\brdrw15\brdrcf0 \trbrdrl\brdrs\brdrw15\brdrcf0 \trbrdrb\brdrs\brdrw15\brdrcf0 \trbrdrr\brdrs\brdrw15\brdrcf0 \trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx720
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx2880
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx5760
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx7200
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx8640
+\pard\intbl\itap0 \fs20 \cell N\'b0 \cell Fichier \cell Modification \cell Priorit\'e9 \cell Statut \cell \row
+\pard\intbl\itap0 \fs20 \cell 1 \cell MainWindow.xaml \cell Remplacer Height/Width fixes \cell \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 \cell \uc0\u25a0 \cell \row
+\pard\intbl\itap0 \fs20 \cell 2 \cell MainWindow.xaml \cell Remplacer Width=\"220\" des boutons \cell \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 \cell \uc0\u25a0 \cell \row
+\pard\intbl\itap0 \fs20 \cell 3 \cell Styles.xaml \cell Remplacer FontSize fixes \cell \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 \cell \uc0\u25a0 \cell \row
+\pard\intbl\itap0 \fs20 \cell 4 \cell App.xaml.cs \cell Ajouter SetDpiAwareness \cell \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 \cell \uc0\u25a0 \cell \row
+\pard\intbl\itap0 \fs20 \cell 5 \cell Toutes les vues \cell Ajouter ScrollViewer \cell \'e2\'b5\'e2\'b5\'e2\'b5 \cell \uc0\u25a0 \cell \row
+\pard\intbl\itap0 \fs20 \cell 6 \cell Styles.xaml \cell Simplifier Margin/Padding \cell \'e2\'b5\'e2\'b5 \cell \uc0\u25a0 \cell \row
+\pard\intbl\itap0 \fs20 \cell 7 \cell Toutes les vues \cell Grid avec tailles relatives \cell \'e2\'b5\'e2\'b5\'e2\'b5 \cell \uc0\u25a0 \cell \row
+\pard\intbl\itap0 \fs20 \cell 8 \cell Fen\'eatres modales \cell V\'e9rifier MinWidth/MinHeight \cell \'e2\'b5\'e2\'b5 \cell \uc0\u25a0 \cell \row
+}
+\par
+\fs16\cf0 \uc0\u8211 L\'e9gende: \'e2\'b5 = Priorit\'e9 faible, \'e2\'b5\'e2\'b5\'e2\'b5\'e2\'b5 = Priorit\'e9 critique\par
+\uc0\u8211 Statut: \uc0\u25a0 = \'c0 faire, \uc0\u2713 = Fait\par
+\par
+\par
+
+{\b\fs32\cf0 \uc0\u8211 Exemple complet: MainWindow.xaml optimis\'e9\par
+}\fs20\cf0 \uc0\u8211 Voici la version compl\'e8tement adaptative:\par
+\par
+{\fs18\cf2 \uc0\u8220\par
+<Window x:Class=\"SuiviPortefolio.Portefeuille.PortefeuilleView.MainWindow\"\par
+        xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\par
+        xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\par
+        Title=\"Suivi Portefolio\"\par
+        WindowState=\"Maximized\"\par
+        MinWidth=\"800\" MinHeight=\"600\"\par
+        WindowStartupLocation=\"CenterScreen\">\par
+\par
+    <DockPanel>\par
+        <Menu DockPanel.Dock=\"Top\">\par
+            <MenuItem Header=\"_Fichier\">\par
+                <MenuItem Header=\"Choisir dossier base...\" />\par
+                <MenuItem Header=\"_Sauvegarder\" />\par
+                <MenuItem Header=\"_Restaurer\" />\par
+                <MenuItem Header=\"_Quitter\" />\par
+            </MenuItem>\par
+        </Menu>\par
+\par
+        <Grid>\par
+            <Grid.RowDefinitions>\par
+                <RowDefinition Height=\"Auto\" />\par
+                <RowDefinition Height=\"*\" />\par
+            </Grid.RowDefinitions>\par
+\par
+            <Button Grid.Row=\"0\" Content=\"Basculer mode sombre\" HorizontalAlignment=\"Right\" Margin=\"10\" />\par
+\par
+            <TabControl Grid.Row=\"1\" Margin=\"0\" Padding=\"0\">\par
+                <TabItem Header=\"Portefeuille\">\par
+                    <ScrollViewer VerticalScrollBarVisibility=\"Auto\">\par
+                        <Grid Margin=\"10\">\par
+                            <Grid.RowDefinitions>\par
+                                <RowDefinition Height=\"Auto\" />\par
+                                <RowDefinition Height=\"Auto\" />\par
+                                <RowDefinition Height=\"*\" />\par
+                            </Grid.RowDefinitions>\par
+\par
+                            <StackPanel Grid.Row=\"0\">\par
+                                <TextBlock Text=\"PORTEFEUILLES\" Style=\"{DynamicResource TitleH1Style}\" />\par
+                                <ComboBox ItemsSource=\"{Binding ListePortefeuilles}\" SelectedItem=\"{Binding PortefeuilleSelectionne}\" />\par
+                            </StackPanel>\par
+\par
+                            <StackPanel Grid.Row=\"1\">\par
+                                <Button Content=\"Ajouter/Modifier portefeuille\" HorizontalAlignment=\"Stretch\" />\par
+                                <Button Content=\"Modifier portefeuille\" HorizontalAlignment=\"Stretch\" />\par
+                                <Button Content=\"D\'e9finir comme d\'e9faut\" HorizontalAlignment=\"Stretch\" />\par
+                            </StackPanel>\par
+\par
+                            <GroupBox Grid.Row=\"2\" Header=\"Portefeuille s\'e9lectionn\'e9\">\par
+                                <StackPanel Margin=\"10\">\par
+                                    <TextBlock Text=\"{Binding Portefeuille.PtfNom}\" />\par
+                                    <TextBlock Text=\"{Binding Portefeuille.PtfType}\" />\par
+                                    <TextBlock Text=\"{Binding Portefeuille.PtfDevise}\" />\par
+                                    <TextBlock Text=\"Solde:\" FontWeight=\"Bold\" />\par
+                                    <TextBlock Text=\"{Binding Portefeuille.PtfSolde, StringFormat='{}{0:F2}'}\" />\par
+                                </StackPanel>\par
+                            </GroupBox>\par
+                        </Grid>\par
+                    </ScrollViewer>\par
+                </TabItem>\par
+\par
+                <TabItem Header=\"Comptes\">\par
+                    <ScrollViewer VerticalScrollBarVisibility=\"Auto\">\par
+                        <compte:CompteView />\par
+                    </ScrollViewer>\par
+                </TabItem>\par
+\par
+                <TabItem Header=\"Transactions\">\par
+                    <ScrollViewer VerticalScrollBarVisibility=\"Auto\">\par
+                        <transaction:TransView/>\par
+                    </ScrollViewer>\par
+                </TabItem>\par
+            </TabControl>\par
+        </Grid>\par
+    </DockPanel>\par
+</Window>\par
+}\par
+\par
+
+{\b\fs32\cf0 \uc0\u8211 Outils pour tester\par
+}\fs20\cf0 \uc0\u8211\par
+1. \'c9muler un petit \'e9cran sous Windows\par
+   - Param\'e8tres > Syst\'e8me > Affichage > S\'e9lectionner 1024\u215768 ou 1280\u215720\par
+\par
+2. Live Visual Tree (Visual Studio)\par
+   - Debug > Windows > Live Visual Tree\par
+   - Live Property Explorer pour inspecter les contr\'f4les\par
+\par
+3. Tester le scaling DPI\par
+   - Param\'e8tres > Syst\'e8me > Affichage > Facteur d'\'e9chelle (125%, 150%)\par
+\par
+
+{\b\fs32\cf0 \uc0\u8211 Points d'attention\par
+}\fs20\cf0 \uc0\u8211\par
+1. Images et ic\'f4nes: Utiliser des ic\'f4nes vectorielles (SVG) ou haute r\'e9solution\par
+2. Fen\'eatres modales: Appliquer les m\'eames principes (CompteEditWindow.xaml, etc.)\par
+3. Performances: D\'e9sactiver animations lourdes, limiter colonnes DataGrid\par
+4. Accessibilit\'e9: V\'e9rifier contrastes, permettre zoom, ajouter raccourcis clavier\par
+\par
+
+{\b\fs32\cf0 \uc0\u8211 R\'e9sultat attendu\par
+}\fs20\cf0 \uc0\u8211\par
+{\rtf1\ansi\trowd\trgaph108\trleft-108\trbrdrt\brdrs\brdrw15\brdrcf0 \trbrdrl\brdrs\brdrw15\brdrcf0 \trbrdrb\brdrs\brdrw15\brdrcf0 \trbrdrr\brdrs\brdrw15\brdrcf0 \trpaddl108\trpaddr108\trpaddfl3\trpaddfr3
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx2880
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx5760
+\clvertalc \clbrdrt\brdrs\brdrw15\brdrcf0 \clbrdrl\brdrs\brdrw15\brdrcf0 \clbrdrb\brdrs\brdrw15\brdrcf0 \clbrdrr\brdrs\brdrw15\brdrcf0 \cellx8640
+\pard\intbl\itap0 \fs20 \cell Crit\'e8re \cell Avant modification \cell Apr\'e8s modification \cell \row
+\pard\intbl\itap0 \fs20 \cell Taille fen\'eatre \cell Taille fixe 1000\u215800 \cell Maximis\'e9e, MinWidth/MinHeight \cell \row
+\pard\intbl\itap0 \fs20 \cell Adaptation \cell Interface statique \cell Interface fluide \cell \row
+\pard\intbl\itap0 \fs20 \cell Lisibilit\'e9 \cell Texte/ctrl trop petits \cell Police adapt\'e9e, d\'e9filement \cell \row
+\pard\intbl\itap0 \fs20 \cell Compatibilit\'e9 DPI \cell Interface floue \cell Interface nette \cell \row
+}
+\par
+\par
+
+{\b\fs32\cf0 \uc0\u8211 Prochaines \'e9tapes\par
+}\fs20\cf0 \uc0\u8211\par
+Phase 1: Modifications critiques\par
+- Modifier MainWindow.xaml\par
+- Ajouter SetDpiAwareness dans App.xaml.cs\par
+- Tester sur \'e9cran 1024\u215768\par
+\par
+Phase 2: Optimisations majeures\par
+- Adapter tailles de police\par
+- Rendre boutons adaptatifs\par
+- Ajouter ScrollViewer\par
+\par
+Phase 3: Optimisations mineures\par
+- Optimiser DataGrid\par
+- Simplifier marges/paddings\par
+\par
+\par
+
+\fs16\cf0 \uc0\u8211 Document g\'e9n\'e9r\'e9 par Mistral Vibe - 2026-10-02\par
+}

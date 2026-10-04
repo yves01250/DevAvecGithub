@@ -20,6 +20,7 @@
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.12" />
     <PackageReference Include="OxyPlot.Core" Version="2014.1.546" />
     <PackageReference Include="OxyPlot.Wpf" Version="2014.1.546" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
   </ItemGroup>
 
 </Project>
